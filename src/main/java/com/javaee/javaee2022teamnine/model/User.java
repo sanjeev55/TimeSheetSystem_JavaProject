@@ -86,7 +86,7 @@ public class User implements Serializable {
         this.dob = dob;
     }
 
-    public boolean getTos() {
+    public boolean isTos() {
         return tos;
     }
 
