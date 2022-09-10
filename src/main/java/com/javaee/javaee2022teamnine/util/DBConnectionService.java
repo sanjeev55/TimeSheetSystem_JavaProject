@@ -13,8 +13,8 @@ public class DBConnectionService {
     public DBConnectionService() {
         try {
             String url = "jdbc:mariadb://localhost:3306/javaee";
-            String user = "root";
-            String password = "%password%";
+            String user = "APP";
+            String password = "APP";
 
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
@@ -103,25 +103,6 @@ public class DBConnectionService {
 //            System.out.println("Table " + userTable + " has been created!");
 
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    // demo reg. impl
-    public void registerUser(User user) {
-        String insertQuery = "Insert into users(fullname, username, password, tos, role) values(?, ?, ?, ? ,?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(insertQuery);
-//            ps.setInt(1, user.getId());
-            ps.setString(1, user.getFullName());
-            ps.setString(2, user.getEmail());
-            ps.setString(3, user.getPassword());
-//            ps.setDate(5, user.getDob());
-            ps.setBoolean(4, user.isTos());
-            ps.setString(5, user.getRole());
-
-            ps.execute();
-        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
