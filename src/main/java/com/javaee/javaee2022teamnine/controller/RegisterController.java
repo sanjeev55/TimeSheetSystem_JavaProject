@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
+    DBConnectionService dbService = new DBConnectionService();
+
+    public DBConnectionService getDbService() {
+        return dbService;
+    }
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Table(name = "contract_status")
 public class ContractStatus implements Serializable {
     @Id
+    @Column(name = "contract_status_id")
     private int id;
 
     @Column(name = "contract_status")

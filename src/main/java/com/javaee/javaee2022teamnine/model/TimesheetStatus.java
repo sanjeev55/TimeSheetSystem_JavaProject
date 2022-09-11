@@ -5,11 +5,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "timesheet_status")
-public class TimesheetStatus {
+public class TimesheetStatus implements Serializable {
     @Id
+    @Column(name = "ts_status_id")
     private int id;
 
     @Column(name = "timesheet_status")
