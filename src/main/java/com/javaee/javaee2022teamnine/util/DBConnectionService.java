@@ -88,8 +88,8 @@ public class DBConnectionService {
 
             // Foreign Keys
             String fk_contract_status = "ALTER TABLE contract " +
-                    "ADD CONSTRAINT FK_contractStatus " +
-                    "FOREIGN KEY (c_status) REFERENCES contract_status(contract_status_id);";
+//                    "ADD CONSTRAINT FK_contractStatus " +
+                    "ADD FOREIGN KEY (c_status) REFERENCES contract_status(contract_status_id);";
 
             statement.executeUpdate(userSql);
 
