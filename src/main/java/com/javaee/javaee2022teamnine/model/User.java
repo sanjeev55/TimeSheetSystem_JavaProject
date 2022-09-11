@@ -32,13 +32,14 @@ public class User implements Serializable {
     private String role;
 
 
-    public User(Integer id, String fullName, String email, String password, Date dob, Boolean tos) {
+    public User(Integer id, String fullName, String email, String password, Date dob, Boolean tos, String role) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.dob = dob;
         this.tos = tos;
+        this.role = role;
     }
 
     public User() {
@@ -108,4 +109,6 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
+
 }

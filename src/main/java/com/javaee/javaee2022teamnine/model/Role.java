@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name = "roles")
 public class Role implements Serializable {
     @Id
-    @Column(name = "id")
+    @Column(name = "role_id")
     private int id;
 
     /*@Column(name = "role")

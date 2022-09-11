@@ -4,11 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "report_type")
-public class ReportType {
+public class ReportType implements Serializable {
     @Id
+    @Column(name = "report_type_id")
     private int id;
 
     @Column(name = "report_type")

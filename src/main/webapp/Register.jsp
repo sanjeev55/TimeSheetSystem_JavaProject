@@ -1,36 +1,27 @@
-<%--
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Register</title>
     <script>
-        function validate()
-        {
+        function validate() {
             var fullname = document.form.fullname.value;
             var email = document.form.email.value;
             var password = document.form.password.value;
-            var conpassword= document.form.conpassword.value;
+            var conpassword = document.form.conpassword.value;
 
-            if (fullname==null || fullname=="")
-            {
+            if (fullname == null || fullname == "") {
                 alert("Full Name can't be blank");
                 return false;
-            }
-            else if (email==null || email=="")
-            {
+            } else if (email == null || email == "") {
                 alert("Email can't be blank");
                 return false;
-            }
-            else if(password.length<6)
-            {
+            } else if (password.length < 6) {
                 alert("Password must be at least 6 characters long.");
                 return false;
-            }
-            else if (password!=conpassword)
-            {
+            } else if (password != conpassword) {
                 alert("Confirm Password should match with the Password");
                 return false;
             }
@@ -38,28 +29,41 @@
     </script>
 </head>
 <body>
-<center><h2>Java Registration application using MVC and MySQL </h2></center>
-<form name="form" action="${pageContext.request.contextPath}/register/" method="post" onsubmit="return validate()">
+<center><h2>TSS Registration</h2></center>
+<form name="form" action="${pageContext.request.contextPath}/register" method="post" onsubmit="return validate()">
     <table align="center">
         <tr>
             <td>Full Name</td>
-            <td><input type="text" name="fullname" /></td>
+            <td><input type="text" name="fullname"/></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="text" name="email" /></td>
+            <td><input type="text" name="email"/></td>
         </tr>
         <tr>
             <td>DOB</td>
-            <td><input type="date" name="dob" /></td>
+            <td><input type="date" name="dob"/></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="roles">Choose a role:</label>
+            </td>
+            <td>
+                <select name="roles" id="roles">
+                    <option value="Employee">Employee</option>
+                    <option value="Assistant">Assistant</option>
+                    <option value="Secretary">Secretary</option>
+                    <option value="Supervisor">Supervisor</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password" /></td>
+            <td><input type="password" name="password"/></td>
         </tr>
         <tr>
             <td>Confirm Password</td>
-            <td><input type="password" name="conpassword" /></td>
+            <td><input type="password" name="conpassword"/></td>
         </tr>
         <tr>
             <td><input type="checkbox" name="tos" id="tos" value="true">
@@ -70,7 +74,8 @@
         </tr>
         <tr>
             <td><%=(request.getAttribute("errMessage") == null) ? ""
-                    : request.getAttribute("errMessage")%></td>
+                    : request.getAttribute("errMessage")%>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -80,4 +85,4 @@
     </table>
 </form>
 </body>
-</html>--%>
+</html>
