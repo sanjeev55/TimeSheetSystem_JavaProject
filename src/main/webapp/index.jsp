@@ -86,7 +86,7 @@
     <div class="top-text">
       Time Sheet System (TSS)
     </div>
-      <form name="form" method="post" onsubmit="return validate()">
+      <form name="form" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return validate()">
       <input type="text" name="email" placeholder="Email"/>
       <input type="password" name="password" placeholder="password"/>
       <button type="submit" name="login">Login</button>
@@ -96,3 +96,15 @@
   </div>
 </div>
 </body>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+...
+<body>
+	<p><%=(request.getAttribute("loginResult") == null) ? ""
+                    : "id or password is wrong"%></p>
+
+	...
+	</body>
