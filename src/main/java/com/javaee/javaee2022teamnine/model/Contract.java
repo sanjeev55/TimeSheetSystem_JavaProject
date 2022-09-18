@@ -33,16 +33,33 @@ public class Contract implements Serializable {
     @Column(name = "hours_due")
     private double hoursDue;
 
+    @Column(name = "vacation_hours")
+    private double vacationHours;
+
     @Column(name = "working_days_per_week")
     private int workingDaysPerWeek;
 
-    @Column(name = "vacation_days_per_week")
-    private int vacationDaysPerWeek;
+    @Column(name = "vacation_days_per_year")
+    private int vacationDaysPerYear;
 
-    public Contract() {
+    public Contract(int id, ContractStatus status, String name, Date startDate, Date endDate) {
+        this.id = id;
+        this.status = status;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public Contract(ContractStatus status, String name, Date startDate, Date endDate, String frequency, Date terminationDate, double hoursPerWeek, double hoursDue, int workingDaysPerWeek, int vacationDaysPerWeek) {
+    public Contract(String name, int vacationDaysPerYear) {
+        this.name = name;
+        this.vacationDaysPerYear = vacationDaysPerYear;
+    }
+
+ /*   public Contract(String name) {
+        this.name = name;
+    }*/
+
+    public Contract(ContractStatus status, String name, Date startDate, Date endDate, String frequency, Date terminationDate, double hoursPerWeek, double hoursDue, int workingDaysPerWeek, int vacationDaysPerYear) {
         this.status = status;
         this.name = name;
         this.startDate = startDate;
@@ -52,7 +69,23 @@ public class Contract implements Serializable {
         this.hoursPerWeek = hoursPerWeek;
         this.hoursDue = hoursDue;
         this.workingDaysPerWeek = workingDaysPerWeek;
-        this.vacationDaysPerWeek = vacationDaysPerWeek;
+        this.vacationDaysPerYear = vacationDaysPerYear;
+    }
+
+    public Contract() {
+    }
+
+    public Contract(int id, String name, Date startDate, Date endDate) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Contract(int id, String name, int vacationDaysPerYear) {
+        this.id = id;
+        this.name = name;
+        this.vacationDaysPerYear = vacationDaysPerYear;
     }
 
     public int getId() {
@@ -135,11 +168,19 @@ public class Contract implements Serializable {
         this.workingDaysPerWeek = workingDaysPerWeek;
     }
 
-    public int getVacationDaysPerWeek() {
-        return vacationDaysPerWeek;
+    public int getVacationDaysPerYear() {
+        return vacationDaysPerYear;
     }
 
-    public void setVacationDaysPerWeek(int vacationDaysPerWeek) {
-        this.vacationDaysPerWeek = vacationDaysPerWeek;
+    public void setVacationDaysPerYear(int vacationDaysPerYear) {
+        this.vacationDaysPerYear = vacationDaysPerYear;
+    }
+
+    public double getVacationHours() {
+        return vacationHours;
+    }
+
+    public void setVacationHours(double vacationHours) {
+        this.vacationHours = vacationHours;
     }
 }

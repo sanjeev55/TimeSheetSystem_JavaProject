@@ -125,12 +125,13 @@ public class DBConnectionService {
                 + " name VARCHAR(255), "
                 + " start_date DATE, "
                 + " end_date DATE, "
-                + " frequency VARCHAR(255), "  //change
+                + " frequency VARCHAR(255), "  //todo: add fk
                 + " termination_date DATE, "
                 + " hours_per_week DOUBLE, "
+                + " vacation_hours DOUBLE, "
                 + " hours_due DOUBLE, "
                 + " working_days_per_week int, "
-                + " vacation_days_per_week int);";
+                + " vacation_days_per_year int);";
     }
 
     public Connection initDB() throws SQLException {

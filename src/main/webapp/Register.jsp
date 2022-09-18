@@ -5,31 +5,43 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Register</title>
-    <script>
+
+    <script type="javascript">
         function validate() {
             var fullname = document.form.fullname.value;
             var email = document.form.email.value;
             var password = document.form.password.value;
             var conpassword = document.form.conpassword.value;
 
-            if (fullname == null || fullname == "") {
+            if (fullname == null || fullname === "") {
                 alert("Full Name can't be blank");
                 return false;
-            } else if (email == null || email == "") {
+            } else if (email == null || email === "") {
                 alert("Email can't be blank");
                 return false;
             } else if (password.length < 6) {
                 alert("Password must be at least 6 characters long.");
                 return false;
-            } else if (password != conpassword) {
+            } else if (password !== conpassword) {
                 alert("Confirm Password should match with the Password");
                 return false;
             }
         }
     </script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<center><h2>TSS Registration</h2></center>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+        <div>
+            <a href="#" class="navbar-brand"> Time Sheet System Application </a>
+        </div>
+    </nav>
+</header>
+<br/>
+<center><h2>Register Here</h2></center>
 <form name="form" action="${pageContext.request.contextPath}/register" method="post" onsubmit="return validate()">
     <table align="center">
         <tr>
@@ -68,7 +80,7 @@
         <tr>
             <td><input type="checkbox" name="tos" id="tos" value="true">
                 <label for="tos">
-                    I agree to join the Time Sheet System!
+                    I agree to the TOS of the Time Sheet System!
                 </label>
             </td>
         </tr>
@@ -79,8 +91,8 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Register"></input><input
-                    type="reset" value="Reset"></input></td>
+            <td><input type="submit" value="Register"/>
+                <input type="reset" value="Reset"/></td>
         </tr>
     </table>
 </form>

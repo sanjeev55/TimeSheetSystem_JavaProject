@@ -39,4 +39,12 @@ public class ContractStatus implements Serializable {
     public void setContractStatus(String contractStatus) {
         this.contractStatus = contractStatus;
     }
+
+    public ContractStatus(String contractStatus) {
+        this.contractStatus = contractStatus;
+    }
+
+    public ContractStatus(int id) {
+        this.id = id;
+    }
 }

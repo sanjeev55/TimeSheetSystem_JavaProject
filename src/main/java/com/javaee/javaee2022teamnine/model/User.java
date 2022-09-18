@@ -32,6 +32,13 @@ public class User implements Serializable {
     private String role;
 
 
+    public User(int id, String fullName, String email, String role) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+    }
+
     public User(Integer id, String fullName, String email, String password, Date dob, Boolean tos, String role) {
         this.id = id;
         this.fullName = fullName;
@@ -42,13 +49,17 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public User(String fullName, String email, String role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+    }
+
     public User() {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -72,6 +83,14 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPassword(String password) {
