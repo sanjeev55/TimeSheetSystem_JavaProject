@@ -2,17 +2,16 @@
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: BMS-PC
-  Date: 9/17/2022
-  Time: 5:32 PM
+  Date: 9/19/2022
+  Time: 9:33 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Contracts List</title>
+    <title>Start Contracts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
 <body>
 <header>
@@ -22,15 +21,18 @@
         </div>
 
         <ul class="navbar-nav">
-            <li><a href="<%=request.getContextPath()%>/users-list" class="nav-link">Users</a></li>
-            <li><a href="<%=request.getContextPath()%>/contract-list" class="nav-link">Contracts List</a></li>
+            <li><a href="<%=request.getContextPath()%>/users-list" class="nav-link">Create Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/contract-list" class="nav-link">Edit/Delete Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/start-contract" class="nav-link">Start Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/terminate-contract" class="nav-link">Terminate Contract</a></li>
+
         </ul>
     </nav>
 </header>
-
+<br/>
 <div class="row">
     <div class="container">
-        <h3 class="text-center">Contracts Created</h3>
+        <h3 class="text-center">Contracts Ready to Start</h3>
         <hr>
         <br>
         <table class="table table-bordered">
@@ -44,7 +46,7 @@
             </thead>
             <tbody>
             <%
-                List<Contract> contracts = (List<Contract>) request.getAttribute("listContract");
+                List<Contract> contracts = (List<Contract>) request.getAttribute("listContractToStart");
                 for (Contract contract : contracts) {
             %>
             <tr>
@@ -58,16 +60,12 @@
                 <td><%=contract.getEndDate()%>
                 </td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/edit?contract_id=<%=contract.getId()%>">
+                    <a href="${pageContext.request.contextPath}/start-contract?contract_id=<%=contract.getId()%>">
                         <button class="btn" style="background-color: #008CBA; color: white;">
-                            Edit
+                            Start Contract
                         </button>
                     </a>
-                    <a href="${pageContext.request.contextPath}/delete?contract_id=<%=contract.getId()%>">
-                        <button class="btn" style="background-color: #f44336; color: white;">
-                            Delete
-                        </button>
-                    </a>
+
                 </td>
             </tr>
             <%}%>

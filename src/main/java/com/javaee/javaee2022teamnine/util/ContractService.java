@@ -4,8 +4,6 @@ import com.javaee.javaee2022teamnine.enums.Roles;
 import com.javaee.javaee2022teamnine.model.Contract;
 import com.javaee.javaee2022teamnine.model.User;
 
-import javax.ejb.Remote;
-import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
 
@@ -41,4 +39,10 @@ public interface ContractService {
     Contract getContractById(int id);
 
     boolean updateContract(Contract contract);
+
+    boolean startContract(Contract existingContract);
+
+    List<Contract> getStartedContractList();
+
+    boolean terminateContract(Contract existingContract);
 }

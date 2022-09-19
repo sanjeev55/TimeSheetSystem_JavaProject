@@ -20,8 +20,11 @@
         </div>
 
         <ul class="navbar-nav">
-            <li><a href="<%=request.getContextPath()%>/users-list" class="nav-link">Users List</a></li>
-            <li><a href="<%=request.getContextPath()%>/contract/contract-list" class="nav-link">Contracts List</a></li>
+            <li><a href="<%=request.getContextPath()%>/users-list" class="nav-link">Create Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/contract-list" class="nav-link">Edit/Delete Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/start-contract" class="nav-link">Start Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/terminate-contract" class="nav-link">Terminate Contract</a></li>
+
         </ul>
     </nav>
 </header>

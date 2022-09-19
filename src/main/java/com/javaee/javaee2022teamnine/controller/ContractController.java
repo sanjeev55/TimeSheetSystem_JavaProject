@@ -49,6 +49,12 @@ public class ContractController extends HttpServlet {
             case "/contract-list":
                 listContracts(req, resp);
                 break;
+            case "/start-contract":
+                startContract(req, resp);
+                break;
+            case "/terminate-contract":
+                terminateContract(req, resp);
+                break;
             default:
                 listUsers(req, resp);
                 break;
@@ -136,7 +142,7 @@ public class ContractController extends HttpServlet {
         List<User> users = userService.getAllUsers();
         request.setAttribute("listUser", users);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractCreate.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -144,7 +150,7 @@ public class ContractController extends HttpServlet {
     private void listContracts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Contract> contracts = contractService.getContractList();
         request.setAttribute("listContract", contracts);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/contract-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractList.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -153,7 +159,7 @@ public class ContractController extends HttpServlet {
     private void showEditContractForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("contract_id");
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/CRUD/Edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractEdit.jsp");
         request.setAttribute("contract", existingContract);
         dispatcher.forward(request, response);
     }
@@ -174,6 +180,42 @@ public class ContractController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("contract_id"));
         contractService.deleteContract(id);
         response.sendRedirect("contract-list");
+    }
+
+
+    private void startContract(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        List<Contract> contracts = contractService.getContractList();
+        request.setAttribute("listContractToStart", contracts);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractStart.jsp");
+        dispatcher.forward(request, response);
+
+        String id = request.getParameter("contract_id");
+        Contract existingContract = contractService.getContractById(Integer.parseInt(id));
+
+//        if (existingContract.getStatus().getId() == 1) {
+        existingContract.setStatus(new ContractStatus(2));
+//        }
+
+        contractService.startContract(existingContract);
+        response.sendRedirect("start-contract");
+    }
+
+
+    private void terminateContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Contract> contracts = contractService.getStartedContractList();
+        request.setAttribute("listContractToStart", contracts);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractTerminate.jsp");
+        dispatcher.forward(request, response);
+
+        String id = request.getParameter("contract_id");
+        Contract existingContract = contractService.getContractById(Integer.parseInt(id));
+
+//        if (existingContract.getStatus().getId() == 1) {
+        existingContract.setStatus(new ContractStatus(3));
+//        }
+
+        contractService.terminateContract(existingContract);
+        response.sendRedirect("terminate-contract");
     }
 
 

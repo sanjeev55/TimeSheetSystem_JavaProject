@@ -43,7 +43,7 @@ public class ContractServiceImpl implements ContractService {
     public List<Contract> getContractList() {
         List<Contract> contractList = new ArrayList<>();
 
-        String query = "select contract_id, c_status, name, start_date, end_date from contract;";
+        String query = "select contract_id, c_status, name, start_date, end_date from contract WHERE c_status = 1;";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -89,7 +89,7 @@ public class ContractServiceImpl implements ContractService {
         boolean contractRowDeleted = false;
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM contract WHERE contract_id = ?;"
+                    "DELETE FROM contract WHERE contract_id = ? AND c_status = 1;"
             );
             preparedStatement.setInt(1, contract_id);
             contractRowDeleted = preparedStatement.executeUpdate() > 0;
@@ -170,9 +170,71 @@ public class ContractServiceImpl implements ContractService {
         try (Connection connection = dbService.initDB()) {
             String UPDATE_CONTRACT_SQL = "";
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE contract SET vacation_days_per_year = ? WHERE contract_id = ?;");
+                    "UPDATE contract SET vacation_days_per_year = ? WHERE contract_id = ? and c_status = 1;");
             preparedStatement.setInt(1, contract.getVacationDaysPerYear());
             preparedStatement.setInt(2, contract.getId());
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    @Override
+    public boolean startContract(Contract existingContract) {
+        boolean rowUpdated = false;
+
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE contract SET c_status = ? WHERE contract_id = ?;");
+            preparedStatement.setInt(1, existingContract.getStatus().getId());
+            preparedStatement.setInt(2, existingContract.getId());
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    @Override
+    public List<Contract> getStartedContractList() {
+        List<Contract> startedContractList = new ArrayList<>();
+
+        String query = "select contract_id, c_status, name, start_date, end_date from contract WHERE c_status = 2;";
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("contract_id");
+                String name = resultSet.getString("name");
+                int status = resultSet.getInt("c_status");
+                Date start_date = resultSet.getDate("start_date");
+                Date end_date = resultSet.getDate("end_date");
+
+                Contract contract = new Contract(id, new ContractStatus(status), name, start_date, end_date);
+//                Contract contract = new Contract(id, status, name, start_date, end_date);
+
+                startedContractList.add(contract);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return startedContractList;
+    }
+
+    @Override
+    public boolean terminateContract(Contract existingContract) {
+        boolean rowUpdated = false;
+
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE contract SET c_status = ? WHERE contract_id = ?;");
+            preparedStatement.setInt(1, existingContract.getStatus().getId());
+            preparedStatement.setInt(2, existingContract.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
