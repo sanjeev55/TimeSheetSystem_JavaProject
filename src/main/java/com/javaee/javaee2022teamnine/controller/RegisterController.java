@@ -22,6 +22,7 @@ public class RegisterController extends HttpServlet {
     public DBConnectionService getDbService() {
         return dbService;
     }
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -44,6 +45,7 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String dob = request.getParameter("dob");
         String tos = request.getParameter("tos");
+        String federalState = request.getParameter("federalState");
         String role = request.getParameter("roles");
 
         User user = new User();
@@ -52,6 +54,7 @@ public class RegisterController extends HttpServlet {
         user.setPassword(password);
         user.setDob(Date.valueOf(dob));
         user.setTos(Boolean.parseBoolean(tos));
+        user.setFederalState(federalState);
         user.setRole(role);
 
         RegisterDao registerDao = new RegisterDao();

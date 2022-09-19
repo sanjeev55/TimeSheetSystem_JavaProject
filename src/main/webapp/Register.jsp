@@ -70,6 +70,31 @@
             </td>
         </tr>
         <tr>
+            <td>
+                <label for="federalState">Select Federal State:</label>
+            </td>
+            <td>
+                <select name="federalState" id="federalState">
+                    <option value="Baden-Württemberg">Baden-Württemberg</option>
+                    <option value="Bavaria">Bavaria</option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="Brandenburg">Brandenburg</option>
+                    <option value="Bremen">Bremen</option>
+                    <option value="Hamburg">Hamburg</option>
+                    <option value="Hesse">Hesse</option>
+                    <option value="Lower Saxony">Lower Saxony</option>
+                    <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+                    <option value="North Rhine-Westphalia">North Rhine-Westphalia</option>
+                    <option value="Rhineland-Palatinate">Rhineland-Palatinate</option>
+                    <option value="Saarland">Saarland</option>
+                    <option value="Saxony">Saxony</option>
+                    <option value="Saxony-Anhalt">Saxony-Anhalt</option>
+                    <option value="Schleswig-Holstein">Schleswig-Holstein</option>
+                    <option value="Thuringia">Thuringia</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td>Password</td>
             <td><input type="password" name="password"/></td>
         </tr>
@@ -80,7 +105,7 @@
         <tr>
             <td><input type="checkbox" name="tos" id="tos" value="true">
                 <label for="tos">
-                    I agree to the TOS of the Time Sheet System!
+                    <b>I agree to the TOS of the Time Sheet System!</b>
                 </label>
             </td>
         </tr>

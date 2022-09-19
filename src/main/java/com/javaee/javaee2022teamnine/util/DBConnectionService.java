@@ -32,6 +32,7 @@ public class DBConnectionService {
                     + " password VARCHAR(255), "
                     + " dob DATE, "
                     + " tos BOOLEAN, "
+                    + " federalState VARCHAR(255), "
                     + " role VARCHAR(10))";
 
             // ALL ENUM TABLES

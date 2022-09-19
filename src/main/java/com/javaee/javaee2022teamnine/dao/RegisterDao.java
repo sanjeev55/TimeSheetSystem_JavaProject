@@ -20,10 +20,12 @@ public class RegisterDao {
         String email = user.getEmail();
         String password = user.getPassword();
         Date dob = user.getDob();
+        String federalState = user.getFederalState();
         String role = user.getRole();
         boolean tos = user.isTos();
 
-        String query = "Insert into users(fullname, username, password, dob, tos, role) values(?, ?, ?, ?, ? ,?)";
+        String query = "Insert into users(fullname, username, password, dob, tos, federalState, role) " +
+                "values(?, ?, ?, ?, ?, ? ,?)";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -32,7 +34,8 @@ public class RegisterDao {
             preparedStatement.setString(3, password);
             preparedStatement.setString(4, String.valueOf(dob));
             preparedStatement.setBoolean(5, tos);
-            preparedStatement.setString(6, role);
+            preparedStatement.setString(6, federalState);
+            preparedStatement.setString(7, role);
 
             int i = preparedStatement.executeUpdate();
 

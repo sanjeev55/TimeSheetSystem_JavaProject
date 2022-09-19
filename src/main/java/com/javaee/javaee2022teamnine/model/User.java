@@ -29,6 +29,8 @@ public class User implements Serializable {
     @JoinColumn(name = "role", referencedColumnName = "id")
     private Role role;*/
 
+    @Column(name = "federal_state")
+    private String federalState;
     private String role;
 
 
@@ -120,6 +122,14 @@ public class User implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }*/
+
+    public String getFederalState() {
+        return federalState;
+    }
+
+    public void setFederalState(String federalState) {
+        this.federalState = federalState;
+    }
 
     public String getRole() {
         return role;
