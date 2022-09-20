@@ -116,8 +116,10 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Register"/>
-                <input type="reset" value="Reset"/></td>
+            <td>
+                <input type="submit" value="Register" />
+                <input type="reset" value="Reset"/>
+            </td>
         </tr>
     </table>
 </form>

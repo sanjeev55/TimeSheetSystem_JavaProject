@@ -32,15 +32,16 @@ public class LoginController extends HttpServlet {
     public LoginController() {
     }
 
-    @Override
-    /*
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().append("Served at: ").append(req.getContextPath());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
-    } */
+    }
 
+
+	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
       HttpSession session = request.getSession();
@@ -55,11 +56,11 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("loginResult", "true");
 			HttpSession session1 = request.getSession();
 			session1.setAttribute("sessionID", email);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		} else {
 			request.setAttribute("loginResult", null);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
 		
