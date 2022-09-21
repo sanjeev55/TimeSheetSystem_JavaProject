@@ -15,6 +15,9 @@ public class Contract implements Serializable {
     @JoinColumn(name = "c_status", referencedColumnName = "contract_status_id")
     private ContractStatus status;
 
+    @Column(name = "userId")
+    private int userId;
+
     private String name;
 
     @Column(name = "start_date")
@@ -194,5 +197,13 @@ public class Contract implements Serializable {
 
     public void setVacationHours(double vacationHours) {
         this.vacationHours = vacationHours;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 }

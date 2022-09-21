@@ -59,18 +59,7 @@ public class RegisterController extends HttpServlet {
 
         RegisterDao registerDao = new RegisterDao();
 
-        //The core Logic of the Registration is present here. We are going to insert user data in to the database.
         registerDao.registerUser(user);
-
-        /*if(userRegistered.equals("SUCCESS"))   //On success, you can display a message to user on Home page
-        {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
-        else   //On Failure, display a meaningful message to the User.
-        {
-            request.setAttribute("errMessage", userRegistered);
-            request.getRequestDispatcher("/Register.jsp").forward(request, response);
-        }*/
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);

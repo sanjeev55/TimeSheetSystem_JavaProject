@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -55,6 +56,9 @@ public class ContractController extends HttpServlet {
                 break;
             case "/terminate-contract":
                 terminateContract(req, resp);
+                break;
+            case "/view-contract":
+                viewContract(req, resp);
                 break;
             default:
                 listUsers(req, resp);
@@ -117,11 +121,16 @@ public class ContractController extends HttpServlet {
 
 
     private void createContract(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String fullName = req.getParameter("fullName");
+
+
+        String id = req.getParameter("id");
+
+        User user= userService.getUserById(Integer.parseInt(id));
         Contract contract = new Contract();
 
         contract.setStatus(new ContractStatus(1));
-        contract.setName(fullName);
+        contract.setName(user.getFullName());
+        contract.setUserId(Integer.parseInt(id));
 //        contract.setStartDate(new Date());
         contract.setStartDate(dateService.dateToday());
         contract.setEndDate(dateService.add2YearsToDate());
@@ -135,6 +144,20 @@ public class ContractController extends HttpServlet {
         contractDao.createContract(contract);
 
         resp.sendRedirect("list");
+    }
+
+    protected void viewContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        int userId = u.getId();
+
+        Contract contract = contractService.getContractByUserId(userId);
+        System.out.println(contract.getStatus().getContractStatus());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractView.jsp");
+        request.setAttribute("contract", contract);
+        request.setAttribute("user",u);
+        dispatcher.forward(request,response);
+
     }
 
 

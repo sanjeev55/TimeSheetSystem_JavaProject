@@ -27,7 +27,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
-            <a href="#" class="navbar-brand"> Time Sheet System Application </a>
+            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System Application </a>
         </div>
         <ul class="navbar-nav mr-auto">
             <%
@@ -66,7 +66,7 @@
 <div class="row">
     <div class="container">
         <h3 class="text-center">Terminate Contracts</h3>
-        <i>Signed in as: </i><h5>${u.ge}</h5>
+        <i>Signed in as: </i><h5><%=u.getFullName()%></h5>
         <hr>
         <br>
 

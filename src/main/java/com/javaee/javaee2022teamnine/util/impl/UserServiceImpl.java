@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -47,5 +48,31 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return dataList;
+    }
+
+    @Override
+    public User getUserById(int id){
+        String query = "SELECT fullName, username, dob, role, federalState FROM users WHERE id = ?;";
+        User user= null;
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println("resultSet++++" + resultSet);
+
+            while (resultSet.next()){
+                String fullName = resultSet.getString("fullName");
+                String username = resultSet.getString("username");
+                String role = resultSet.getString("role");
+                String federalState = resultSet.getString("federalState");
+                Date dob = resultSet.getDate("dob");
+
+                user = new User(id, fullName, username,role);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

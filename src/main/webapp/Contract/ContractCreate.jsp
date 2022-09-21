@@ -18,7 +18,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
-            <a href="#" class="navbar-brand"> Time Sheet System Application </a>
+            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System Application </a>
         </div>
         <ul class="navbar-nav mr-auto">
         <%
@@ -97,7 +97,7 @@
                 </td>
                 <td>
 
-                    <a href="${pageContext.request.contextPath}/create?fullName=<%=user.getFullName()%>">
+                    <a href="${pageContext.request.contextPath}/create?id=<%=user.getId()%>">
                         <button class="btn" style="background-color: #4CAF50; color: white;">
                             Create Contract
                         </button>

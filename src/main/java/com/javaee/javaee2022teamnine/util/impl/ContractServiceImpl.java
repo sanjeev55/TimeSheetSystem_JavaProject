@@ -273,4 +273,36 @@ public class ContractServiceImpl implements ContractService {
         }
         return rowUpdated;
     }
+
+    @Override
+    public Contract getContractByUserId(int userId) {
+        String query = "SELECT * FROM contract WHERE userId = ?;";
+       Contract contract = null;
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println("resultSet++++" + resultSet);
+
+            while (resultSet.next()){
+                int status = resultSet.getInt("c_status");
+                String name = resultSet.getString("name");
+                Date startDate = resultSet.getDate("start_date");
+                Date endDate = resultSet.getDate("end_date");
+                Date terminationDate = resultSet.getDate("termination_date");
+                String frequency = resultSet.getString("frequency");
+                Double hpw = resultSet.getDouble("hours_per_week");
+                Double hoursDue = resultSet.getDouble("hours_due");
+                int wdpw = resultSet.getInt("working_days_per_week");
+                int vdpy = resultSet.getInt("vacation_days_per_year");
+
+                contract = new Contract(new ContractStatus(status), name,startDate,endDate,frequency, terminationDate ,hpw, hoursDue,wdpw, vdpy);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contract;
+    }
 }

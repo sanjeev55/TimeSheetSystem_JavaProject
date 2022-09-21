@@ -25,10 +25,11 @@ public class ContractDao {
         double vacationHours = contract.getVacationHours();
         int workingDaysPerWeek = contract.getWorkingDaysPerWeek();
         int vacationDaysPerYear = contract.getVacationDaysPerYear();
+        int userId = contract.getUserId();
 
         String query = "Insert into contract(c_status, name, start_date, end_date," +
-                " hours_per_week, vacation_hours, working_days_per_week, vacation_days_per_year) " +
-                "values(?, ?, ?, ?, ?, ?, ?, ?)";
+                " hours_per_week, vacation_hours, working_days_per_week, vacation_days_per_year, userId) " +
+                "values(?, ?, ?, ?, ?, ?, ?, ?,?)";
 //        String query = "Insert into contract(c_status, name) values(?, ?)";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -41,6 +42,7 @@ public class ContractDao {
             preparedStatement.setDouble(6, vacationHours);
             preparedStatement.setInt(7, workingDaysPerWeek);
             preparedStatement.setInt(8, vacationDaysPerYear);
+            preparedStatement.setInt(9, userId);
 
             preparedStatement.executeUpdate();
 
