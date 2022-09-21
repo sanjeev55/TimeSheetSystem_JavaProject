@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -170,7 +171,24 @@ public class ContractController extends HttpServlet {
         String name = request.getParameter("name");
         int vacationDaysPerYear = Integer.parseInt(request.getParameter("vacation_days_per_year"));
 
-        Contract contract = new Contract(id, name, vacationDaysPerYear);
+        String startDate = request.getParameter("start_date");
+        String endDate = request.getParameter("end_date");
+        String hoursPerWeek = request.getParameter("hours_per_week");
+        String vacationHours = request.getParameter("vacation_hours");
+        String workingDaysPerWeek = request.getParameter("working_days_per_week");
+
+//        Contract contract = new Contract(id, name, vacationDaysPerYear);
+        Contract contract = new Contract();
+        contract.setId(id);
+        contract.setName(name);
+        contract.setStartDate(Date.valueOf(startDate));
+        contract.setEndDate(Date.valueOf(endDate));
+        contract.setHoursPerWeek(Double.parseDouble(hoursPerWeek));
+        contract.setVacationHours(Double.parseDouble((vacationHours)));
+        contract.setWorkingDaysPerWeek(Integer.parseInt(workingDaysPerWeek));
+        contract.setVacationDaysPerYear(vacationDaysPerYear);
+
+//        Contract contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear);
         contractService.updateContract(contract);
         response.sendRedirect("contract-list");
     }
@@ -212,6 +230,7 @@ public class ContractController extends HttpServlet {
 
 //        if (existingContract.getStatus().getId() == 1) {
         existingContract.setStatus(new ContractStatus(3));
+        existingContract.setTerminationDate(dateService.dateToday());
 //        }
 
         contractService.terminateContract(existingContract);

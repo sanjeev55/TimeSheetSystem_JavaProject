@@ -32,28 +32,38 @@
 <br/>
 <div class="row">
     <div class="container">
-        <h3 class="text-center">Contracts Ready to Start</h3>
+        <h3 class="text-center">Start Contract</h3>
         <hr>
-        <br>
-        <table class="table table-bordered">
+        <br/>
+
+        <%--        <%=contracts.size()%>--%>
+        <table class="table table-bordered" id="tbT">
+            <%
+                List<Contract> contracts = (List<Contract>) request.getAttribute("listContractToStart");
+                if (contracts.size() != 0) {
+            %>
             <thead>
             <tr>
                 <th>Contract ID</th>
                 <th>Contract Holders Name</th>
+                <th>Contract Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
             </tr>
             </thead>
-            <tbody>
-            <%
-                List<Contract> contracts = (List<Contract>) request.getAttribute("listContractToStart");
-                for (Contract contract : contracts) {
+            <% for (Contract contract : contracts) {
             %>
+            <tbody>
             <tr>
                 <td>
                     <%=contract.getId()%>
                 </td>
                 <td><%=contract.getName()%>
+                </td>
+                <td>
+                    <center>
+                        <span class="badge badge-primary">PREPARED</span>
+                    </center>
                 </td>
                 <td><%=contract.getStartDate()%>
                 </td>
@@ -61,16 +71,37 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}/start-contract?contract_id=<%=contract.getId()%>">
-                        <button class="btn" style="background-color: #008CBA; color: white;">
+                        <button class="btn dell" style="background-color: #008CBA; color: white;">
                             Start Contract
                         </button>
                     </a>
 
                 </td>
             </tr>
-            <%}%>
             </tbody>
+            <%
+                }
+            } else {
+            %>
+            <div class="alert alert-success" role="alert">
+                No contracts to <span class="badge badge-info">START</span> !
+                Wait for contracts to be <span class="badge badge-success">CREATED</span> !
+            </div>
+            <%
+                }
+            %>
         </table>
+
+        <%--<script>
+                $(document).ready(function () {
+
+                    $("#tbT").on('click', '.dell', function () {
+                        $(this).closest('tr').remove();
+                    });
+
+                });
+
+            </script>--%>
     </div>
 </div>
 </body>

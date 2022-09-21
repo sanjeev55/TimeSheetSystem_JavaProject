@@ -88,6 +88,18 @@ public class Contract implements Serializable {
         this.vacationDaysPerYear = vacationDaysPerYear;
     }
 
+    public Contract(int id, String name, Date startDate, Date endDate, double hoursPerWeek, double vacationHours, int workingDaysPerWeek, int vacationDaysPerYear) {
+        this.id = id;
+//        this.status = status;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.hoursPerWeek = hoursPerWeek;
+        this.vacationHours = vacationHours;
+        this.workingDaysPerWeek = workingDaysPerWeek;
+        this.vacationDaysPerYear = vacationDaysPerYear;
+    }
+
     public int getId() {
         return id;
     }

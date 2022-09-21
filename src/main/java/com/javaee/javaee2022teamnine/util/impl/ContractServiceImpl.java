@@ -143,7 +143,18 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Contract getContractById(int id) {
-        String SELECT_CONTRACT_BY_ID = "select contract_id, name, vacation_days_per_year  from contract where contract_id = ?";
+        String SELECT_CONTRACT_BY_ID = "select contract_id, " +
+//                "c_status, " +
+                "name, " +
+                "start_date, " +
+                "end_date, " +
+//                            "frequency = ?, " + // todo
+                "hours_per_week," +
+                "vacation_hours, " +
+                "working_days_per_week, " +
+//                            "hours_due = ?, " + // todo
+                "vacation_days_per_year " +
+                "from contract where contract_id = ?";
 
         Contract contract = null;
         try (Connection connection = dbService.initDB()) {
@@ -154,8 +165,15 @@ public class ContractServiceImpl implements ContractService {
 
             while (rs.next()) {
                 String name = rs.getString("name");
-                int vacation_days_per_year = rs.getInt("vacation_days_per_year");
-                contract = new Contract(id, name, vacation_days_per_year);
+//                ContractStatus status = (ContractStatus) rs.getObject(new ContractStatus().getId());
+                Date startDate = rs.getDate("start_date");
+                Date endDate = rs.getDate("end_date");
+                double hoursPerWeek = rs.getDouble("hours_per_week");
+                double vacationHours = rs.getDouble("vacation_hours");
+                int workingDaysPerWeek = rs.getInt("working_days_per_week");
+                int vacationDaysPerYear = rs.getInt("vacation_days_per_year");
+
+                contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -168,11 +186,23 @@ public class ContractServiceImpl implements ContractService {
         boolean rowUpdated = false;
 
         try (Connection connection = dbService.initDB()) {
-            String UPDATE_CONTRACT_SQL = "";
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE contract SET vacation_days_per_year = ? WHERE contract_id = ? and c_status = 1;");
-            preparedStatement.setInt(1, contract.getVacationDaysPerYear());
-            preparedStatement.setInt(2, contract.getId());
+                    "UPDATE contract SET " +
+                            "start_date = ?, " +
+                            "end_date = ?, " +
+//                            "frequency = ?, " + // todo
+                            "hours_per_week= ?," +
+                            "vacation_hours = ?, " +
+                            "working_days_per_week = ?, " +
+//                            "hours_due = ?, " + // todo
+                            "vacation_days_per_year = ? WHERE contract_id = ? and c_status = 1;");
+            preparedStatement.setDate(1, (Date) contract.getStartDate());
+            preparedStatement.setDate(2, (Date) contract.getEndDate());
+            preparedStatement.setDouble(3, contract.getHoursPerWeek());
+            preparedStatement.setDouble(4, contract.getVacationHours());
+            preparedStatement.setInt(5, contract.getWorkingDaysPerWeek());
+            preparedStatement.setInt(6, contract.getVacationDaysPerYear());
+            preparedStatement.setInt(7, contract.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -232,9 +262,10 @@ public class ContractServiceImpl implements ContractService {
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE contract SET c_status = ? WHERE contract_id = ?;");
+                    "UPDATE contract SET c_status = ?, termination_date = ? WHERE contract_id = ?;");
             preparedStatement.setInt(1, existingContract.getStatus().getId());
-            preparedStatement.setInt(2, existingContract.getId());
+            preparedStatement.setDate(2, (Date) existingContract.getTerminationDate());
+            preparedStatement.setInt(3, existingContract.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {

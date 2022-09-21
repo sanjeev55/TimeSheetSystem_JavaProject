@@ -41,7 +41,9 @@
     </nav>
 </header>
 <br/>
+<br/>
 <center><h2>Register Here</h2></center>
+<br/>
 <form name="form" action="${pageContext.request.contextPath}/register" method="post" onsubmit="return validate()">
     <table align="center">
         <tr>
@@ -117,9 +119,22 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Register" />
+                <input type="submit" value="Register"/>
                 <input type="reset" value="Reset"/>
             </td>
+        </tr>
+        <tr>
+            <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <p class="message"><b>Already have an account?</b>
+                    <a href="${pageContext.request.contextPath}/login">
+                        <u>Login Here</u>
+                    </a>
+                </p>
+            </td>
+
         </tr>
     </table>
 </form>

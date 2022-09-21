@@ -30,13 +30,17 @@
         </ul>
     </nav>
 </header>
-
+<br/>
 <div class="row">
     <div class="container">
-        <h3 class="text-center">Contracts Created</h3>
+        <h3 class="text-center">Edit/ Delete Contract</h3>
         <hr>
         <br>
         <table class="table table-bordered">
+            <%
+                List<Contract> contracts = (List<Contract>) request.getAttribute("listContract");
+                if (contracts.size() != 0) {
+            %>
             <thead>
             <tr>
                 <th>Contract ID</th>
@@ -47,7 +51,6 @@
             </thead>
             <tbody>
             <%
-                List<Contract> contracts = (List<Contract>) request.getAttribute("listContract");
                 for (Contract contract : contracts) {
             %>
             <tr>
@@ -73,8 +76,19 @@
                     </a>
                 </td>
             </tr>
-            <%}%>
             </tbody>
+            <%
+                }
+            } else {
+            %>
+            <div class="alert alert-success" role="alert">
+                No contracts to <span class="badge badge-info">EDIT</span> /
+                <span class="badge badge-danger">DELETE</span> !
+                Wait for contracts to be <span class="badge badge-success">CREATED</span> !
+            </div>
+            <%
+                }
+            %>
         </table>
     </div>
 </div>

@@ -99,9 +99,9 @@
 </header>
 <div class="login-page">
     <div class="form">
-        <%--<div class="top-text">
-            Time Sheet System (TSS)
-        </div>--%>
+        <div class="top-text">
+            Time Sheet System Login
+        </div>
         <form name="form" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return validate()">
             <input type="text" name="email" placeholder="Email"/>
             <input type="password" name="password" placeholder="Password"/>
