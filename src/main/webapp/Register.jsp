@@ -138,5 +138,12 @@
         </tr>
     </table>
 </form>
+<center>
+    <a href="${pageContext.request.contextPath}/users-list">
+        <button class="btn btn-success" type="submit">
+            Test Contract CRUD
+        </button>
+    </a>
+</center>
 </body>
 </html>
