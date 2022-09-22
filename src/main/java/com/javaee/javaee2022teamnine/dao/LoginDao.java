@@ -1,17 +1,15 @@
 package com.javaee.javaee2022teamnine.dao;
 
+import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LoginDao {
 
-    
-    private LoginDao() {
-    };
+
+    public LoginDao() {
+    }
 
     DBConnectionService dbService = new DBConnectionService();
 
@@ -31,7 +29,8 @@ public class LoginDao {
 
     // 로그인 기능수행을 위한 login()메서드 정의
     // 리턴 타입 : boolean, 파라미터 : id,pass
-    public boolean login(String email, String password) {
+//    public boolean login(String email, String password) {
+    public User login(String email, String password) {
         boolean b = false;
 //        System.out.println(id+", "+pass);
 
@@ -39,22 +38,33 @@ public class LoginDao {
         // 둘다 일치하면 true, 아니면 false 리턴
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        User user = null;
 
-        try(Connection connection = dbService.initDB()) {
+        try (Connection connection = dbService.initDB()) {
 
-            String sql = "SELECT * FROM users WHERE email=? AND password=?";
+            String sql = "SELECT * FROM users WHERE username=? AND password=?";
             pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, email);
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
+
+
             if (rs.next()) {
-                b = true;
+                user = new User();
+                user.setFullName(rs.getString("fullName"));
+                user.setEmail(email);
+                user.setRole(rs.getString("role"));
+                user.setDob(Date.valueOf(rs.getString("dob")));
+                user.setFederalState(rs.getString("federalState"));
+
+//                b = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return b;
+//        return b;
+        return user;
     }
 
 }
