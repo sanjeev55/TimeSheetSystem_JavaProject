@@ -24,6 +24,7 @@ public class LoginController extends HttpServlet {
     public DBConnectionService getDbService() {
         return dbService;
     }
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -32,7 +33,7 @@ public class LoginController extends HttpServlet {
     public LoginController() {
     }
 
-	@Override
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().append("Served at: ").append(req.getContextPath());
 
@@ -41,34 +42,36 @@ public class LoginController extends HttpServlet {
     }
 
 
-	@Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-      HttpSession session = request.getSession();
-      request.setCharacterEncoding("UTF-8");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		LoginDao logindao = LoginDao.getInstance();
-		boolean loginResult = logindao.login(email, password);
-		
-		if (loginResult == true) {
-			request.setAttribute("loginResult", "true");
-			HttpSession session1 = request.getSession();
-			session1.setAttribute("sessionID", email);
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-			rd.forward(request, response);
-		} else {
-			request.setAttribute("loginResult", null);
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-			rd.forward(request, response);
-		}
-		
-	}
-	
+        request.setCharacterEncoding("UTF-8");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        LoginDao logindao = new LoginDao();
+//		boolean loginResult = logindao.login(email, password);
 
 
+        User user = logindao.login(email, password);
+        String destinationPage = "index.jsp";
 
+        if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            destinationPage = "Dashboard.jsp";
 
+//                request.setAttribute("loginResult", "true");
+//                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+//                rd.forward(request, response);
+        } else {
+            String message = "Invalid email/password";
+            request.setAttribute("message", message);
+//                request.setAttribute("loginResult", null);
+//                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+//                rd.forward(request, response);
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher(destinationPage);
+        dispatcher.forward(request, response);
     }
-
+}
