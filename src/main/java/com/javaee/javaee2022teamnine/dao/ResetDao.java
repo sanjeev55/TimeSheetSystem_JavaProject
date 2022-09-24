@@ -6,31 +6,37 @@ package com.javaee.javaee2022teamnine.dao;
 
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 /**
- *
  * @author ayush
  */
 public class ResetDao {
- DBConnectionService dbService = new DBConnectionService();
+    DBConnectionService dbService = new DBConnectionService();
 
     public DBConnectionService getDbService() {
         return dbService;
     }
-    public String resetpass(User user) throws SQLException{
+
+    public boolean resetPassword(User user) throws SQLException {
+        boolean rowUpdated = false;
+
         String email = user.getEmail();
         String password = user.getPassword();
-        String query = "update users SET password= ? where email= ?";
+        String query = "UPDATE users SET password= ? WHERE username= ?";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, password);
             preparedStatement.setString(2, email);
-            preparedStatement.setString(3, password);
-        }catch (SQLException ex) {
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-     return null;
+        return rowUpdated;
     }
 }

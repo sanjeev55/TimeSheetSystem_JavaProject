@@ -108,7 +108,7 @@
             <button type="submit" name="login">Login</button>
             <p class="message">New Employees <a href="${pageContext.request.contextPath}/register"><u>Create an
                 account</u></a></p>
-            <p class="message">Forgot Password? <a href="#"><u>Reset Here</u></a></p>
+            <p class="message">Forgot Password? <a href="${pageContext.request.contextPath}/reset-password"><u>Reset Here</u></a></p>
         </form>
     </div>
 </div>

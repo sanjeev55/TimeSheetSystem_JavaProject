@@ -85,6 +85,12 @@
     </style>
 </head>
 <body>
+<%--<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
+
+%>--%>
 <header>
 
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">

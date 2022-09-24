@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/dao/ContractDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/dao/LoginDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/dao/RegisterDao.java" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/dao/ResetDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/DBConnectionService.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/impl/ContractServiceImpl.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/impl/UserServiceImpl.java" dialect="MariaDB" />

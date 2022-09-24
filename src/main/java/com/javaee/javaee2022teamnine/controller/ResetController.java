@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/resetpw")
+@WebServlet("/reset-password")
 public class ResetController extends HttpServlet {
     DBConnectionService dbService = new DBConnectionService();
-    
+
         public DBConnectionService getDbService() {
             return dbService;
         }
@@ -37,28 +37,28 @@ public class ResetController extends HttpServlet {
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().append("Served at: ").append(req.getContextPath());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("Register.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("resetpw.jsp");
         dispatcher.forward(req, resp);
-        } 
+        }
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            
+
             User user = new User();
             user.setEmail(email);
             user.setPassword(password);
-            
+
             ResetDao resetDao = new ResetDao();
-            resetDao.resetpass(user);
-            
+            resetDao.resetPassword(user);
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ResetController.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
-        
-    
+
+
 }
 
