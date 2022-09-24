@@ -22,10 +22,11 @@ public class DBConnectionService {
             statement = connection.createStatement();
 
 
-            // TODO: Add foreign key relations
-            String userTable = "users";
+            String javaee_team_nine_db = "CREATE DATABASE if not exists javaee_team_nine;";
 
-            String userSql = "CREATE TABLE IF NOT EXISTS " + userTable
+            // TODO: Add foreign key relations
+
+            String userSql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.users"
                     + " (id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY , "
                     + " fullName VARCHAR(255), "
                     + " username VARCHAR(255), "
@@ -36,62 +37,63 @@ public class DBConnectionService {
                     + " role VARCHAR(10))";
 
             // ALL ENUM TABLES
-            String roleSql = "CREATE TABLE IF NOT EXISTS roles " +
+            String roleSql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.roles " +
                     "(role_id int NOT NULL, " +
                     "role VARCHAR(10), " +
                     "PRIMARY KEY (role_id)) ";
 //                    "FOREIGN KEY (id) REFERENCES users(role))";
 
-            String roleInsert = "INSERT IGNORE roles(role_id, role) VALUES " +
+            String roleInsert = "INSERT IGNORE javaee_team_nine.roles(role_id, role) VALUES " +
                     "(1, 'EMPLOYEE')," +
                     "(2, 'ASSISTANT')," +
                     "(3, 'SECRETARY')," +
                     "(4, 'SUPERVISOR')";
 
-            String contractStatusSql = "CREATE TABLE IF NOT EXISTS contract_status " +
+            String contractStatusSql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.contract_status " +
                     "(contract_status_id int NOT NULL, " +
                     "contract_status VARCHAR(25), " +
                     "PRIMARY KEY (contract_status_id)) ";
-            String contractStatusInsert = "INSERT IGNORE contract_status(contract_status_id, contract_status) VALUES " +
+            String contractStatusInsert = "INSERT IGNORE javaee_team_nine.contract_status(contract_status_id, contract_status) VALUES " +
                     "(1, 'PREPARED')," +
                     "(2, 'STARTED')," +
                     "(3, 'TERMINATED')," +
                     "(4, 'ARCHIVED')";
 
-            String TimesheetFrequencySql = "CREATE TABLE IF NOT EXISTS timesheet_frequency " +
+            String TimesheetFrequencySql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.timesheet_frequency " +
                     "(ts_frequency_id int NOT NULL, " +
                     "timesheet_frequency VARCHAR(25), " +
                     "PRIMARY KEY (ts_frequency_id)) ";
-            String TimesheetFrequencyInsert = "INSERT IGNORE timesheet_frequency(ts_frequency_id, timesheet_frequency) VALUES " +
+            String TimesheetFrequencyInsert = "INSERT IGNORE javaee_team_nine.timesheet_frequency(ts_frequency_id, timesheet_frequency) VALUES " +
                     "(1, 'WEEKLY')," +
                     "(2, 'MONTHLY')";
 
-            String TimesheetStatusSql = "CREATE TABLE IF NOT EXISTS timesheet_status " +
+            String TimesheetStatusSql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.timesheet_status " +
                     "(ts_status_id int NOT NULL, " +
                     "timesheet_status VARCHAR(25), " +
                     "PRIMARY KEY (ts_status_id)) ";
-            String TimesheetStatusInsert = "INSERT IGNORE timesheet_status(ts_status_id, timesheet_status) VALUES " +
+            String TimesheetStatusInsert = "INSERT IGNORE javaee_team_nine.timesheet_status(ts_status_id, timesheet_status) VALUES " +
                     "(1, 'IN_PROGRESS')," +
                     "(2, 'SIGNED_BY_EMPLOYEE')," +
                     "(3, 'SIGNED_BY_SUPERVISOR')," +
                     "(4, 'ARCHIVED')";
 
-            String ReportTypeSql = "CREATE TABLE IF NOT EXISTS report_type " +
+            String ReportTypeSql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.report_type " +
                     "(report_type_id int NOT NULL, " +
                     "report_type VARCHAR(25), " +
                     "PRIMARY KEY (report_type_id))";
 
-            String ReportTypeInsert = "INSERT IGNORE report_type(report_type_id, report_type) VALUES " +
+            String ReportTypeInsert = "INSERT IGNORE javaee_team_nine.report_type(report_type_id, report_type) VALUES " +
                     "(1, 'WORK')," +
                     "(2, 'VACATION')," +
                     "(3, 'SICK_LEAVE')";
             // END ENUM TABLES
 
             // Foreign Keys
-            String fk_contract_status = "ALTER TABLE contract " +
+            String fk_contract_status = "ALTER TABLE javaee_team_nine.contract " +
 //                    "ADD CONSTRAINT FK_contractStatus " +
-                    "ADD FOREIGN KEY (c_status) REFERENCES contract_status(contract_status_id);";
+                    "ADD FOREIGN KEY (c_status) REFERENCES javaee_team_nine.contract_status(contract_status_id);";
 
+            statement.executeUpdate(javaee_team_nine_db);
             statement.executeUpdate(userSql);
 
             statement.executeUpdate(roleSql);
@@ -120,7 +122,7 @@ public class DBConnectionService {
     }
 
     private String createContractTable() {
-        return "CREATE TABLE IF NOT EXISTS contract"
+        return "CREATE TABLE IF NOT EXISTS javaee_team_nine.contract"
                 + " (contract_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY , "
                 + " c_status int, "
                 + " name VARCHAR(255), "

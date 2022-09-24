@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         List<User> dataList = new ArrayList<>();
 
-        String query = "select id, fullName, username, role from users;";
+        String query = "select id, fullName, username, role from javaee_team_nine.users;";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 

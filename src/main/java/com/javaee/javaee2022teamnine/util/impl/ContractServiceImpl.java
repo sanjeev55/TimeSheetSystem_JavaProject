@@ -43,7 +43,7 @@ public class ContractServiceImpl implements ContractService {
     public List<Contract> getContractList() {
         List<Contract> contractList = new ArrayList<>();
 
-        String query = "select contract_id, c_status, name, start_date, end_date from contract WHERE c_status = 1;";
+        String query = "select contract_id, c_status, name, start_date, end_date from javaee_team_nine.contract WHERE c_status = 1;";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -89,7 +89,7 @@ public class ContractServiceImpl implements ContractService {
         boolean contractRowDeleted = false;
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM contract WHERE contract_id = ? AND c_status = 1;"
+                    "DELETE FROM javaee_team_nine.contract WHERE contract_id = ? AND c_status = 1;"
             );
             preparedStatement.setInt(1, contract_id);
             contractRowDeleted = preparedStatement.executeUpdate() > 0;
@@ -154,7 +154,7 @@ public class ContractServiceImpl implements ContractService {
                 "working_days_per_week, " +
 //                            "hours_due = ?, " + // todo
                 "vacation_days_per_year " +
-                "from contract where contract_id = ?";
+                "from javaee_team_nine.contract where contract_id = ?";
 
         Contract contract = null;
         try (Connection connection = dbService.initDB()) {
@@ -187,7 +187,7 @@ public class ContractServiceImpl implements ContractService {
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE contract SET " +
+                    "UPDATE javaee_team_nine.contract SET " +
                             "start_date = ?, " +
                             "end_date = ?, " +
 //                            "frequency = ?, " + // todo
@@ -217,7 +217,7 @@ public class ContractServiceImpl implements ContractService {
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE contract SET c_status = ? WHERE contract_id = ?;");
+                    "UPDATE javaee_team_nine.contract SET c_status = ? WHERE contract_id = ?;");
             preparedStatement.setInt(1, existingContract.getStatus().getId());
             preparedStatement.setInt(2, existingContract.getId());
 
@@ -232,7 +232,7 @@ public class ContractServiceImpl implements ContractService {
     public List<Contract> getStartedContractList() {
         List<Contract> startedContractList = new ArrayList<>();
 
-        String query = "select contract_id, c_status, name, start_date, end_date from contract WHERE c_status = 2;";
+        String query = "select contract_id, c_status, name, start_date, end_date from javaee_team_nine.contract WHERE c_status = 2;";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -262,7 +262,7 @@ public class ContractServiceImpl implements ContractService {
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE contract SET c_status = ?, termination_date = ? WHERE contract_id = ?;");
+                    "UPDATE javaee_team_nine.contract SET c_status = ?, termination_date = ? WHERE contract_id = ?;");
             preparedStatement.setInt(1, existingContract.getStatus().getId());
             preparedStatement.setDate(2, (Date) existingContract.getTerminationDate());
             preparedStatement.setInt(3, existingContract.getId());

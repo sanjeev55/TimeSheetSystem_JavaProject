@@ -26,7 +26,7 @@ public class ContractDao {
         int workingDaysPerWeek = contract.getWorkingDaysPerWeek();
         int vacationDaysPerYear = contract.getVacationDaysPerYear();
 
-        String query = "Insert into contract(c_status, name, start_date, end_date," +
+        String query = "Insert into javaee_team_nine.contract(c_status, name, start_date, end_date," +
                 " hours_per_week, vacation_hours, working_days_per_week, vacation_days_per_year) " +
                 "values(?, ?, ?, ?, ?, ?, ?, ?)";
 //        String query = "Insert into contract(c_status, name) values(?, ?)";

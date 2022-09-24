@@ -73,7 +73,7 @@
         var password = document.form.password.value;
         var format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (email === "") {
-            alert("email field empty");
+            window.prompt("email field empty");
             return false;
         }
         if (password === "") {
@@ -97,18 +97,20 @@
         </div>
     </nav>
 </header>
+<input type="hidden" id="message" value="<%=request.getAttribute("message")%>>">
 <div class="login-page">
     <div class="form">
         <div class="top-text">
             Time Sheet System Login
         </div>
         <form name="form" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return validate()">
-            <input type="text" name="email" placeholder="Email"/>
-            <input type="password" name="password" placeholder="Password"/>
+            <input type="text" name="email" placeholder="Email" required/>
+            <input type="password" name="password" placeholder="Password" required/>
             <button type="submit" name="login">Login</button>
             <p class="message">New Employees <a href="${pageContext.request.contextPath}/register"><u>Create an
                 account</u></a></p>
-            <p class="message">Forgot Password? <a href="${pageContext.request.contextPath}/reset-password"><u>Reset Here</u></a></p>
+            <p class="message">Forgot Password? <a href="${pageContext.request.contextPath}/reset-password"><u>Reset
+                Here</u></a></p>
         </form>
     </div>
 </div>
@@ -120,7 +122,7 @@
 <!DOCTYPE html>
 ...
 <body>
-<p><%=(request.getAttribute("loginResult") == null) ? ""
+<p><%=(request.getAttribute("message") == null) ? ""
         : "id or password is wrong"%>
 </p>
 

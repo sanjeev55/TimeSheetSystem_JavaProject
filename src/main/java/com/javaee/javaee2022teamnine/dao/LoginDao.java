@@ -42,7 +42,7 @@ public class LoginDao {
 
         try (Connection connection = dbService.initDB()) {
 
-            String sql = "SELECT * FROM users WHERE username=? AND password=?";
+            String sql = "SELECT * FROM javaee_team_nine.users WHERE username=? AND password=?";
             pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, email);
             pstmt.setString(2, password);

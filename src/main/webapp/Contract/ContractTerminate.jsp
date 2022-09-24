@@ -66,7 +66,6 @@
 <div class="row">
     <div class="container">
         <h3 class="text-center">Terminate Contracts</h3>
-        <i>Signed in as: </i><h5>${u.ge}</h5>
         <hr>
         <br>
 
@@ -94,11 +93,13 @@
                 </td>
                 <td><%=contract.getName()%>
                 </td>
+                <% if (contract.getStatus().getId() == 2) { %>
                 <td>
                     <center>
                         <span class="badge badge-success">STARTED</span>
                     </center>
                 </td>
+                <%}%>
                 <td><%=contract.getStartDate()%>
                 </td>
                 <td><%=contract.getEndDate()%>

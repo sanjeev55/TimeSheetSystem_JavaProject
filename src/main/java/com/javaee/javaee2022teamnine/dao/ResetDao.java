@@ -27,7 +27,7 @@ public class ResetDao {
 
         String email = user.getEmail();
         String password = user.getPassword();
-        String query = "UPDATE users SET password= ? WHERE username= ?";
+        String query = "UPDATE javaee_team_nine.users SET password= ? WHERE username= ?";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, password);

@@ -24,7 +24,7 @@ public class RegisterDao {
         String role = user.getRole();
         boolean tos = user.isTos();
 
-        String query = "Insert into users(fullname, username, password, dob, tos, federalState, role) " +
+        String query = "Insert into javaee_team_nine.users(fullname, username, password, dob, tos, federalState, role) " +
                 "values(?, ?, ?, ?, ?, ? ,?)";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
