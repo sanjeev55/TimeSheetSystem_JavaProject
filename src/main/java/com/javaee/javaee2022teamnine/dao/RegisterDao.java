@@ -15,6 +15,11 @@ public class RegisterDao {
         return dbService;
     }
 
+    /**
+     * @param user User object passed from the view
+     * @return The user enters their credentials in the form that is captured here. A new users object is inserted
+     * into the db
+     */
     public String registerUser(User user) {
         String fullName = user.getFullName();
         String email = user.getEmail();

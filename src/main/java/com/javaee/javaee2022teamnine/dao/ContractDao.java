@@ -15,6 +15,10 @@ public class ContractDao {
         return dbService;
     }
 
+    /**
+     * @param contract Contract object being passed from the contract controller
+     *                 This method will create a new Contract object
+     */
     public void createContract(Contract contract) {
 //        ContractStatus status = contract.getStatus();
         int status = contract.getStatus().getId();

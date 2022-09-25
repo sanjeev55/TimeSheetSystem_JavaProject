@@ -11,7 +11,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Stateless
 public class ContractServiceImpl implements ContractService {
     DBConnectionService dbService = new DBConnectionService();
     DateService dateService = new DateService();
@@ -36,9 +35,6 @@ public class ContractServiceImpl implements ContractService {
     }
 
 
-    /**
-     * @return List of all Contracts
-     */
     @Override
     public List<Contract> getContractList() {
         List<Contract> contractList = new ArrayList<>();
@@ -70,21 +66,6 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public List<Contract> search(String name) {
-        return null;
-    }
-
-    @Override
-    public Contract getContract(String uuid) {
-        return null;
-    }
-
-    @Override
-    public String storeContract(Contract Contract) {
-        return null;
-    }
-
-    @Override
     public boolean deleteContract(int contract_id) {
         boolean contractRowDeleted = false;
         try (Connection connection = dbService.initDB()) {
@@ -104,11 +85,6 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public int calculateWorkingDaysPerWeek() {
         return 5;
-    }
-
-    @Override
-    public User getCurrentUser() {
-        return null;
     }
 
     @Override
@@ -277,7 +253,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Contract getContractByUserId(int userId) {
         String query = "SELECT * FROM contract WHERE userId = ?;";
-       Contract contract = null;
+        Contract contract = null;
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userId);
@@ -285,7 +261,7 @@ public class ContractServiceImpl implements ContractService {
             ResultSet resultSet = preparedStatement.executeQuery();
             System.out.println("resultSet++++" + resultSet);
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int status = resultSet.getInt("c_status");
                 String name = resultSet.getString("name");
                 Date startDate = resultSet.getDate("start_date");
@@ -297,7 +273,7 @@ public class ContractServiceImpl implements ContractService {
                 int wdpw = resultSet.getInt("working_days_per_week");
                 int vdpy = resultSet.getInt("vacation_days_per_year");
 
-                contract = new Contract(new ContractStatus(status), name,startDate,endDate,frequency, terminationDate ,hpw, hoursDue,wdpw, vdpy);
+                contract = new Contract(new ContractStatus(status), name, startDate, endDate, frequency, terminationDate, hpw, hoursDue, wdpw, vdpy);
 
             }
         } catch (SQLException e) {

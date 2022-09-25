@@ -22,6 +22,11 @@ public class ResetDao {
         return dbService;
     }
 
+    /**
+     * @param user User object to get the email and password
+     * @return Updates forgotten password
+     * @throws SQLException If there is mistake in the query
+     */
     public boolean resetPassword(User user) throws SQLException {
         boolean rowUpdated = false;
 
