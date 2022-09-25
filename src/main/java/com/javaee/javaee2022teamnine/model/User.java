@@ -25,6 +25,9 @@ public class User implements Serializable {
     private Date dob;
     private boolean tos;
 
+    @Column(name = "has_contract")
+    private boolean hasContract;
+
     /*@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role", referencedColumnName = "id")
     private Role role;*/
@@ -39,6 +42,14 @@ public class User implements Serializable {
         this.fullName = fullName;
         this.email = email;
         this.role = role;
+    }
+
+    public User(int id, String fullName, String email, String role, boolean hasContract) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+        this.hasContract = hasContract;
     }
 
     public User(Integer id, String fullName, String email, String password, Date dob, Boolean tos, String role) {
@@ -139,5 +150,11 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public boolean isHasContract() {
+        return hasContract;
+    }
 
+    public void setHasContract(boolean hasContract) {
+        this.hasContract = hasContract;
+    }
 }

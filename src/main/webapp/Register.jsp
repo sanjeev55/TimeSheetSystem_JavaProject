@@ -73,10 +73,10 @@
         </tr>
         <tr>
             <td>
-                <label for="federalState">Select Federal State:</label>
+                <label for="federal_state">Select Federal State:</label>
             </td>
             <td>
-                <select name="federalState" id="federalState">
+                <select name="federal_state" id="federal_state">
                     <option value="Baden-Württemberg">Baden-Württemberg</option>
                     <option value="Bavaria">Bavaria</option>
                     <option value="Berlin">Berlin</option>

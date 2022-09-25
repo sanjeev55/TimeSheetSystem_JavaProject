@@ -45,7 +45,7 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String dob = request.getParameter("dob");
         String tos = request.getParameter("tos");
-        String federalState = request.getParameter("federalState");
+        String federalState = request.getParameter("federal_state");
         String role = request.getParameter("roles");
 
         User user = new User();
@@ -56,6 +56,7 @@ public class RegisterController extends HttpServlet {
         user.setTos(Boolean.parseBoolean(tos));
         user.setFederalState(federalState);
         user.setRole(role);
+        user.setHasContract(false);
 
         RegisterDao registerDao = new RegisterDao();
 

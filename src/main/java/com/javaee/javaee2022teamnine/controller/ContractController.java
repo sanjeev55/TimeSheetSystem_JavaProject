@@ -123,28 +123,27 @@ public class ContractController extends HttpServlet {
 
 
     private void createContract(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-
         String id = req.getParameter("id");
-        // 7
+
         User user = userService.getUserById(Integer.parseInt(id));
+
         Contract contract = new Contract();
 
         contract.setStatus(new ContractStatus(1));
         contract.setName(user.getFullName());
         contract.setUserId(Integer.parseInt(id));
-//        contract.setStartDate(new Date());
         contract.setStartDate(dateService.dateToday());
         contract.setEndDate(dateService.add2YearsToDate());
         contract.setFrequency(TimesheetFrequency.generateRandomTf().name());
-//        contract.setFrequency("MONTHLY");
         contract.setHoursPerWeek(contractService.calculateHoursPerWeek());
         contract.setVacationHours(contractService.calculateVacationHours(contract.getStartDate(), contract.getEndDate()));
         contract.setWorkingDaysPerWeek(contractService.calculateWorkingDaysPerWeek());
         contract.setVacationDaysPerYear(contractService.calculateVacationDaysPerYear());
 
+        userService.updateUserContractStatus(userService.getUserById(Integer.parseInt(id)), true);
         ContractDao contractDao = new ContractDao();
         contractDao.createContract(contract);
+
 
         resp.sendRedirect("list");
     }

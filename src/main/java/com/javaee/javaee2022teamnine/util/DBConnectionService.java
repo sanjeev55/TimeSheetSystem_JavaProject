@@ -33,8 +33,9 @@ public class DBConnectionService {
                     + " password VARCHAR(255), "
                     + " dob DATE, "
                     + " tos BOOLEAN, "
-                    + " federalState VARCHAR(255), "
-                    + " role VARCHAR(10))";
+                    + " federal_state VARCHAR(255), "
+                    + " role VARCHAR(10), "
+                    + " has_contract BOOLEAN);";
 
             // ALL ENUM TABLES
             String roleSql = "CREATE TABLE IF NOT EXISTS javaee_team_nine.roles " +

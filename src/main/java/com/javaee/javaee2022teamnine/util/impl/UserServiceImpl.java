@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         List<User> dataList = new ArrayList<>();
 
-        String query = "select id, fullName, username, role from javaee_team_nine.users;";
+        String query = "select id, fullName, username, role, has_contract from javaee_team_nine.users;";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -36,8 +36,9 @@ public class UserServiceImpl implements UserService {
                 String fullName = resultSet.getString("fullName");
                 String username = resultSet.getString("username");
                 String role = resultSet.getString("role");
+                boolean hasContract = resultSet.getBoolean("has_contract");
 
-                User user = new User(id, fullName, username, role);
+                User user = new User(id, fullName, username, role, hasContract);
 
                 dataList.add(user);
             }
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(int id){
-        String query = "SELECT fullName, username, dob, role, federalState FROM users WHERE id = ?;";
+        String query = "SELECT fullName, username, dob, role, federal_state FROM users WHERE id = ?;";
         User user= null;
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
                 String fullName = resultSet.getString("fullName");
                 String username = resultSet.getString("username");
                 String role = resultSet.getString("role");
-                String federalState = resultSet.getString("federalState");
+                String federalState = resultSet.getString("federal_state");
                 Date dob = resultSet.getDate("dob");
 
                 user = new User(id, fullName, username,role);
@@ -74,5 +75,22 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return user;
+    }
+
+    @Override
+    public boolean updateUserContractStatus(User existingUser, boolean hasContract) {
+        boolean rowUpdated = false;
+
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE javaee_team_nine.users SET has_contract = ? WHERE id = ?;");
+            preparedStatement.setBoolean(1, hasContract);
+            preparedStatement.setInt(2, existingUser.getId());
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
     }
 }

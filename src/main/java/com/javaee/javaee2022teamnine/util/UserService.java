@@ -8,4 +8,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     User getUserById(int id);
+
+    boolean updateUserContractStatus(User existingUser, boolean hasContract);
 }

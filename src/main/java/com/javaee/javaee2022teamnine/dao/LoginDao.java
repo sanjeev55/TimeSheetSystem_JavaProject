@@ -56,7 +56,7 @@ public class LoginDao {
                 user.setEmail(email);
                 user.setRole(rs.getString("role"));
                 user.setDob(Date.valueOf(rs.getString("dob")));
-                user.setFederalState(rs.getString("federalState"));
+                user.setFederalState(rs.getString("federal_state"));
 
 //                b = true;
             }

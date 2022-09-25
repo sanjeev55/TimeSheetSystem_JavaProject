@@ -23,9 +23,10 @@ public class RegisterDao {
         String federalState = user.getFederalState();
         String role = user.getRole();
         boolean tos = user.isTos();
+        boolean hasContract = user.isHasContract();
 
-        String query = "Insert into javaee_team_nine.users(fullname, username, password, dob, tos, federalState, role) " +
-                "values(?, ?, ?, ?, ?, ? ,?)";
+        String query = "Insert into javaee_team_nine.users(fullname, username, password, dob, tos, federal_state, role, has_contract) " +
+                "values(?, ?, ?, ?, ?, ? ,?, ?)";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -36,6 +37,7 @@ public class RegisterDao {
             preparedStatement.setBoolean(5, tos);
             preparedStatement.setString(6, federalState);
             preparedStatement.setString(7, role);
+            preparedStatement.setBoolean(8, hasContract);
 
             int i = preparedStatement.executeUpdate();
 

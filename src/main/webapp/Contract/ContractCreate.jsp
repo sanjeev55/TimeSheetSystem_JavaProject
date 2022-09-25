@@ -1,5 +1,6 @@
 <%@ page import="com.javaee.javaee2022teamnine.model.User" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: BMS-PC
   Date: 9/17/2022
@@ -62,6 +63,10 @@
         <hr>
         <br>
         <table class="table table-bordered">
+            <%
+                List<User> users = (List<User>) request.getAttribute("listUser");
+
+            %>
             <thead>
             <tr>
                 <th>ID</th>
@@ -72,8 +77,8 @@
             </thead>
             <tbody>
             <%
-                List<User> users = (List<User>) request.getAttribute("listUser");
                 for (User user : users) {
+                    if (!user.isHasContract()) {
             %>
             <tr>
                 <td>
@@ -93,9 +98,17 @@
                     </a>
                 </td>
             </tr>
-            <%}%>
+            <%
+            } }
+            %>
+            <%--
+                        <div class="alert alert-success" role="alert">
+                            No contracts to <span class="badge badge-success">CREATE</span> !
+                            You will be able to <span class="badge badge-success">CREATE</span> new contracts after new users have
+                            registered to the TSS!
+                        </div>
+            --%>
             </tbody>
-
         </table>
     </div>
 </div>
