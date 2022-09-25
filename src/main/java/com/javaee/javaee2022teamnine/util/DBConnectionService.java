@@ -123,6 +123,7 @@ public class DBConnectionService {
         return "CREATE TABLE IF NOT EXISTS contract"
                 + " (contract_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY , "
                 + " c_status int, "
+                + " userId int, "
                 + " name VARCHAR(255), "
                 + " start_date DATE, "
                 + " end_date DATE, "
