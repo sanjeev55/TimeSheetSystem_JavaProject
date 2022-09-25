@@ -25,7 +25,7 @@
 <center><h1>User Registered Successfully!</h1></center>
 <br/>
 <center>
-    <h3>Go To <a href="#">Login Page</a></h3>
+    <h3>Go To <a href="index.jsp">Login Page</a></h3>
 </center>
 </body>
 </html>

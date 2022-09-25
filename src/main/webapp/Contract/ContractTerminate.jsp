@@ -27,7 +27,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
-            <a href="#" class="navbar-brand"> Time Sheet System Application </a>
+            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System Application </a>
         </div>
         <ul class="navbar-nav mr-auto">
             <%

@@ -19,7 +19,8 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
-            <a href="#" class="navbar-brand"> Time Sheet System Application </a>
+            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System
+                Application </a>
         </div>
         <ul class="navbar-nav mr-auto">
             <%
@@ -41,16 +42,16 @@
             </li>
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
-            <li><a href="#" class="nav-link">Sign Timesheet</a></li>
+            <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
 
             <% } else { %>
-            <li><a href="#" class="nav-link">View Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/view-contract?id=<%=u.getId()%>" class="nav-link">View
+                Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
             <% } %>
         </ul>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-info btn-">
-            <%--            <span class="glyphicon glyphicon-log-out"></span>--%>
             Logout
         </a>
     </nav>

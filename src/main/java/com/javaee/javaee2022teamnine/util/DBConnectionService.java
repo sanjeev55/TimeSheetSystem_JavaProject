@@ -13,7 +13,7 @@ public class DBConnectionService {
 
     public DBConnectionService() {
         try {
-            String url = "jdbc:mariadb://localhost:3306/javaee";
+            String url = "jdbc:mariadb://localhost:3306/javaee_team_nine";
             String user = "root";
             String password = "%password%";
 
@@ -125,6 +125,8 @@ public class DBConnectionService {
         return "CREATE TABLE IF NOT EXISTS javaee_team_nine.contract"
                 + " (contract_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY , "
                 + " c_status int, "
+                + " userId int, "
+//                + " userId int NOT NULL UNIQUE, "
                 + " name VARCHAR(255), "
                 + " start_date DATE, "
                 + " end_date DATE, "
@@ -139,7 +141,7 @@ public class DBConnectionService {
 
     public Connection initDB() throws SQLException {
         return DriverManager
-                .getConnection("jdbc:mariadb://localhost:3306/javaee", "root", "%password%");
+                .getConnection("jdbc:mariadb://localhost:3306/javaee_team_nine", "root", "%password%");
     }
 
     public void registerUser(User user) {

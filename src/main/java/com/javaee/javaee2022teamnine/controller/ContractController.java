@@ -1,6 +1,7 @@
 package com.javaee.javaee2022teamnine.controller;
 
 import com.javaee.javaee2022teamnine.dao.ContractDao;
+import com.javaee.javaee2022teamnine.enums.TimesheetFrequency;
 import com.javaee.javaee2022teamnine.model.Contract;
 import com.javaee.javaee2022teamnine.model.ContractStatus;
 import com.javaee.javaee2022teamnine.model.User;
@@ -16,9 +17,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Random;
 
 
 @WebServlet(urlPatterns = {"/"})
@@ -55,6 +58,9 @@ public class ContractController extends HttpServlet {
                 break;
             case "/terminate-contract":
                 terminateContract(req, resp);
+                break;
+            case "/view-contract":
+                viewContract(req, resp);
                 break;
             default:
                 listUsers(req, resp);
@@ -117,15 +123,21 @@ public class ContractController extends HttpServlet {
 
 
     private void createContract(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String fullName = req.getParameter("fullName");
+
+
+        String id = req.getParameter("id");
+        // 7
+        User user = userService.getUserById(Integer.parseInt(id));
         Contract contract = new Contract();
 
         contract.setStatus(new ContractStatus(1));
-        contract.setName(fullName);
+        contract.setName(user.getFullName());
+        contract.setUserId(Integer.parseInt(id));
 //        contract.setStartDate(new Date());
         contract.setStartDate(dateService.dateToday());
         contract.setEndDate(dateService.add2YearsToDate());
-
+        contract.setFrequency(TimesheetFrequency.generateRandomTf().name());
+//        contract.setFrequency("MONTHLY");
         contract.setHoursPerWeek(contractService.calculateHoursPerWeek());
         contract.setVacationHours(contractService.calculateVacationHours(contract.getStartDate(), contract.getEndDate()));
         contract.setWorkingDaysPerWeek(contractService.calculateWorkingDaysPerWeek());
@@ -137,11 +149,27 @@ public class ContractController extends HttpServlet {
         resp.sendRedirect("list");
     }
 
+    protected void viewContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        int userId = u.getId();
+
+        Contract contract = contractService.getContractByUserId(userId);
+        System.out.println(contract.getStatus().getContractStatus());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractView.jsp");
+        request.setAttribute("contract", contract);
+        request.setAttribute("user", u);
+        dispatcher.forward(request, response);
+
+    }
+
 
     protected void listUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<User> users = userService.getAllUsers();
+        List<Contract> contracts = contractService.getContractList();
         request.setAttribute("listUser", users);
+        request.setAttribute("listContract", contracts);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractCreate.jsp");
         dispatcher.forward(request, response);

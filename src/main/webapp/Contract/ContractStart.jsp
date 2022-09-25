@@ -18,7 +18,8 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
-            <a href="#" class="navbar-brand"> Time Sheet System Application </a>
+            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System
+                Application </a>
         </div>
         <ul class="navbar-nav mr-auto">
             <%
@@ -49,7 +50,6 @@
             <% } %>
         </ul>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-info btn-">
-            <%--            <span class="glyphicon glyphicon-log-out"></span>--%>
             Logout
         </a>
     </nav>
@@ -60,8 +60,6 @@
         <h3 class="text-center">Start Contract</h3>
         <hr>
         <br/>
-
-        <%--        <%=contracts.size()%>--%>
         <table class="table table-bordered" id="tbT">
             <%
                 List<Contract> contracts = (List<Contract>) request.getAttribute("listContractToStart");
@@ -116,17 +114,6 @@
                 }
             %>
         </table>
-
-        <%--<script>
-                $(document).ready(function () {
-
-                    $("#tbT").on('click', '.dell', function () {
-                        $(this).closest('tr').remove();
-                    });
-
-                });
-
-            </script>--%>
     </div>
 </div>
 </body>

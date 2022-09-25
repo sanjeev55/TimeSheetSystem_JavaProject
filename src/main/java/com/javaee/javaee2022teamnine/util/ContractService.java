@@ -45,4 +45,6 @@ public interface ContractService {
     List<Contract> getStartedContractList();
 
     boolean terminateContract(Contract existingContract);
+
+    Contract getContractByUserId(int userId);
 }

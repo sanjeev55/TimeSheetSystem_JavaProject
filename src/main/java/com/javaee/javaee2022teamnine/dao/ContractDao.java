@@ -21,14 +21,17 @@ public class ContractDao {
         String name = contract.getName();
         Date startDate = (Date) contract.getStartDate();
         Date endDate = (Date) contract.getEndDate();
+        String frequency = contract.getFrequency();
         double hoursPerWeek = contract.getHoursPerWeek();
         double vacationHours = contract.getVacationHours();
         int workingDaysPerWeek = contract.getWorkingDaysPerWeek();
         int vacationDaysPerYear = contract.getVacationDaysPerYear();
+        int userId = contract.getUserId();
 
-        String query = "Insert into javaee_team_nine.contract(c_status, name, start_date, end_date," +
-                " hours_per_week, vacation_hours, working_days_per_week, vacation_days_per_year) " +
-                "values(?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "Insert into javaee_team_nine.contract(c_status, name, start_date, end_date, frequency," +
+                " hours_per_week, vacation_hours, working_days_per_week, vacation_days_per_year, userId) " +
+                "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 //        String query = "Insert into contract(c_status, name) values(?, ?)";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -37,10 +40,12 @@ public class ContractDao {
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, String.valueOf(startDate));
             preparedStatement.setString(4, String.valueOf(endDate));
-            preparedStatement.setDouble(5, hoursPerWeek);
-            preparedStatement.setDouble(6, vacationHours);
-            preparedStatement.setInt(7, workingDaysPerWeek);
-            preparedStatement.setInt(8, vacationDaysPerYear);
+            preparedStatement.setString(5, frequency);
+            preparedStatement.setDouble(6, hoursPerWeek);
+            preparedStatement.setDouble(7, vacationHours);
+            preparedStatement.setInt(8, workingDaysPerWeek);
+            preparedStatement.setInt(9, vacationDaysPerYear);
+            preparedStatement.setInt(10, userId);
 
             preparedStatement.executeUpdate();
 
