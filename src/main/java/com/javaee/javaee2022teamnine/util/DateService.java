@@ -1,9 +1,19 @@
 package com.javaee.javaee2022teamnine.util;
 
+import com.google.common.collect.Lists;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class DateService {
@@ -34,7 +44,7 @@ public class DateService {
         return calendar;
     }
 
-    public double countMonthsBetweenDates(Calendar beginDate, Calendar endDate){
+    public double countMonthsBetweenDates(Calendar beginDate, Calendar endDate) {
         int yearsInBetween = beginDate.get(Calendar.YEAR) - endDate.get(Calendar.YEAR);
         int monthsDiff = beginDate.get(Calendar.MONTH) - endDate.get(Calendar.MONTH);
         return yearsInBetween * 12 + monthsDiff;
@@ -103,5 +113,34 @@ public class DateService {
             result.add(Calendar.DATE, 1);
         } while (result.get(Calendar.DAY_OF_WEEK) != 2);
         return result;
+    }
+
+    public static List<LocalDate> getDatesBetweenUsingJava8(
+            LocalDate startDate, LocalDate endDate) {
+
+        long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+        System.out.println(numOfDaysBetween);
+
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(startDate::plusDays)
+                .collect(Collectors.toList());
+    }
+
+    public static boolean isWeekend(LocalDate ld) {
+        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
+        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
+    }
+
+    public List<List<LocalDate>> datesForStartAndEndOfWeek(LocalDate startDate, LocalDate endDate) {
+        List<LocalDate> localDateList = new ArrayList<>();
+        for (LocalDate date :
+                getDatesBetweenUsingJava8(startDate, endDate)) {
+            if (!isWeekend(date))
+                if (date.getDayOfWeek() == DayOfWeek.MONDAY || date.getDayOfWeek() == DayOfWeek.FRIDAY) {
+                    localDateList.add(date);
+                }
+        }
+        return Lists.partition(localDateList, 2);
     }
 }

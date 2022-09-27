@@ -124,7 +124,7 @@ public class ContractServiceImpl implements ContractService {
                 "name, " +
                 "start_date, " +
                 "end_date, " +
-//                            "frequency = ?, " + // todo
+                "frequency, " + // todo
                 "hours_per_week," +
                 "vacation_hours, " +
                 "working_days_per_week, " +
@@ -148,8 +148,9 @@ public class ContractServiceImpl implements ContractService {
                 double vacationHours = rs.getDouble("vacation_hours");
                 int workingDaysPerWeek = rs.getInt("working_days_per_week");
                 int vacationDaysPerYear = rs.getInt("vacation_days_per_year");
+                String frequency = rs.getString("frequency");
 
-                contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear);
+                contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear, frequency);
             }
         } catch (SQLException e) {
             e.printStackTrace();

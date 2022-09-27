@@ -91,7 +91,7 @@ public class Contract implements Serializable {
         this.vacationDaysPerYear = vacationDaysPerYear;
     }
 
-    public Contract(int id, String name, Date startDate, Date endDate, double hoursPerWeek, double vacationHours, int workingDaysPerWeek, int vacationDaysPerYear) {
+    public Contract(int id, String name, Date startDate, Date endDate, double hoursPerWeek, double vacationHours, int workingDaysPerWeek, int vacationDaysPerYear, String frequency) {
         this.id = id;
 //        this.status = status;
         this.name = name;
@@ -101,6 +101,7 @@ public class Contract implements Serializable {
         this.vacationHours = vacationHours;
         this.workingDaysPerWeek = workingDaysPerWeek;
         this.vacationDaysPerYear = vacationDaysPerYear;
+        this.frequency = frequency;
     }
 
     public int getId() {

@@ -4,11 +4,14 @@ import com.javaee.javaee2022teamnine.dao.ContractDao;
 import com.javaee.javaee2022teamnine.enums.TimesheetFrequency;
 import com.javaee.javaee2022teamnine.model.Contract;
 import com.javaee.javaee2022teamnine.model.ContractStatus;
+import com.javaee.javaee2022teamnine.model.TimeSheet;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.ContractService;
 import com.javaee.javaee2022teamnine.util.DateService;
+import com.javaee.javaee2022teamnine.util.TimesheetService;
 import com.javaee.javaee2022teamnine.util.UserService;
 import com.javaee.javaee2022teamnine.util.impl.ContractServiceImpl;
+import com.javaee.javaee2022teamnine.util.impl.TimesheetServiceImpl;
 import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,6 +35,8 @@ public class ContractController extends HttpServlet {
     ContractService contractService = new ContractServiceImpl();
     UserService userService = new UserServiceImpl();
     DateService dateService = new DateService();
+
+    TimesheetService timesheetService = new TimesheetServiceImpl();
 
     String role = "EMPLOYEE";
 
@@ -237,11 +245,25 @@ public class ContractController extends HttpServlet {
         String id = request.getParameter("contract_id");
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
 
-//        if (existingContract.getStatus().getId() == 1) {
         existingContract.setStatus(new ContractStatus(2));
-//        }
 
         contractService.startContract(existingContract);
+
+        TimeSheet timeSheet = new TimeSheet();
+        // todo: apply frequency logic here maybe?
+        /*List<List<LocalDate>> dates = new ArrayList<>();
+        dates = dateService.datesForStartAndEndOfWeek(
+                existingContract.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                existingContract.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+        );*/
+
+
+        timeSheet.setTimesheetStartDate(existingContract.getStartDate());
+        timeSheet.setTimesheetEndDate(existingContract.getEndDate());
+        timeSheet.setTimesheetStatus("IN_PROGRESS");
+
+        timesheetService.createTimesheet(timeSheet);
+
         response.sendRedirect("start-contract");
     }
 
@@ -255,10 +277,8 @@ public class ContractController extends HttpServlet {
         String id = request.getParameter("contract_id");
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
 
-//        if (existingContract.getStatus().getId() == 1) {
         existingContract.setStatus(new ContractStatus(3));
         existingContract.setTerminationDate(dateService.dateToday());
-//        }
 
         contractService.terminateContract(existingContract);
         response.sendRedirect("terminate-contract");

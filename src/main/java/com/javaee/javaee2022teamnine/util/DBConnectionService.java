@@ -115,6 +115,8 @@ public class DBConnectionService {
             String contractSql = createContractTable();
             statement.executeUpdate(contractSql);
             statement.executeUpdate(fk_contract_status);
+
+            statement.executeUpdate(createTimeSheetTable());
 //            System.out.println("Table " + userTable + " has been created!");
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -138,6 +140,17 @@ public class DBConnectionService {
                 + " hours_due DOUBLE, "
                 + " working_days_per_week int, "
                 + " vacation_days_per_year int);";
+    }
+
+    private String createTimeSheetTable(){
+        return "CREATE TABLE IF NOT EXISTS javaee_team_nine.timesheet" +
+                " (timesheet_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY," +
+                " timesheet_status VARCHAR(255), " +
+                " timesheet_start_date DATE, " +
+                " timesheet_end_date DATE, " +
+                " hours_due DOUBLE, " +
+                " signed_by_employee DATE, " +
+                " signed_by_supervisor DATE);";
     }
 
     public Connection initDB() throws SQLException {
