@@ -142,7 +142,8 @@ public class ContractController extends HttpServlet {
         contract.setUserId(Integer.parseInt(id));
         contract.setStartDate(dateService.dateToday());
         contract.setEndDate(dateService.add2YearsToDate());
-        contract.setFrequency(TimesheetFrequency.generateRandomTf().name());
+//        contract.setFrequency(TimesheetFrequency.generateRandomTf().name());
+        contract.setFrequency("WEEKLY");
         contract.setHoursPerWeek(contractService.calculateHoursPerWeek());
         contract.setVacationHours(contractService.calculateVacationHours(contract.getStartDate(), contract.getEndDate()));
         contract.setWorkingDaysPerWeek(contractService.calculateWorkingDaysPerWeek());
@@ -251,18 +252,28 @@ public class ContractController extends HttpServlet {
 
         TimeSheet timeSheet = new TimeSheet();
         // todo: apply frequency logic here maybe?
-        /*List<List<LocalDate>> dates = new ArrayList<>();
-        dates = dateService.datesForStartAndEndOfWeek(
-                existingContract.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-                existingContract.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-        );*/
+        List<List<Date>> dates = new ArrayList<>();
+        dates = DateService.datesForStartAndEndOfWeek(
+                (Date) existingContract.getStartDate(),
+                (Date) existingContract.getEndDate()
+        );
+        System.out.println("--dates====" + dates);
+
+        for (List<Date> combo :
+                dates) {
+            if (combo.size() == 2) {
+                timeSheet.setTimesheetStartDate(combo.get(0));
+                timeSheet.setTimesheetEndDate(combo.get(1));
+                timeSheet.setTimesheetStatus("IN_PROGRESS");
+                timesheetService.createTimesheet(timeSheet);
+            }
+        }
 
 
-        timeSheet.setTimesheetStartDate(existingContract.getStartDate());
+        /*timeSheet.setTimesheetStartDate(existingContract.getStartDate());
         timeSheet.setTimesheetEndDate(existingContract.getEndDate());
-        timeSheet.setTimesheetStatus("IN_PROGRESS");
+        timeSheet.setTimesheetStatus("IN_PROGRESS");*/
 
-        timesheetService.createTimesheet(timeSheet);
 
         response.sendRedirect("start-contract");
     }

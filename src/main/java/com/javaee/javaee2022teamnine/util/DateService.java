@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -115,32 +116,61 @@ public class DateService {
         return result;
     }
 
-    public static List<LocalDate> getDatesBetweenUsingJava8(
-            LocalDate startDate, LocalDate endDate) {
+    public static List<Date> getDaysBetweenDates(Date startdate, Date enddate) {
+        List<Date> dates = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        System.out.println(numOfDaysBetween);
+        calendar.setTime(startdate);
 
-        return IntStream.iterate(0, i -> i + 1)
-                .limit(numOfDaysBetween)
-                .mapToObj(startDate::plusDays)
-                .collect(Collectors.toList());
-    }
+        while (calendar.getTime().before(enddate)) {
+            String result = dateFormat.format(calendar.getTime());
+            dates.add(java.sql.Date.valueOf(result));
 
-    public static boolean isWeekend(LocalDate ld) {
-        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
-        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
-    }
-
-    public List<List<LocalDate>> datesForStartAndEndOfWeek(LocalDate startDate, LocalDate endDate) {
-        List<LocalDate> localDateList = new ArrayList<>();
-        for (LocalDate date :
-                getDatesBetweenUsingJava8(startDate, endDate)) {
-            if (!isWeekend(date))
-                if (date.getDayOfWeek() == DayOfWeek.MONDAY || date.getDayOfWeek() == DayOfWeek.FRIDAY) {
-                    localDateList.add(date);
-                }
+            calendar.add(Calendar.DATE, 1);
         }
-        return Lists.partition(localDateList, 2);
+        return dates;
+    }
+
+    public static boolean isWeekendSql(java.sql.Date date) {
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(date);
+
+        return (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
+                c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY);
+    }
+
+    public static boolean isMondaySQL(java.sql.Date date) {
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(date);
+
+        return (c1.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY);
+    }
+
+    public static boolean isFridaySQL(java.sql.Date date) {
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(date);
+
+        return (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY);
+    }
+
+    public static List<List<java.sql.Date>> datesForStartAndEndOfWeek(java.sql.Date start, java.sql.Date end) {
+        List<java.sql.Date> localToSQLDate = new ArrayList<>();
+        List<java.sql.Date> dateSQLList = new ArrayList<>();
+
+        for (Date date : getDaysBetweenDates(start, end)) {
+            localToSQLDate.add(java.sql.Date.valueOf(String.valueOf(date)));
+
+        }
+        System.out.println("--sql dates---" + localToSQLDate);
+
+        for (java.sql.Date d : localToSQLDate) {
+            if (!isWeekendSql(d))
+                if (isMondaySQL(d) || isFridaySQL(d)) {
+                    dateSQLList.add(d);
+                }
+
+        }
+        return Lists.partition(dateSQLList, 2);
     }
 }
