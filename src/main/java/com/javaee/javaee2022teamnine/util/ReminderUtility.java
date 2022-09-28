@@ -43,8 +43,8 @@ public class ReminderUtility extends TimerTask{
     public static void runTimer(){
         Timer timer = new Timer();
         TimerTask task = new ReminderUtility();
-        timer.schedule(task, 0, 10000);
-        //timer.schedule(task, new Date(2022, 10, 1), 604800000);
+        //timer.schedule(task, 0, 10000);
+        timer.schedule(task, new Date(2022, 10, 1), 604800000);
         System.out.println("finished -----------");
     
     
