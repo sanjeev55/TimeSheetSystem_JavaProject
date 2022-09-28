@@ -5,6 +5,7 @@ import com.javaee.javaee2022teamnine.dao.LoginDao;
 import com.javaee.javaee2022teamnine.dao.RegisterDao;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
+import com.javaee.javaee2022teamnine.util.ReminderUtility;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -19,6 +20,10 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
+
+    static{
+        runCronJob();
+    }
     DBConnectionService dbService = new DBConnectionService();
 
     public DBConnectionService getDbService() {
@@ -73,5 +78,9 @@ public class LoginController extends HttpServlet {
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(destinationPage);
         dispatcher.forward(request, response);
+    }
+
+    public static void runCronJob() {
+        ReminderUtility.runTimer();
     }
 }
