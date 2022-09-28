@@ -14,7 +14,15 @@
     <title>Java EE TSS - Your Timesheet</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -34,7 +42,7 @@
             <li><a href="<%=request.getContextPath()%>/start-contract" class="nav-link">Start Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/terminate-contract" class="nav-link">Terminate
                 Contract</a></li>
-            <li><a href="<%=request.getContextPath()%>/timesheet/view-timesheet" class="nav-link">View Timesheet</a>
+            <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
 
             <% } else if (u != null && u.getRole().equals("Secretary")) { %>
@@ -43,19 +51,19 @@
             <li><a href="<%=request.getContextPath()%>/print-timesheet" class="nav-link">Print Timesheet</a>
             <li><a href="<%=request.getContextPath()%>/archive-timesheet" class="nav-link">Archive Timesheet</a>
             </li>
-            <li><a href="<%=request.getContextPath()%>/timesheet/view-timesheet" class="nav-link">View Timesheet</a>
+            <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
             <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
-            <li><a href="<%=request.getContextPath()%>/timesheet/view-timesheet" class="nav-link">View Timesheet</a>
+            <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
 
             <% } else { %>
             <li><a href="#" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
-            <li><a href="<%=request.getContextPath()%>/timesheet/view-timesheet" class="nav-link">View Timesheet</a>
+            <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
             <% } %>
         </ul>
@@ -68,12 +76,12 @@
 <div class="row">
 
     <div class="container">
-        <h3 class="text-center">Create Contract</h3>
+        <h3 class="text-center">Your Time Sheets</h3>
         <hr>
         <br>
         <table class="table table-bordered">
             <%
-                List<TimeSheet> timeSheets = (List<TimeSheet>) request.getAttribute("listUser");
+                List<TimeSheet> timeSheets = (List<TimeSheet>) request.getAttribute("listTimesheet");
 
             %>
             <thead>
@@ -86,14 +94,18 @@
             </thead>
             <tbody>
             <%
+                //                User user =
                 for (TimeSheet timeSheet : timeSheets) {
-//                    if (!timeSheet.isHasContract()) {
+//                    if (timeSheet.getContractId() == u.getId()) {
             %>
             <tr>
                 <td>
                     <%=timeSheet.getTimesheetId()%>
                 </td>
-                <td><%=timeSheet.getTimesheetStatus()%>
+                <td>
+                    <center><span
+                            class="badge badge-info"><%=timeSheet.getTimesheetStatus()%></span>
+                    </center>
                 </td>
                 <td><%=timeSheet.getTimesheetStartDate()%>
                 </td>
@@ -108,7 +120,8 @@
                 </td>--%>
             </tr>
             <%
-                }
+                    }
+//                }
             %>
             <%--
                         <div class="alert alert-success" role="alert">
