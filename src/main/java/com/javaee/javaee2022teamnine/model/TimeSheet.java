@@ -21,6 +21,9 @@ public class TimeSheet implements Serializable {
     @Column(name = "timesheet_end_date")
     private Date timesheetEndDate;
 
+    @Column(name = "contract_id")
+    private int contractId;
+
     @Column(name = "hours_due")
     private double hoursDue;
 
@@ -34,6 +37,12 @@ public class TimeSheet implements Serializable {
     public TimeSheet() {
     }
 
+    public TimeSheet(int timesheetId, String timesheetStatus, Date timesheetStartDate, Date timesheetEndDate) {
+        this.timesheetId = timesheetId;
+        this.timesheetStatus = timesheetStatus;
+        this.timesheetStartDate = timesheetStartDate;
+        this.timesheetEndDate = timesheetEndDate;
+    }
 
     public int getTimesheetId() {
         return timesheetId;
@@ -61,6 +70,15 @@ public class TimeSheet implements Serializable {
 
     public Date getTimesheetEndDate() {
         return timesheetEndDate;
+    }
+
+
+    public int getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
     }
 
     public void setTimesheetEndDate(Date timesheetEndDate) {

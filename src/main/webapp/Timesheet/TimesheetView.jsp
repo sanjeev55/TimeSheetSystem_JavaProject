@@ -1,16 +1,17 @@
-<%@ page import="com.javaee.javaee2022teamnine.model.Contract" %>
+<%@ page import="com.javaee.javaee2022teamnine.model.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.javaee.javaee2022teamnine.model.User" %><%--
+<%@ page import="com.javaee.javaee2022teamnine.model.TimeSheet" %>
+<%--
   Created by IntelliJ IDEA.
   User: BMS-PC
-  Date: 9/17/2022
-  Time: 5:32 PM
+  Date: 9/28/2022
+  Time: 9:26 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Contracts List</title>
+    <title>Java EE TSS - Your Timesheet</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -65,63 +66,58 @@
 </header>
 <br/>
 <div class="row">
+
     <div class="container">
-        <h3 class="text-center">Edit/ Delete Contract</h3>
+        <h3 class="text-center">Create Contract</h3>
         <hr>
         <br>
         <table class="table table-bordered">
             <%
-                List<Contract> contracts = (List<Contract>) request.getAttribute("listContract");
-                if (contracts.size() != 0) {
+                List<TimeSheet> timeSheets = (List<TimeSheet>) request.getAttribute("listUser");
+
             %>
             <thead>
             <tr>
-                <th>Contract ID</th>
-                <th>Contract Holders Name</th>
+                <th>Timesheet Id</th>
+                <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
             </tr>
             </thead>
             <tbody>
             <%
-                for (Contract contract : contracts) {
+                for (TimeSheet timeSheet : timeSheets) {
+//                    if (!timeSheet.isHasContract()) {
             %>
             <tr>
                 <td>
-                    <%=contract.getId()%>
+                    <%=timeSheet.getTimesheetId()%>
                 </td>
-                <td><%=contract.getName()%>
+                <td><%=timeSheet.getTimesheetStatus()%>
                 </td>
-                <td><%=contract.getStartDate()%>
+                <td><%=timeSheet.getTimesheetStartDate()%>
                 </td>
-                <td><%=contract.getEndDate()%>
+                <td><%=timeSheet.getTimesheetEndDate()%>
                 </td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/edit?contract_id=<%=contract.getId()%>">
-                        <button class="btn" style="background-color: #008CBA; color: white;">
-                            Edit
+                <%--<td>
+                    <a href="${pageContext.request.contextPath}/create?id=<%=t.getId()%>">
+                        <button class="btn" style="background-color: #4CAF50; color: white;">
+                            Create Contract
                         </button>
                     </a>
-                    <a href="${pageContext.request.contextPath}/delete?contract_id=<%=contract.getId()%>">
-                        <button class="btn" style="background-color: #f44336; color: white;">
-                            Delete
-                        </button>
-                    </a>
-                </td>
+                </td>--%>
             </tr>
+            <%
+                }
+            %>
+            <%--
+                        <div class="alert alert-success" role="alert">
+                            No contracts to <span class="badge badge-success">CREATE</span> !
+                            You will be able to <span class="badge badge-success">CREATE</span> new contracts after new users have
+                            registered to the TSS!
+                        </div>
+            --%>
             </tbody>
-            <%
-                }
-            } else {
-            %>
-            <div class="alert alert-success" role="alert">
-                No contracts to <span class="badge badge-info">EDIT</span> /
-                <span class="badge badge-danger">DELETE</span> !
-                Wait for contracts to be <span class="badge badge-success">CREATED</span> !
-            </div>
-            <%
-                }
-            %>
         </table>
     </div>
 </div>

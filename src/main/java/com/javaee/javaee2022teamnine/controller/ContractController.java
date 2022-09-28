@@ -23,11 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 @WebServlet(urlPatterns = {"/"})
@@ -252,12 +248,11 @@ public class ContractController extends HttpServlet {
 
         TimeSheet timeSheet = new TimeSheet();
         // todo: apply frequency logic here maybe?
-        List<List<Date>> dates = new ArrayList<>();
-        dates = DateService.datesForStartAndEndOfWeek(
+        List<List<Date>> dates = DateService.datesForStartAndEndOfWeek(
                 (Date) existingContract.getStartDate(),
                 (Date) existingContract.getEndDate()
         );
-        System.out.println("--dates====" + dates);
+//        System.out.println("--dates====" + dates);
 
         for (List<Date> combo :
                 dates) {
@@ -265,6 +260,8 @@ public class ContractController extends HttpServlet {
                 timeSheet.setTimesheetStartDate(combo.get(0));
                 timeSheet.setTimesheetEndDate(combo.get(1));
                 timeSheet.setTimesheetStatus("IN_PROGRESS");
+                timeSheet.setContractId(existingContract.getId());
+
                 timesheetService.createTimesheet(timeSheet);
             }
         }
