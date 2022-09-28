@@ -103,6 +103,7 @@
                 User u = (User) session.getAttribute("user");
                 if (u != null && u.getRole().equals("Assistant")) {
             %>
+            <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/users-list" class="nav-link">Create Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/contract-list" class="nav-link">Edit/Delete Contract</a>
             </li>
@@ -113,6 +114,7 @@
             </li>
 
             <% } else if (u != null && u.getRole().equals("Secretary")) { %>
+            <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/users-list" class="nav-link">Create Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/contract-list" class="nav-link">Edit/Delete Contract</a>
             <li><a href="<%=request.getContextPath()%>/print-timesheet" class="nav-link">Print Timesheet</a>
@@ -122,12 +124,13 @@
             </li>
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
+            <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
 
             <% } else { %>
-            <li><a href="#" class="nav-link">View Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>

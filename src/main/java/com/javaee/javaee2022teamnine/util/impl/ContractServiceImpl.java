@@ -253,7 +253,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Contract getContractByUserId(int userId) {
-        String query = "SELECT * FROM contract WHERE userId = ?;";
+        String query = "SELECT * FROM javaee_team_nine.contract WHERE userId = ?;";
         Contract contract = null;
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -269,8 +269,8 @@ public class ContractServiceImpl implements ContractService {
                 Date endDate = resultSet.getDate("end_date");
                 Date terminationDate = resultSet.getDate("termination_date");
                 String frequency = resultSet.getString("frequency");
-                Double hpw = resultSet.getDouble("hours_per_week");
-                Double hoursDue = resultSet.getDouble("hours_due");
+                double hpw = resultSet.getDouble("hours_per_week");
+                double hoursDue = resultSet.getDouble("hours_due");
                 int wdpw = resultSet.getInt("working_days_per_week");
                 int vdpy = resultSet.getInt("vacation_days_per_year");
 

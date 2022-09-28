@@ -1,6 +1,7 @@
 <%@ page import="com.javaee.javaee2022teamnine.model.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.javaee.javaee2022teamnine.model.TimeSheet" %>
+<%@ page import="com.javaee.javaee2022teamnine.model.Contract" %>
 <%--
   Created by IntelliJ IDEA.
   User: BMS-PC
@@ -79,6 +80,7 @@
         <h3 class="text-center">Your Time Sheets</h3>
         <hr>
         <br>
+        <%=u.getEmail()%>
         <table class="table table-bordered">
             <%
                 List<TimeSheet> timeSheets = (List<TimeSheet>) request.getAttribute("listTimesheet");
@@ -90,13 +92,15 @@
                 <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Contract ID</th>
             </tr>
             </thead>
             <tbody>
             <%
                 //                User user =
+                Contract contract = (Contract) request.getAttribute("contract");
                 for (TimeSheet timeSheet : timeSheets) {
-//                    if (timeSheet.getContractId() == u.getId()) {
+                    if (timeSheet.getContractId() == contract.getId()) {
             %>
             <tr>
                 <td>
@@ -111,6 +115,8 @@
                 </td>
                 <td><%=timeSheet.getTimesheetEndDate()%>
                 </td>
+                <td><%=timeSheet.getContractId()%>
+                </td>
                 <%--<td>
                     <a href="${pageContext.request.contextPath}/create?id=<%=t.getId()%>">
                         <button class="btn" style="background-color: #4CAF50; color: white;">
@@ -121,7 +127,7 @@
             </tr>
             <%
                     }
-//                }
+                }
             %>
             <%--
                         <div class="alert alert-success" role="alert">
