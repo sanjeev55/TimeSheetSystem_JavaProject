@@ -127,6 +127,7 @@ public class DBConnectionService {
         return "CREATE TABLE IF NOT EXISTS javaee_team_nine.contract"
                 + " (contract_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY , "
                 + " c_status int, "
+                + " has_timesheet BOOLEAN, "
                 + " userId int, "
                 + " name VARCHAR(255), "
                 + " start_date DATE, "
@@ -140,7 +141,7 @@ public class DBConnectionService {
                 + " vacation_days_per_year int);";
     }
 
-    private String createTimeSheetTable(){
+    private String createTimeSheetTable() {
         return "CREATE TABLE IF NOT EXISTS javaee_team_nine.timesheet" +
                 " (timesheet_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY," +
                 " timesheet_status VARCHAR(255), " +

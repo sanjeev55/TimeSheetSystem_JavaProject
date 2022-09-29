@@ -12,4 +12,8 @@ public interface TimesheetService {
     List<TimeSheet> getSignedTimeSheet();
 
     void updateTimeSheetByID(int id);
+
+    boolean deleteTimesheetIfContractTerminated(int contract_id);
+
+    List<TimeSheet> getTimesheetByContractId(int id);
 }

@@ -252,6 +252,7 @@ public class ContractController extends HttpServlet {
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
 
         existingContract.setStatus(new ContractStatus(2));
+        existingContract.setHasTimesheet(true);
 
         contractService.startContract(existingContract);
 
@@ -274,13 +275,6 @@ public class ContractController extends HttpServlet {
                 timesheetService.createTimesheet(timeSheet);
             }
         }
-
-
-        /*timeSheet.setTimesheetStartDate(existingContract.getStartDate());
-        timeSheet.setTimesheetEndDate(existingContract.getEndDate());
-        timeSheet.setTimesheetStatus("IN_PROGRESS");*/
-
-
         response.sendRedirect("start-contract");
     }
 
@@ -299,9 +293,13 @@ public class ContractController extends HttpServlet {
 
         existingContract.setStatus(new ContractStatus(3));
         existingContract.setTerminationDate(dateService.dateToday());
+        existingContract.setHasTimesheet(false);
 
         contractService.terminateContract(existingContract);
         userService.updateUserContractStatus(user,false);
+
+        timesheetService.deleteTimesheetIfContractTerminated(existingContract.getId());
+
         response.sendRedirect("terminate-contract");
     }
 

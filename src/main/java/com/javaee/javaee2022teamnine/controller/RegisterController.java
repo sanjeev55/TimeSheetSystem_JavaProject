@@ -4,8 +4,13 @@ package com.javaee.javaee2022teamnine.controller;
 import com.javaee.javaee2022teamnine.dao.RegisterDao;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
+import com.javaee.javaee2022teamnine.util.UserService;
+import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -18,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
     DBConnectionService dbService = new DBConnectionService();
+
+    UserService userService = new UserServiceImpl();
 
     public DBConnectionService getDbService() {
         return dbService;
@@ -51,7 +58,7 @@ public class RegisterController extends HttpServlet {
         User user = new User();
         user.setFullName(fullName);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(userService.generateMD5(password));
         user.setDob(Date.valueOf(dob));
         user.setTos(Boolean.parseBoolean(tos));
         user.setFederalState(federalState);
@@ -65,4 +72,5 @@ public class RegisterController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }
+
 }

@@ -196,9 +196,10 @@ public class ContractServiceImpl implements ContractService {
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE javaee_team_nine.contract SET c_status = ? WHERE contract_id = ?;");
+                    "UPDATE javaee_team_nine.contract SET c_status = ?, has_timesheet = ? WHERE contract_id = ?;");
             preparedStatement.setInt(1, existingContract.getStatus().getId());
-            preparedStatement.setInt(2, existingContract.getId());
+            preparedStatement.setBoolean(2, existingContract.isHasTimesheet());
+            preparedStatement.setInt(3, existingContract.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -211,7 +212,7 @@ public class ContractServiceImpl implements ContractService {
     public List<Contract> getStartedContractList() {
         List<Contract> startedContractList = new ArrayList<>();
 
-        String query = "select contract_id, c_status, name, start_date, end_date from javaee_team_nine.contract WHERE c_status = 2;";
+        String query = "select contract_id, c_status, name, start_date, end_date, has_timesheet, userId from javaee_team_nine.contract WHERE c_status = 2;";
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -223,9 +224,10 @@ public class ContractServiceImpl implements ContractService {
                 int status = resultSet.getInt("c_status");
                 Date start_date = resultSet.getDate("start_date");
                 Date end_date = resultSet.getDate("end_date");
+                boolean hasTimesheet = resultSet.getBoolean("has_timesheet");
+                int userId = resultSet.getInt("userId");
 
-                Contract contract = new Contract(id, new ContractStatus(status), name, start_date, end_date);
-//                Contract contract = new Contract(id, status, name, start_date, end_date);
+                Contract contract = new Contract(id, new ContractStatus(status), name, start_date, end_date, hasTimesheet, userId);
 
                 startedContractList.add(contract);
             }
