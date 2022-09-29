@@ -12,6 +12,10 @@
             var email = document.form.email.value;
             var password = document.form.password.value;
             var conpassword = document.form.conpassword.value;
+            var dob = document.form.dob.value;
+            var roles = document.form.roles.value;
+            var federal_state = document.form.federal_state.value;
+            var tos = document.form.tos.value;
 
             if (fullname == null || fullname === "") {
                 alert("Full Name can't be blank");
@@ -24,6 +28,18 @@
                 return false;
             } else if (password !== conpassword) {
                 alert("Confirm Password should match with the Password");
+                return false;
+            } else if(dob == null || dob === ""){
+                alert("Dob cannot be empty!");
+                return false;
+            } else if (roles == null || roles === ""){
+                alert("Role cannot be empty!") ;
+                return false;
+            } else if (federal_state == null || federal_state ===""){
+                alert("State cannot be empty!");
+                return false;
+            }else{
+                alert("You must agree to the TOS!");
                 return false;
             }
         }
@@ -48,15 +64,21 @@
     <table align="center">
         <tr>
             <td>Full Name</td>
-            <td><input type="text" name="fullname"/></td>
+            <td><label>
+                <input name="fullname" type="text"/>
+            </label></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="text" name="email"/></td>
+            <td><label>
+                <input type="text" name="email"/>
+            </label></td>
         </tr>
         <tr>
             <td>DOB</td>
-            <td><input type="date" name="dob"/></td>
+            <td><label>
+                <input type="date" name="dob"/>
+            </label></td>
         </tr>
         <tr>
             <td>
@@ -98,11 +120,15 @@
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password"/></td>
+            <td><label>
+                <input type="password" name="password"/>
+            </label></td>
         </tr>
         <tr>
             <td>Confirm Password</td>
-            <td><input type="password" name="conpassword"/></td>
+            <td><label>
+                <input type="password" name="conpassword"/>
+            </label></td>
         </tr>
         <tr>
             <td><input type="checkbox" name="tos" id="tos" value="true">
@@ -139,11 +165,11 @@
     </table>
 </form>
 <center>
-    <a href="${pageContext.request.contextPath}/users-list">
-        <button class="btn btn-success" type="submit">
-            Test Contract CRUD
-        </button>
-    </a>
+<%--    <a href="${pageContext.request.contextPath}/users-list">--%>
+<%--        <button class="btn btn-success" type="submit">--%>
+<%--            Test Contract CRUD--%>
+<%--        </button>--%>
+<%--    </a>--%>
 </center>
 </body>
 </html>

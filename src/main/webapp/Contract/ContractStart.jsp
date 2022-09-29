@@ -112,7 +112,7 @@
                 <td><%=contract.getEndDate()%>
                 </td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/start-contract?contract_id=<%=contract.getId()%>">
+                    <a href="${pageContext.request.contextPath}/start?contract_id=<%=contract.getId()%>">
                         <button class="btn dell" style="background-color: #008CBA; color: white;">
                             Start Contract
                         </button>

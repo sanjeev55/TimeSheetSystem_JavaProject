@@ -146,13 +146,13 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    The user may still have Time Sheets that
+                                    The user (<%=contract.getId()%>) may still have Time Sheets that
                                     are in progress.
                                     <br/>
                                     Confirm termination of contract?
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="${pageContext.request.contextPath}/terminate-contract?contract_id=<%=contract.getId()%>">
+                                    <a href="${pageContext.request.contextPath}/terminate?contract_id=<%=contract.getId()%>">
                                         <button class="btn btn-success" onClick="window.location.reload();"
                                                 type="submit">
                                             Confirm

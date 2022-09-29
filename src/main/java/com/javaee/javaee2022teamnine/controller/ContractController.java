@@ -60,8 +60,14 @@ public class ContractController extends HttpServlet {
             case "/start-contract":
                 startContract(req, resp);
                 break;
+            case "/start":
+                startContractUpdate(req, resp);
+                break;
             case "/terminate-contract":
                 terminateContract(req, resp);
+                break;
+            case "/terminate":
+                terminateContractUpdate(req, resp);
                 break;
             case "/view-contract":
                 viewContract(req, resp);
@@ -156,6 +162,7 @@ public class ContractController extends HttpServlet {
     protected void viewContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
+        System.out.println("has contract:"+ u.isHasContract());
 
         if (u.isHasContract()) {
             int userId = u.getId();
@@ -248,6 +255,37 @@ public class ContractController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractStart.jsp");
         dispatcher.forward(request, response);
 
+      /*  String id = request.getParameter("contract_id");
+        Contract existingContract = contractService.getContractById(Integer.parseInt(id));
+
+        existingContract.setStatus(new ContractStatus(2));
+        existingContract.setHasTimesheet(true);
+
+        contractService.startContract(existingContract);
+
+        TimeSheet timeSheet = new TimeSheet();
+        // todo: apply frequency logic here maybe?
+        List<List<Date>> dates = DateService.datesForStartAndEndOfWeek(
+                (Date) existingContract.getStartDate(),
+                (Date) existingContract.getEndDate()
+        );
+//        System.out.println("--dates====" + dates);
+
+        for (List<Date> combo :
+                dates) {
+            if (combo.size() == 2) {
+                timeSheet.setTimesheetStartDate(combo.get(0));
+                timeSheet.setTimesheetEndDate(combo.get(1));
+                timeSheet.setTimesheetStatus("IN_PROGRESS");
+                timeSheet.setContractId(Integer.parseInt(id));
+
+                timesheetService.createTimesheet(timeSheet);
+            }
+        }
+        response.sendRedirect("start-contract");*/
+    }
+
+    private void startContractUpdate(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         String id = request.getParameter("contract_id");
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
 
@@ -285,9 +323,27 @@ public class ContractController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractTerminate.jsp");
         dispatcher.forward(request, response);
 
-        String id = request.getParameter("contract_id");
+        /*String id = request.getParameter("contract_id");
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
-        System.out.println("User id ----------"+existingContract.getUserId());
+        User user = userService.getUserById(existingContract.getUserId());
+
+
+        existingContract.setStatus(new ContractStatus(3));
+        existingContract.setTerminationDate(dateService.dateToday());
+        existingContract.setHasTimesheet(false);
+
+        contractService.terminateContract(existingContract);
+        userService.updateUserContractStatus(user,false);
+
+        timesheetService.deleteTimesheetIfContractTerminated(existingContract.getId());
+
+        response.sendRedirect("terminate-contract");*/
+    }
+
+    private void terminateContractUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String id = request.getParameter("contract_id");
+        System.out.println("Contract Id========"+ id);
+        Contract existingContract = contractService.getContractById(Integer.parseInt(id));
         User user = userService.getUserById(existingContract.getUserId());
 
 
