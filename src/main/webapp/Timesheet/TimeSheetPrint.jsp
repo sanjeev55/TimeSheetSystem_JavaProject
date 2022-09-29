@@ -1,21 +1,16 @@
 <%@ page import="com.javaee.javaee2022teamnine.model.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaee.javaee2022teamnine.model.TimeSheet" %>
 <%@ page import="com.javaee.javaee2022teamnine.model.Contract" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.sql.Time" %>
-<%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
-  User: Sanjeev
-  Date: 9/28/2022
-  Time: 6:26 PM
+  User: BMS-PC
+  Date: 9/29/2022
+  Time: 10:43 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Java EE TSS - Archive Timesheet</title>
+    <title>Print Timesheet</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -70,7 +65,7 @@
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
-            <%if (u.isHasContract()){%>
+            <%if (u.isHasContract()) {%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
             <%}%>
@@ -81,88 +76,58 @@
         </a>
     </nav>
 </header>
-<br/>
+
 <div class="row">
 
     <div class="container">
+        <br/>
         <h3 class="text-center">Your Time Sheets</h3>
         <hr>
         <br>
-        <%=u.getEmail()%>
-        <table class="table table-bordered">
-            <%
-                HashMap<TimeSheet, User> timeSheets = (HashMap<TimeSheet, User>) request.getAttribute("signedTimeSheets");
+        <i>Logged in as:</i> <b><%=u.getEmail()%>
+    </b>
+        <br/>
+        <br/>
 
-            %>
+        <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Timesheet Id</th>
-                <th>User</th>
-                <th>Status</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Contract ID</th>
+                <th>Name</th>
+                <th>Action</th>
             </tr>
             </thead>
-            <tbody>
             <%
-                for (Map.Entry<TimeSheet, User> timeSheet : timeSheets.entrySet()) {
+                List<Contract> contracts = (List<Contract>) request.getAttribute("listContract");
+                List<User> users = (List<User>) request.getAttribute("listUsers");
+
+                for (User user : users) {
+                    for (Contract contract : contracts) {
+                        if ((contract.getUserId() == user.getId()) && (contract.isHasTimesheet())) {
             %>
+
+            <tbody>
             <tr>
                 <td>
-                    <%=timeSheet.getKey().getTimesheetId()%>
+                    <%=user.getFullName()%>
                 </td>
                 <td>
-                    <%=timeSheet.getValue().getFullName()%>
-                </td>
-                <td>
-                    <center><span
-                            class="badge badge-info"><%=timeSheet.getKey().getTimesheetStatus()%></span>
-                    </center>
-                </td>
-                <td><%=timeSheet.getKey().getTimesheetStartDate()%>
-                </td>
-                <td><%=timeSheet.getKey().getTimesheetEndDate()%>
-                </td>
-                <td><%=timeSheet.getKey().getContractId()%>
-                </td>
-                <td>
-                    <%if (timeSheet.getKey().getTimesheetStatus().equals("ARCHIVED")){%>
-                    <a href="#">
-                        <button class="btn" style="background-color: #4CAF50; color: white;" disabled>
-                            Archived!!
+                    <a href="${pageContext.request.contextPath}/print-pdf?ts_contract_id=<%=contract.getId()%>">
+                        <button class="btn dell" style="background-color: #4CAF50; color: white;">
+                            Print Timesheet
                         </button>
                     </a>
-                    <%} else {%>
-
-                    <a href="${pageContext.request.contextPath}/archive?id=<%=timeSheet.getKey().getTimesheetId()%>">
-                        <button class="btn" style="background-color: #4CAF50; color: white;">
-                            Archive
-                        </button>
-                    </a>
-                    <%}%>
                 </td>
-                <%--<td>
-                    <a href="${pageContext.request.contextPath}/create?id=<%=t.getId()%>">
-                        <button class="btn" style="background-color: #4CAF50; color: white;">
-                            Create Contract
-                        </button>
-                    </a>
-                </td>--%>
             </tr>
+            </tbody>
+
             <%
+                        }
+                    }
                 }
             %>
-            <%--
-                        <div class="alert alert-success" role="alert">
-                            No contracts to <span class="badge badge-success">CREATE</span> !
-                            You will be able to <span class="badge badge-success">CREATE</span> new contracts after new users have
-                            registered to the TSS!
-                        </div>
-            --%>
-            </tbody>
         </table>
     </div>
 </div>
+
 </body>
 </html>

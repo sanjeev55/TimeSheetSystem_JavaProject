@@ -18,6 +18,9 @@ public class Contract implements Serializable {
     @Column(name = "userId")
     private int userId;
 
+    @Column(name = "has_timesheet")
+    private boolean hasTimesheet;
+
     private String name;
 
     @Column(name = "start_date")
@@ -45,12 +48,14 @@ public class Contract implements Serializable {
     @Column(name = "vacation_days_per_year")
     private int vacationDaysPerYear;
 
-    public Contract(int id, ContractStatus status, String name, Date startDate, Date endDate) {
+    public Contract(int id, ContractStatus status, String name, Date startDate, Date endDate, boolean hasTimesheet, int userId) {
         this.id = id;
         this.status = status;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.hasTimesheet = hasTimesheet;
+        this.userId = userId;
     }
 
     public Contract(String name, int vacationDaysPerYear) {
@@ -223,5 +228,13 @@ public class Contract implements Serializable {
 
     public int getUserId() {
         return userId;
+    }
+
+    public boolean isHasTimesheet() {
+        return hasTimesheet;
+    }
+
+    public void setHasTimesheet(boolean hasTimesheet) {
+        this.hasTimesheet = hasTimesheet;
     }
 }

@@ -74,29 +74,29 @@ public class TimesheetServiceImpl implements TimesheetService {
     }
 
     @Override
-    public List<TimeSheet> getSignedTimeSheet(){
-        List <TimeSheet> timeSheetList = new ArrayList<>();
+    public List<TimeSheet> getSignedTimeSheet() {
+        List<TimeSheet> timeSheetList = new ArrayList<>();
 
         String query = "Select * from javaee_team_nine.timesheet where timesheet_status = ? or timesheet_status = ? ORDER BY timesheet_id";
-        try(Connection connection = dbService.initDB()){
+        try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, "SIGNED_BY_SUPERVISOR");
             preparedStatement.setString(2, "ARCHIVED");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
-                 int id = resultSet.getInt("timesheet_id");
-                 String status = resultSet.getString("timesheet_status");
-                 Date startDate = resultSet.getDate("timesheet_start_date");
-                 Date endDate = resultSet.getDate("timesheet_end_date");
-                 int contractId = resultSet.getInt("contract_id");
+                int id = resultSet.getInt("timesheet_id");
+                String status = resultSet.getString("timesheet_status");
+                Date startDate = resultSet.getDate("timesheet_start_date");
+                Date endDate = resultSet.getDate("timesheet_end_date");
+                int contractId = resultSet.getInt("contract_id");
 
-                 TimeSheet timeSheet = new TimeSheet(id, status, startDate, endDate, contractId);
+                TimeSheet timeSheet = new TimeSheet(id, status, startDate, endDate, contractId);
 
-                 timeSheetList.add(timeSheet);
+                timeSheetList.add(timeSheet);
             }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return timeSheetList;
@@ -105,15 +105,59 @@ public class TimesheetServiceImpl implements TimesheetService {
     @Override
     public void updateTimeSheetByID(int id) {
         try (Connection connection = dbService.initDB()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE timesheet SET timesheet_status = ? where timesheet_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE javaee_team_nine.timesheet SET timesheet_status = ? where timesheet_id = ?");
             preparedStatement.setString(1, "ARCHIVED");
             preparedStatement.setInt(2, id);
 
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean deleteTimesheetIfContractTerminated(int contractId) {
+        boolean rowUpdated = false;
+
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM javaee_team_nine.timesheet WHERE contract_id = ? AND timesheet_status = ?;");
+            preparedStatement.setInt(1, contractId);
+            preparedStatement.setString(2, "IN_PROGRESS");
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    @Override
+    public List<TimeSheet> getTimesheetByContractId(int contractId) {
+        List<TimeSheet> timeSheetList = new ArrayList<>();
+
+        String query = "Select * from javaee_team_nine.timesheet where contract_id = ?;";
+        try (Connection connection = dbService.initDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, contractId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("timesheet_id");
+                String status = resultSet.getString("timesheet_status");
+                Date startDate = resultSet.getDate("timesheet_start_date");
+                Date endDate = resultSet.getDate("timesheet_end_date");
+                int cId = resultSet.getInt("contract_id");
+
+                TimeSheet timeSheet = new TimeSheet(id, status, startDate, endDate, cId);
+
+                timeSheetList.add(timeSheet);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return timeSheetList;
     }
 }
