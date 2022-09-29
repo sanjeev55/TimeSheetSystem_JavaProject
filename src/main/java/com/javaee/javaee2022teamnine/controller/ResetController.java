@@ -7,6 +7,8 @@ package com.javaee.javaee2022teamnine.controller;
 import com.javaee.javaee2022teamnine.dao.ResetDao;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
+import com.javaee.javaee2022teamnine.util.UserService;
+import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,10 +25,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/reset-password")
 public class ResetController extends HttpServlet {
     DBConnectionService dbService = new DBConnectionService();
+    UserService userService = new UserServiceImpl();
 
         public DBConnectionService getDbService() {
             return dbService;
         }
+
         @Override
         public void init(ServletConfig config) throws ServletException {
             super.init(config);
@@ -43,7 +47,7 @@ public class ResetController extends HttpServlet {
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            String password = userService.generateMD5(request.getParameter("password"));
 
             User user = new User();
             user.setEmail(email);

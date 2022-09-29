@@ -22,4 +22,6 @@ public interface UserService {
      * @return When contract is created, 'hasContract' will be updated to true
      */
     boolean updateUserContractStatus(User existingUser, boolean hasContract);
+
+    String generateMD5(String s);
 }

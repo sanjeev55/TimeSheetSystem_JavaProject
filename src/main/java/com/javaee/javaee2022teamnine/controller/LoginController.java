@@ -5,6 +5,8 @@ import com.javaee.javaee2022teamnine.dao.LoginDao;
 import com.javaee.javaee2022teamnine.dao.RegisterDao;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
+import com.javaee.javaee2022teamnine.util.UserService;
+import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
     DBConnectionService dbService = new DBConnectionService();
+    UserService userService = new UserServiceImpl();
 
     public DBConnectionService getDbService() {
         return dbService;
@@ -47,7 +50,7 @@ public class LoginController extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = userService.generateMD5(request.getParameter("password"));
 
         LoginDao logindao = new LoginDao();
 //		boolean loginResult = logindao.login(email, password);
