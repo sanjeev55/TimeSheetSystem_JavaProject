@@ -24,7 +24,7 @@ public class ReminderDao {
         return dbService;
     }
 
-  
+
     public List<User> getAllReminderUsers() {
         List<User> dataList = new ArrayList<>();
 
@@ -70,5 +70,5 @@ public class ReminderDao {
         return dataList;
     }
 
-    
+
 }
