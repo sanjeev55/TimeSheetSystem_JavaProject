@@ -62,7 +62,7 @@ public class Contract implements Serializable {
         this.name = name;
     }*/
 
-    public Contract(ContractStatus status, String name, Date startDate, Date endDate, String frequency, Date terminationDate, double hoursPerWeek, double hoursDue, int workingDaysPerWeek, int vacationDaysPerYear) {
+    public Contract(ContractStatus status, String name, Date startDate, Date endDate, String frequency, Date terminationDate, double hoursPerWeek, double hoursDue, int workingDaysPerWeek, int vacationDaysPerYear, int userId) {
         this.status = status;
         this.name = name;
         this.startDate = startDate;
@@ -73,6 +73,7 @@ public class Contract implements Serializable {
         this.hoursDue = hoursDue;
         this.workingDaysPerWeek = workingDaysPerWeek;
         this.vacationDaysPerYear = vacationDaysPerYear;
+        this.userId = userId;
     }
 
     public Contract() {
@@ -91,7 +92,7 @@ public class Contract implements Serializable {
         this.vacationDaysPerYear = vacationDaysPerYear;
     }
 
-    public Contract(int id, String name, Date startDate, Date endDate, double hoursPerWeek, double vacationHours, int workingDaysPerWeek, int vacationDaysPerYear, String frequency) {
+    public Contract(int id, String name, Date startDate, Date endDate, double hoursPerWeek, double vacationHours, int workingDaysPerWeek, int vacationDaysPerYear, String frequency, int userId) {
         this.id = id;
 //        this.status = status;
         this.name = name;
@@ -102,6 +103,22 @@ public class Contract implements Serializable {
         this.workingDaysPerWeek = workingDaysPerWeek;
         this.vacationDaysPerYear = vacationDaysPerYear;
         this.frequency = frequency;
+        this.userId = userId;
+    }
+
+    public Contract(int contractId, ContractStatus contractStatus, String name, Date startDate, Date endDate, String frequency, Date terminationDate, double hpw, double hoursDue, int wdpw, int vdpy, int userId) {
+        this.id = contractId;
+        this.status=contractStatus;
+        this.name=name;
+        this.startDate =startDate;
+        this.endDate = endDate;
+        this.frequency = frequency;
+        this.terminationDate=terminationDate;
+        this.hoursPerWeek=hpw;
+        this.hoursDue=hoursDue;
+        this.workingDaysPerWeek=wdpw;
+        this.vacationDaysPerYear=vdpy;
+        this.userId=userId;
     }
 
     public int getId() {

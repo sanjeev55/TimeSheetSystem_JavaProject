@@ -123,6 +123,7 @@ public class ContractServiceImpl implements ContractService {
 //                "c_status, " +
                 "name, " +
                 "start_date, " +
+                "userId, " +
                 "end_date, " +
                 "frequency, " + // todo
                 "hours_per_week," +
@@ -149,8 +150,9 @@ public class ContractServiceImpl implements ContractService {
                 int workingDaysPerWeek = rs.getInt("working_days_per_week");
                 int vacationDaysPerYear = rs.getInt("vacation_days_per_year");
                 String frequency = rs.getString("frequency");
+                int userId = rs.getInt("userId");
 
-                contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear, frequency);
+                contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear, frequency, userId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -260,10 +262,11 @@ public class ContractServiceImpl implements ContractService {
             preparedStatement.setInt(1, userId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println("resultSet++++" + resultSet);
+
 
             while (resultSet.next()) {
                 int status = resultSet.getInt("c_status");
+                int contractId = resultSet.getInt("contract_id");
                 String name = resultSet.getString("name");
                 Date startDate = resultSet.getDate("start_date");
                 Date endDate = resultSet.getDate("end_date");
@@ -274,7 +277,8 @@ public class ContractServiceImpl implements ContractService {
                 int wdpw = resultSet.getInt("working_days_per_week");
                 int vdpy = resultSet.getInt("vacation_days_per_year");
 
-                contract = new Contract(new ContractStatus(status), name, startDate, endDate, frequency, terminationDate, hpw, hoursDue, wdpw, vdpy);
+
+                contract = new Contract(contractId, new ContractStatus(status), name, startDate, endDate, frequency, terminationDate, hpw, hoursDue, wdpw, vdpy, userId);
 
             }
         } catch (SQLException e) {

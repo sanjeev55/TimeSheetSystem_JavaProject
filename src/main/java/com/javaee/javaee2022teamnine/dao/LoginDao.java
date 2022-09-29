@@ -48,12 +48,14 @@ public class LoginDao {
 
             if (rs.next()) {
                 user = new User();
+
                 user.setId(rs.getInt("id"));
                 user.setFullName(rs.getString("fullName"));
                 user.setEmail(email);
                 user.setRole(rs.getString("role"));
                 user.setDob(Date.valueOf(rs.getString("dob")));
                 user.setFederalState(rs.getString("federal_state"));
+                user.setHasContract(rs.getBoolean("has_contract"));
 
 //                b = true;
             }

@@ -156,14 +156,20 @@ public class ContractController extends HttpServlet {
     protected void viewContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
-        int userId = u.getId();
 
-        Contract contract = contractService.getContractByUserId(userId);
-        System.out.println(contract.getStatus().getContractStatus());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractView.jsp");
-        request.setAttribute("contract", contract);
-        request.setAttribute("user", u);
-        dispatcher.forward(request, response);
+        if (u.isHasContract()) {
+            int userId = u.getId();
+            Contract contract = contractService.getContractByUserId(userId);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractView.jsp");
+            request.setAttribute("contract", contract);
+            request.setAttribute("user", u);
+            dispatcher.forward(request, response);
+        }
+        else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractView.jsp");
+            request.setAttribute("user", u);
+            dispatcher.forward(request, response);
+        }
 
     }
 
@@ -228,6 +234,9 @@ public class ContractController extends HttpServlet {
 
     private void deleteContract(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("contract_id"));
+        Contract contract = contractService.getContractById(id);
+        User user = userService.getUserById(contract.getUserId());
+        userService.updateUserContractStatus(user,false);
         contractService.deleteContract(id);
         response.sendRedirect("contract-list");
     }
@@ -260,7 +269,7 @@ public class ContractController extends HttpServlet {
                 timeSheet.setTimesheetStartDate(combo.get(0));
                 timeSheet.setTimesheetEndDate(combo.get(1));
                 timeSheet.setTimesheetStatus("IN_PROGRESS");
-                timeSheet.setContractId(existingContract.getId());
+                timeSheet.setContractId(Integer.parseInt(id));
 
                 timesheetService.createTimesheet(timeSheet);
             }
@@ -284,11 +293,15 @@ public class ContractController extends HttpServlet {
 
         String id = request.getParameter("contract_id");
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
+        System.out.println("User id ----------"+existingContract.getUserId());
+        User user = userService.getUserById(existingContract.getUserId());
+
 
         existingContract.setStatus(new ContractStatus(3));
         existingContract.setTerminationDate(dateService.dateToday());
 
         contractService.terminateContract(existingContract);
+        userService.updateUserContractStatus(user,false);
         response.sendRedirect("terminate-contract");
     }
 

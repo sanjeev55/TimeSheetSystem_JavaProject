@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println("resultSet++++" + resultSet);
 
             //Converting resultSet to ArrayList
             while (resultSet.next()) {

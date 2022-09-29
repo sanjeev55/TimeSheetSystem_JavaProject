@@ -8,4 +8,8 @@ public interface TimesheetService {
     void createTimesheet(TimeSheet timesheet);
 
     List<TimeSheet> listTimesheet();
+
+    List<TimeSheet> getSignedTimeSheet();
+
+    void updateTimeSheetByID(int id);
 }

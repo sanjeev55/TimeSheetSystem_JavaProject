@@ -44,6 +44,14 @@ public class TimeSheet implements Serializable {
         this.timesheetEndDate = timesheetEndDate;
     }
 
+    public TimeSheet(int id, String status, Date startDate, Date endDate, int contractId) {
+        this.timesheetId = id;
+        this.timesheetStatus = status;
+        this.timesheetStartDate = startDate;
+        this.timesheetEndDate = endDate;
+        this.contractId = contractId;
+    }
+
     public int getTimesheetId() {
         return timesheetId;
     }

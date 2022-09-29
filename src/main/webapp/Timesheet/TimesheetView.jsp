@@ -61,11 +61,13 @@
             </li>
 
             <% } else { %>
-            <li><a href="#" class="nav-link">View Contract</a></li>
+            <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
+            <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
+            <%}%>
             <% } %>
         </ul>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-info btn-">

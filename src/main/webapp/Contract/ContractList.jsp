@@ -34,8 +34,10 @@
             <li><a href="<%=request.getContextPath()%>/start-contract" class="nav-link">Start Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/terminate-contract" class="nav-link">Terminate
                 Contract</a></li>
+            <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
+            <%}%>
 
             <% } else if (u != null && u.getRole().equals("Secretary")) { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
@@ -44,21 +46,27 @@
             <li><a href="<%=request.getContextPath()%>/print-timesheet" class="nav-link">Print Timesheet</a>
             <li><a href="<%=request.getContextPath()%>/archive-timesheet" class="nav-link">Archive Timesheet</a>
             </li>
+            <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
+            <%}%>
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
+            <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
+            <%}%>
 
             <% } else { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
+            <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
+            <%}%>
             <% } %>
         </ul>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-info btn-">
