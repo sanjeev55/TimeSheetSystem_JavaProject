@@ -2,18 +2,13 @@ package com.javaee.javaee2022teamnine.controller;
 
 
 import com.javaee.javaee2022teamnine.dao.LoginDao;
-import com.javaee.javaee2022teamnine.dao.RegisterDao;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
-<<<<<<< HEAD
 import com.javaee.javaee2022teamnine.util.UserService;
 import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
-=======
 import com.javaee.javaee2022teamnine.util.ReminderUtility;
->>>>>>> dev-bms-reminder
 
 import java.io.IOException;
-import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
