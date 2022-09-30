@@ -50,7 +50,7 @@
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
-            <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
+            <li><a href="<%=request.getContextPath()%>/sign-timesheet-employee" class="nav-link">Sign Timesheet</a></li>
             <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
@@ -59,7 +59,6 @@
             <% } else { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
-            <li><a href="#" class="nav-link">Sign Timesheet</a></li>
             <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>

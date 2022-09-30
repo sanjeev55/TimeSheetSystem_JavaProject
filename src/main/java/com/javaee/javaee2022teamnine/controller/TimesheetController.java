@@ -6,8 +6,10 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.javaee.javaee2022teamnine.model.Contract;
 import com.javaee.javaee2022teamnine.model.TimeSheet;
+import com.javaee.javaee2022teamnine.model.TimeSheetEntry;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.ContractService;
+import com.javaee.javaee2022teamnine.util.DateService;
 import com.javaee.javaee2022teamnine.util.TimesheetService;
 import com.javaee.javaee2022teamnine.util.UserService;
 import com.javaee.javaee2022teamnine.util.impl.ContractServiceImpl;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
@@ -32,7 +35,11 @@ import java.util.stream.Stream;
         "/archive-timesheet",
         "/archive",
         "/print-timesheet",
-        "/print-pdf"
+        "/print-pdf",
+        "/sign-timesheet-view",
+        "/sign-timesheet",
+        "/sign-timesheet-employee",
+        "/sign-supervisor"
 })
 public class TimesheetController extends HttpServlet {
     TimesheetService timesheetService = new TimesheetServiceImpl();
@@ -41,6 +48,7 @@ public class TimesheetController extends HttpServlet {
 
     UserService userService = new UserServiceImpl();
 
+    DateService dateService = new DateService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        resp.getWriter().append("Served at: ").append(req.getContextPath());
@@ -56,6 +64,15 @@ public class TimesheetController extends HttpServlet {
             printTimeSheet(req, resp);
         } else if ("/print-pdf".equals(action)) {
             printTimeSheetPdf(req, resp);
+        } else if ("/sign-timesheet-view".equals(action)){
+            signTimeSheetView(req,resp);
+        } else if ("/sign-timesheet".equals(action)){
+            signTimeSheet(req, resp);
+        } else if("/sign-timesheet-employee".equals(action)){
+            System.out.println("------------------------herererere");
+            signTimeSheetEmployee(req, resp);
+        } else if("/sign-supervisor".equals(action)){
+            signTimeSheetSupervisor(req, resp);
         }
     }
 
@@ -191,6 +208,77 @@ public class TimesheetController extends HttpServlet {
         }
 //        table.addCell("row 1, col 2");
     }
+
+    private void signTimeSheetView(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        String timeSheetId = request.getParameter("timesheetId");
+        System.out.println("Inside sign timesheet view========="+timeSheetId);
+        TimeSheet timesheet = timesheetService.getTimesheetById(Integer.parseInt(timeSheetId));
+        System.out.println("Timehseet=="+timesheet);
+
+        List<TimeSheetEntry> timeSheetEntryList = timesheetService.getTimesheetEntryByTimeSheetId(Integer.parseInt(timeSheetId));
+        System.out.println("Time sheet entry list:"+timeSheetEntryList);
+
+        if (timeSheetEntryList.isEmpty()){
+            Date startDate = timesheet.getTimesheetStartDate();
+            Date endDate = timesheet.getTimesheetEndDate();
+
+            List<Date> listOfDate = dateService.getDaysBetweenDatesForTimeSheet(startDate,endDate);
+            listOfDate.add(endDate);
+
+            for (Date date: listOfDate) {
+                timesheetService.addTimeSheetEntry(Integer.parseInt(timeSheetId), timesheet.getHoursDue(), date);
+            }
+            timeSheetEntryList = timesheetService.getTimesheetEntryByTimeSheetId(Integer.parseInt(timeSheetId));
+
+            request.setAttribute("timeSheetEntryList", timeSheetEntryList);
+        }
+        else{
+            request.setAttribute("timeSheetEntryList", timeSheetEntryList);
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Timesheet/SignTimeSheetView.jsp");
+        dispatcher.forward(request,response);
+    }
+
+    private void signTimeSheet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String id = request.getParameter("timesheetEntryId");
+
+        TimeSheetEntry timeSheetEntry = timesheetService.getTimesheetEntryById(Integer.parseInt(id));
+        TimeSheet timeSheet = timesheetService.getTimesheetById(timeSheetEntry.getTimesheetId());
+        timesheetService.updateTimeSheetStatusAndHoursDueAndSignedByEmployeeById(timeSheetEntry.getTimesheetId(), "SIGNED_BY_EMPLOYEE", timeSheet.getHoursDue(), (java.sql.Date) timeSheetEntry.getEntryDate());
+        timesheetService.updateTimeSheetEntryById(Integer.parseInt(id));
+
+        response.sendRedirect("view-timesheet");
+    }
+
+    private void signTimeSheetEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Inside signeddd--------------");
+        List<TimeSheet> timeSheets = timesheetService.getSignedByEmployeeTimeSheets();
+        HashMap<TimeSheet, User> timeSheetUser = new HashMap<>();
+
+
+        for (TimeSheet sheet : timeSheets) {
+
+            int contractID = sheet.getContractId();
+            Contract contract = contractService.getContractById(contractID);
+
+            int userId = contract.getUserId();
+            User user = userService.getUserById(userId);
+
+            timeSheetUser.put(sheet, user);
+        }
+        System.out.println("Timesheet user------"+timeSheetUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Timesheet/SignedByEmployeeView.jsp");
+        request.setAttribute("signedTimeSheets", timeSheetUser);
+        dispatcher.forward(request, response);
+    }
+
+    private void signTimeSheetSupervisor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        timesheetService.updateTimeSheetStatusAndSignedBySupervisorByID(Integer.parseInt(id), java.time.LocalDate.now());
+
+        response.sendRedirect("sign-timesheet-employee");
+    }
+
 
 
 }

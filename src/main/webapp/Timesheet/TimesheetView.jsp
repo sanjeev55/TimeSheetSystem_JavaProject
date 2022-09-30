@@ -59,14 +59,13 @@
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
-            <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
+            <li><a href="<%=request.getContextPath()%>/sign-timesheet-employee" class="nav-link">Sign Timesheet</a></li>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
 
             <% } else { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
-            <li><a href="#" class="nav-link">Sign Timesheet</a></li>
             <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
@@ -98,6 +97,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Contract ID</th>
+                <th>Signature</th>
             </tr>
             </thead>
             <tbody>
@@ -121,6 +121,14 @@
                 <td><%=timeSheet.getTimesheetEndDate()%>
                 </td>
                 <td><%=timeSheet.getContractId()%>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/sign-timesheet-view?timesheetId=<%=timeSheet.getTimesheetId()%>">
+                      <button class="btn" style="background-color: #4CAF50; color: white;">
+                            Signature
+                      </button>
+                    </a>
+
                 </td>
                 <%--<td>
                     <a href="${pageContext.request.contextPath}/create?id=<%=t.getId()%>">
