@@ -23,10 +23,11 @@ public class ReminderUtility extends TimerTask{
     @Override
     public void run() {
 
-       
-            ReminderDao reminderDao = new ReminderDao();
-            List<User> users = reminderDao.getAllReminderUsers();
-            users.forEach(user -> {
+        System.out.println("cron job running.......");
+        ReminderDao reminderDao = new ReminderDao();
+        //In Progress Reminder
+        List<User> users = reminderDao.getAllInProgressReminderUsers();
+        users.forEach(user -> {
             try {
                 SendEmail.sendAsHtml(user.getEmail(),
                         "Reminder email",
@@ -34,19 +35,54 @@ public class ReminderUtility extends TimerTask{
             } catch (MessagingException ex) {
                 Logger.getLogger(ReminderUtility.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
+        });
+
+        //signed by employee
+        users = reminderDao.getAllSignedByEmployeeReminderUsers();
+        List<User> supervisorAssistantusers = reminderDao.getSupervisorAndAssistantUsers();
+        users.forEach(user -> {
+            supervisorAssistantusers.forEach(supervisor ->{
+                try {
+                    SendEmail.sendAsHtml(supervisor.getEmail(),
+                            "Reminder email",
+                            "<h2>Please review the timesheet which is assigned to you and approve or reject it as a supervisor for" +user.getEmail() + "</h2>");
+                } catch (MessagingException ex) {
+                    Logger.getLogger(ReminderUtility.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
             });
-            
-      
+        });
+
+        //signed by supervisor
+        users = reminderDao.getAllSignedBySupervisorReminderUsers();
+        List<User> secretaryusers = reminderDao.getSecretaryUsers();
+        users.forEach(user -> {
+            secretaryusers.forEach(secretary ->{
+                try {
+                    SendEmail.sendAsHtml(secretary.getEmail(),
+                            "Reminder email",
+                            "<h2>Please review the timesheet which is assigned to you and approve or reject it as a secretary for " +user.getEmail() + "</h2>");
+                } catch (MessagingException ex) {
+                    Logger.getLogger(ReminderUtility.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+            });
+        });
+
+
+
     }
-    
+
     public static void runTimer(){
         Timer timer = new Timer();
         TimerTask task = new ReminderUtility();
         //timer.schedule(task, 0, 10000);
         timer.schedule(task, new Date(2022, 10, 1), 604800000);
         System.out.println("finished -----------");
-    
-    
+
+
     }
 }

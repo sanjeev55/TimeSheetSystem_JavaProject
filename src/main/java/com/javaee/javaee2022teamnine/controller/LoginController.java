@@ -21,9 +21,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
-    static{
-        runCronJob();
-    }
     DBConnectionService dbService = new DBConnectionService();
     UserService userService = new UserServiceImpl();
 
@@ -79,9 +76,5 @@ public class LoginController extends HttpServlet {
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(destinationPage);
         dispatcher.forward(request, response);
-    }
-
-    public static void runCronJob() {
-        ReminderUtility.runTimer();
     }
 }

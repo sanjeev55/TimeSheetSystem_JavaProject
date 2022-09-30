@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-221.5080.210">
-    <data-source name="javaee_team_nine" uuid="92e42dc0-1b90-4c83-b596-210500cea89b">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
-      <schema-mapping />
-    </data-source>
-  </component>
-</project>
