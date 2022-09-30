@@ -69,7 +69,6 @@ public class TimesheetController extends HttpServlet {
         } else if ("/sign-timesheet".equals(action)){
             signTimeSheet(req, resp);
         } else if("/sign-timesheet-employee".equals(action)){
-            System.out.println("------------------------herererere");
             signTimeSheetEmployee(req, resp);
         } else if("/sign-supervisor".equals(action)){
             signTimeSheetSupervisor(req, resp);
@@ -92,9 +91,6 @@ public class TimesheetController extends HttpServlet {
         Contract contract = contractService.getContractByUserId(userId);
 
         List<TimeSheet> timeSheets = timesheetService.listTimesheet();
-        for (TimeSheet time : timeSheets) {
-            System.out.println(time.getContractId());
-        }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("Timesheet/TimesheetView.jsp");
 
@@ -120,8 +116,6 @@ public class TimesheetController extends HttpServlet {
 
             timeSheetUser.put(sheet, user);
         }
-        System.out.println(timeSheetUser);
-
         request.setAttribute("signedTimeSheets", timeSheetUser);
         dispatcher.forward(request, response);
 
@@ -206,17 +200,13 @@ public class TimesheetController extends HttpServlet {
             table.addCell("" + timeSheet.getTimesheetEndDate());
             table.addCell("" + timeSheet.getContractId());
         }
-//        table.addCell("row 1, col 2");
     }
 
     private void signTimeSheetView(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         String timeSheetId = request.getParameter("timesheetId");
-        System.out.println("Inside sign timesheet view========="+timeSheetId);
         TimeSheet timesheet = timesheetService.getTimesheetById(Integer.parseInt(timeSheetId));
-        System.out.println("Timehseet=="+timesheet);
 
         List<TimeSheetEntry> timeSheetEntryList = timesheetService.getTimesheetEntryByTimeSheetId(Integer.parseInt(timeSheetId));
-        System.out.println("Time sheet entry list:"+timeSheetEntryList);
 
         if (timeSheetEntryList.isEmpty()){
             Date startDate = timesheet.getTimesheetStartDate();
@@ -251,7 +241,6 @@ public class TimesheetController extends HttpServlet {
     }
 
     private void signTimeSheetEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Inside signeddd--------------");
         List<TimeSheet> timeSheets = timesheetService.getSignedByEmployeeTimeSheets();
         HashMap<TimeSheet, User> timeSheetUser = new HashMap<>();
 
@@ -266,7 +255,6 @@ public class TimesheetController extends HttpServlet {
 
             timeSheetUser.put(sheet, user);
         }
-        System.out.println("Timesheet user------"+timeSheetUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("Timesheet/SignedByEmployeeView.jsp");
         request.setAttribute("signedTimeSheets", timeSheetUser);
         dispatcher.forward(request, response);

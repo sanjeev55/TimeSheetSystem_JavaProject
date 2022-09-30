@@ -20,7 +20,6 @@ public class ContractDao {
      *                 This method will create a new Contract object
      */
     public void createContract(Contract contract) {
-//        ContractStatus status = contract.getStatus();
         int status = contract.getStatus().getId();
         String name = contract.getName();
         Date startDate = (Date) contract.getStartDate();

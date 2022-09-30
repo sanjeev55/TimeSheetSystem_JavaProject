@@ -3852,456 +3852,516 @@
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="848" parent="339" name="contract_ibfk_54">
+    <foreign-key id="848" parent="339" name="contract_ibfk_537">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="849" parent="339" name="contract_ibfk_55">
+    <foreign-key id="849" parent="339" name="contract_ibfk_538">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="850" parent="339" name="contract_ibfk_56">
+    <foreign-key id="850" parent="339" name="contract_ibfk_539">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="851" parent="339" name="contract_ibfk_57">
+    <foreign-key id="851" parent="339" name="contract_ibfk_54">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="852" parent="339" name="contract_ibfk_58">
+    <foreign-key id="852" parent="339" name="contract_ibfk_540">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="853" parent="339" name="contract_ibfk_59">
+    <foreign-key id="853" parent="339" name="contract_ibfk_541">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="854" parent="339" name="contract_ibfk_6">
+    <foreign-key id="854" parent="339" name="contract_ibfk_542">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="855" parent="339" name="contract_ibfk_60">
+    <foreign-key id="855" parent="339" name="contract_ibfk_543">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="856" parent="339" name="contract_ibfk_61">
+    <foreign-key id="856" parent="339" name="contract_ibfk_544">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="857" parent="339" name="contract_ibfk_62">
+    <foreign-key id="857" parent="339" name="contract_ibfk_545">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="858" parent="339" name="contract_ibfk_63">
+    <foreign-key id="858" parent="339" name="contract_ibfk_546">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="859" parent="339" name="contract_ibfk_64">
+    <foreign-key id="859" parent="339" name="contract_ibfk_547">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="860" parent="339" name="contract_ibfk_65">
+    <foreign-key id="860" parent="339" name="contract_ibfk_548">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="861" parent="339" name="contract_ibfk_66">
+    <foreign-key id="861" parent="339" name="contract_ibfk_55">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="862" parent="339" name="contract_ibfk_67">
+    <foreign-key id="862" parent="339" name="contract_ibfk_56">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="863" parent="339" name="contract_ibfk_68">
+    <foreign-key id="863" parent="339" name="contract_ibfk_57">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="864" parent="339" name="contract_ibfk_69">
+    <foreign-key id="864" parent="339" name="contract_ibfk_58">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="865" parent="339" name="contract_ibfk_7">
+    <foreign-key id="865" parent="339" name="contract_ibfk_59">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="866" parent="339" name="contract_ibfk_70">
+    <foreign-key id="866" parent="339" name="contract_ibfk_6">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="867" parent="339" name="contract_ibfk_71">
+    <foreign-key id="867" parent="339" name="contract_ibfk_60">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="868" parent="339" name="contract_ibfk_72">
+    <foreign-key id="868" parent="339" name="contract_ibfk_61">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="869" parent="339" name="contract_ibfk_73">
+    <foreign-key id="869" parent="339" name="contract_ibfk_62">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="870" parent="339" name="contract_ibfk_74">
+    <foreign-key id="870" parent="339" name="contract_ibfk_63">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="871" parent="339" name="contract_ibfk_75">
+    <foreign-key id="871" parent="339" name="contract_ibfk_64">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="872" parent="339" name="contract_ibfk_76">
+    <foreign-key id="872" parent="339" name="contract_ibfk_65">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="873" parent="339" name="contract_ibfk_77">
+    <foreign-key id="873" parent="339" name="contract_ibfk_66">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="874" parent="339" name="contract_ibfk_78">
+    <foreign-key id="874" parent="339" name="contract_ibfk_67">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="875" parent="339" name="contract_ibfk_79">
+    <foreign-key id="875" parent="339" name="contract_ibfk_68">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="876" parent="339" name="contract_ibfk_8">
+    <foreign-key id="876" parent="339" name="contract_ibfk_69">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="877" parent="339" name="contract_ibfk_80">
+    <foreign-key id="877" parent="339" name="contract_ibfk_7">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="878" parent="339" name="contract_ibfk_81">
+    <foreign-key id="878" parent="339" name="contract_ibfk_70">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="879" parent="339" name="contract_ibfk_82">
+    <foreign-key id="879" parent="339" name="contract_ibfk_71">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="880" parent="339" name="contract_ibfk_83">
+    <foreign-key id="880" parent="339" name="contract_ibfk_72">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="881" parent="339" name="contract_ibfk_84">
+    <foreign-key id="881" parent="339" name="contract_ibfk_73">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="882" parent="339" name="contract_ibfk_85">
+    <foreign-key id="882" parent="339" name="contract_ibfk_74">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="883" parent="339" name="contract_ibfk_86">
+    <foreign-key id="883" parent="339" name="contract_ibfk_75">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="884" parent="339" name="contract_ibfk_87">
+    <foreign-key id="884" parent="339" name="contract_ibfk_76">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="885" parent="339" name="contract_ibfk_88">
+    <foreign-key id="885" parent="339" name="contract_ibfk_77">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="886" parent="339" name="contract_ibfk_89">
+    <foreign-key id="886" parent="339" name="contract_ibfk_78">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="887" parent="339" name="contract_ibfk_9">
+    <foreign-key id="887" parent="339" name="contract_ibfk_79">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="888" parent="339" name="contract_ibfk_90">
+    <foreign-key id="888" parent="339" name="contract_ibfk_8">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="889" parent="339" name="contract_ibfk_91">
+    <foreign-key id="889" parent="339" name="contract_ibfk_80">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="890" parent="339" name="contract_ibfk_92">
+    <foreign-key id="890" parent="339" name="contract_ibfk_81">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="891" parent="339" name="contract_ibfk_93">
+    <foreign-key id="891" parent="339" name="contract_ibfk_82">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="892" parent="339" name="contract_ibfk_94">
+    <foreign-key id="892" parent="339" name="contract_ibfk_83">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="893" parent="339" name="contract_ibfk_95">
+    <foreign-key id="893" parent="339" name="contract_ibfk_84">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="894" parent="339" name="contract_ibfk_96">
+    <foreign-key id="894" parent="339" name="contract_ibfk_85">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="895" parent="339" name="contract_ibfk_97">
+    <foreign-key id="895" parent="339" name="contract_ibfk_86">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="896" parent="339" name="contract_ibfk_98">
+    <foreign-key id="896" parent="339" name="contract_ibfk_87">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <foreign-key id="897" parent="339" name="contract_ibfk_99">
+    <foreign-key id="897" parent="339" name="contract_ibfk_88">
       <ColNames>c_status</ColNames>
       <RefColNames>contract_status_id</RefColNames>
       <RefTableName>contract_status</RefTableName>
     </foreign-key>
-    <index id="898" parent="339" name="c_status">
+    <foreign-key id="898" parent="339" name="contract_ibfk_89">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="899" parent="339" name="contract_ibfk_9">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="900" parent="339" name="contract_ibfk_90">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="901" parent="339" name="contract_ibfk_91">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="902" parent="339" name="contract_ibfk_92">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="903" parent="339" name="contract_ibfk_93">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="904" parent="339" name="contract_ibfk_94">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="905" parent="339" name="contract_ibfk_95">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="906" parent="339" name="contract_ibfk_96">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="907" parent="339" name="contract_ibfk_97">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="908" parent="339" name="contract_ibfk_98">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <foreign-key id="909" parent="339" name="contract_ibfk_99">
+      <ColNames>c_status</ColNames>
+      <RefColNames>contract_status_id</RefColNames>
+      <RefTableName>contract_status</RefTableName>
+    </foreign-key>
+    <index id="910" parent="339" name="c_status">
       <ColNames>c_status</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="899" parent="339" name="PRIMARY">
+    <key id="911" parent="339" name="PRIMARY">
       <ColNames>contract_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="900" parent="340" name="contract_status_id">
+    <column id="912" parent="340" name="contract_status_id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="901" parent="340" name="contract_status">
+    <column id="913" parent="340" name="contract_status">
       <DataType>varchar(25)|0s</DataType>
       <Position>2</Position>
     </column>
-    <key id="902" parent="340" name="PRIMARY">
+    <key id="914" parent="340" name="PRIMARY">
       <ColNames>contract_status_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="903" parent="341" name="report_type_id">
+    <column id="915" parent="341" name="report_type_id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="904" parent="341" name="report_type">
+    <column id="916" parent="341" name="report_type">
       <DataType>varchar(25)|0s</DataType>
       <Position>2</Position>
     </column>
-    <key id="905" parent="341" name="PRIMARY">
+    <key id="917" parent="341" name="PRIMARY">
       <ColNames>report_type_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="906" parent="342" name="role_id">
+    <column id="918" parent="342" name="role_id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="907" parent="342" name="role">
+    <column id="919" parent="342" name="role">
       <DataType>varchar(10)|0s</DataType>
       <Position>2</Position>
     </column>
-    <key id="908" parent="342" name="PRIMARY">
+    <key id="920" parent="342" name="PRIMARY">
       <ColNames>role_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="909" parent="343" name="timesheet_id">
+    <column id="921" parent="343" name="timesheet_id">
       <AutoIncrement>6041</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="910" parent="343" name="timesheet_status">
+    <column id="922" parent="343" name="timesheet_status">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="911" parent="343" name="timesheet_start_date">
+    <column id="923" parent="343" name="timesheet_start_date">
       <DataType>date|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="912" parent="343" name="timesheet_end_date">
+    <column id="924" parent="343" name="timesheet_end_date">
       <DataType>date|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="913" parent="343" name="contract_id">
+    <column id="925" parent="343" name="contract_id">
       <DataType>int(11)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="914" parent="343" name="hours_due">
+    <column id="926" parent="343" name="hours_due">
       <DataType>double|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="915" parent="343" name="signed_by_employee">
+    <column id="927" parent="343" name="signed_by_employee">
       <DataType>date|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="916" parent="343" name="signed_by_supervisor">
+    <column id="928" parent="343" name="signed_by_supervisor">
       <DataType>date|0s</DataType>
       <Position>8</Position>
     </column>
-    <key id="917" parent="343" name="PRIMARY">
+    <key id="929" parent="343" name="PRIMARY">
       <ColNames>timesheet_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="918" parent="344" name="timesheet_entry_id">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="930" parent="344" name="timesheet_entry_id">
+      <AutoIncrement>6</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="919" parent="344" name="timesheet_id">
+    <column id="931" parent="344" name="timesheet_id">
       <DataType>int(11)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="920" parent="344" name="report_type">
+    <column id="932" parent="344" name="report_type">
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="921" parent="344" name="description">
+    <column id="933" parent="344" name="description">
       <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="922" parent="344" name="hours_due">
+    <column id="934" parent="344" name="hours_due">
       <DataType>double|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="923" parent="344" name="start_time">
+    <column id="935" parent="344" name="start_time">
       <DataType>time|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="924" parent="344" name="end_time">
+    <column id="936" parent="344" name="end_time">
       <DataType>time|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="925" parent="344" name="entry_date">
+    <column id="937" parent="344" name="entry_date">
       <DataType>date|0s</DataType>
       <Position>8</Position>
     </column>
-    <column id="926" parent="344" name="is_signed">
+    <column id="938" parent="344" name="is_signed">
       <DataType>tinyint(1)|0s</DataType>
       <Position>9</Position>
     </column>
-    <key id="927" parent="344" name="PRIMARY">
+    <key id="939" parent="344" name="PRIMARY">
       <ColNames>timesheet_entry_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="928" parent="345" name="ts_frequency_id">
+    <column id="940" parent="345" name="ts_frequency_id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="929" parent="345" name="timesheet_frequency">
+    <column id="941" parent="345" name="timesheet_frequency">
       <DataType>varchar(25)|0s</DataType>
       <Position>2</Position>
     </column>
-    <key id="930" parent="345" name="PRIMARY">
+    <key id="942" parent="345" name="PRIMARY">
       <ColNames>ts_frequency_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="931" parent="346" name="ts_status_id">
+    <column id="943" parent="346" name="ts_status_id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="932" parent="346" name="timesheet_status">
+    <column id="944" parent="346" name="timesheet_status">
       <DataType>varchar(25)|0s</DataType>
       <Position>2</Position>
     </column>
-    <key id="933" parent="346" name="PRIMARY">
+    <key id="945" parent="346" name="PRIMARY">
       <ColNames>ts_status_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="934" parent="347" name="id">
-      <AutoIncrement>14</AutoIncrement>
+    <column id="946" parent="347" name="id">
+      <AutoIncrement>15</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="935" parent="347" name="fullName">
+    <column id="947" parent="347" name="fullName">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="936" parent="347" name="username">
+    <column id="948" parent="347" name="username">
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="937" parent="347" name="password">
+    <column id="949" parent="347" name="password">
       <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="938" parent="347" name="dob">
+    <column id="950" parent="347" name="dob">
       <DataType>date|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="939" parent="347" name="tos">
+    <column id="951" parent="347" name="tos">
       <DataType>tinyint(1)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="940" parent="347" name="federal_state">
+    <column id="952" parent="347" name="federal_state">
       <DataType>varchar(255)|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="941" parent="347" name="role">
+    <column id="953" parent="347" name="role">
       <DataType>varchar(10)|0s</DataType>
       <Position>8</Position>
     </column>
-    <column id="942" parent="347" name="has_contract">
+    <column id="954" parent="347" name="has_contract">
       <DataType>tinyint(1)|0s</DataType>
       <Position>9</Position>
     </column>
-    <key id="943" parent="347" name="PRIMARY">
+    <key id="955" parent="347" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>

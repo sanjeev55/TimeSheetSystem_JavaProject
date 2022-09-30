@@ -34,8 +34,6 @@ public class ContractController extends HttpServlet {
 
     TimesheetService timesheetService = new TimesheetServiceImpl();
 
-    String role = "EMPLOYEE";
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().append("Served at: ").append(req.getContextPath());
@@ -76,58 +74,10 @@ public class ContractController extends HttpServlet {
                 listUsers(req, resp);
                 break;
         }
-
-
-        /*switch (user.getRole()) {
-            case "SUPERVISOR": {
-                RequestDispatcher dispatcher = req.getRequestDispatcher("Contract/ContractSupervisor.jsp");
-
-                if (req.getParameter("createContract") != null) {
-                    req.getRequestDispatcher("Contract/CRUD/Create.jsp").forward(req, resp);
-                }
-                dispatcher.forward(req, resp);
-                break;
-            }
-            case "ASSISTANT": {
-                RequestDispatcher dispatcher = req.getRequestDispatcher("Contract/ContractAssistant.jsp");
-//                processRequest(req, resp);
-                try {
-                    if ("/create".equals(action)) {
-                        createContract(req, resp);
-                    } else if ("/list".equals(action)){
-                        listUsers(req, resp);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                dispatcher.forward(req, resp);
-                break;
-            }
-            case "SECRETARY": {
-                RequestDispatcher dispatcher = req.getRequestDispatcher("Contract/ContractSecretary.jsp");
-                dispatcher.forward(req, resp);
-                break;
-            }
-            case "EMPLOYEE": {
-                RequestDispatcher dispatcher = req.getRequestDispatcher("Contract/ContractEmployee.jsp");
-                dispatcher.forward(req, resp);
-                break;
-            }
-            default:
-                RequestDispatcher dispatcher = req.getRequestDispatcher("Contract.jsp");
-                dispatcher.forward(req, resp);
-        }*/
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //Test: driver code
-//        User user = new User("Biraj Man Singh", "bmsingh@uni-koblenz.de", "SUPERVISOR");
-        User user = new User("Biraj Man Singh", "bmsingh@uni-koblenz.de", "ASSISTANT");
-//        User user = new User("Biraj Man Singh", "bmsingh@uni-koblenz.de", "SECRETARY");
-//        User user = new User("Biraj Man Singh", "bmsingh@uni-koblenz.de", "EMPLOYEE");
-
         doGet(req, resp);
     }
 
@@ -233,7 +183,6 @@ public class ContractController extends HttpServlet {
         contract.setWorkingDaysPerWeek(Integer.parseInt(workingDaysPerWeek));
         contract.setVacationDaysPerYear(vacationDaysPerYear);
 
-//        Contract contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear);
         contractService.updateContract(contract);
         response.sendRedirect("contract-list");
     }
@@ -254,35 +203,6 @@ public class ContractController extends HttpServlet {
         request.setAttribute("listContractToStart", contracts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractStart.jsp");
         dispatcher.forward(request, response);
-
-      /*  String id = request.getParameter("contract_id");
-        Contract existingContract = contractService.getContractById(Integer.parseInt(id));
-
-        existingContract.setStatus(new ContractStatus(2));
-        existingContract.setHasTimesheet(true);
-
-        contractService.startContract(existingContract);
-
-        TimeSheet timeSheet = new TimeSheet();
-        // todo: apply frequency logic here maybe?
-        List<List<Date>> dates = DateService.datesForStartAndEndOfWeek(
-                (Date) existingContract.getStartDate(),
-                (Date) existingContract.getEndDate()
-        );
-//        System.out.println("--dates====" + dates);
-
-        for (List<Date> combo :
-                dates) {
-            if (combo.size() == 2) {
-                timeSheet.setTimesheetStartDate(combo.get(0));
-                timeSheet.setTimesheetEndDate(combo.get(1));
-                timeSheet.setTimesheetStatus("IN_PROGRESS");
-                timeSheet.setContractId(Integer.parseInt(id));
-
-                timesheetService.createTimesheet(timeSheet);
-            }
-        }
-        response.sendRedirect("start-contract");*/
     }
 
     private void startContractUpdate(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -295,12 +215,10 @@ public class ContractController extends HttpServlet {
 
 
         TimeSheet timeSheet = new TimeSheet();
-        // todo: apply frequency logic here maybe?
         List<List<Date>> dates = DateService.datesForStartAndEndOfWeek(
                 (Date) existingContract.getStartDate(),
                 (Date) existingContract.getEndDate()
         );
-//        System.out.println("--dates====" + dates);
 
         for (List<Date> combo :
                 dates) {
@@ -325,22 +243,6 @@ public class ContractController extends HttpServlet {
         request.setAttribute("listContractToStart", contracts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("Contract/ContractTerminate.jsp");
         dispatcher.forward(request, response);
-
-        /*String id = request.getParameter("contract_id");
-        Contract existingContract = contractService.getContractById(Integer.parseInt(id));
-        User user = userService.getUserById(existingContract.getUserId());
-
-
-        existingContract.setStatus(new ContractStatus(3));
-        existingContract.setTerminationDate(dateService.dateToday());
-        existingContract.setHasTimesheet(false);
-
-        contractService.terminateContract(existingContract);
-        userService.updateUserContractStatus(user,false);
-
-        timesheetService.deleteTimesheetIfContractTerminated(existingContract.getId());
-
-        response.sendRedirect("terminate-contract");*/
     }
 
     private void terminateContractUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException{

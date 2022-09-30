@@ -6,7 +6,6 @@ import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
 import com.javaee.javaee2022teamnine.util.UserService;
 import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
-import com.javaee.javaee2022teamnine.util.ReminderUtility;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -53,8 +52,6 @@ public class LoginController extends HttpServlet {
         String password = userService.generateMD5(request.getParameter("password"));
 
         LoginDao logindao = new LoginDao();
-//		boolean loginResult = logindao.login(email, password);
-
 
         User user = logindao.login(email, password);
         String destinationPage = "index.jsp";
@@ -63,16 +60,9 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             destinationPage = "Dashboard.jsp";
-
-//                request.setAttribute("loginResult", "true");
-//                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-//                rd.forward(request, response);
         } else {
             String message = "Invalid email/password";
             request.setAttribute("message", message);
-//                request.setAttribute("loginResult", null);
-//                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-//                rd.forward(request, response);
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(destinationPage);
         dispatcher.forward(request, response);
