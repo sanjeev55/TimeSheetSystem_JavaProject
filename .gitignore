@@ -36,3 +36,12 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/workspace.xml
+/.idea/vcs.xml
+/.idea/misc.xml
+/.idea/jpa-buddy.xml
+/.idea/encodings.xml
+/.idea/dataSources.xml
+/.idea/dataSources.local.xml
+/.idea/artifacts/javaee_2022_teamnine_war_exploded.xml
+/.idea/artifacts/javaee_2022_teamnine_war.xml

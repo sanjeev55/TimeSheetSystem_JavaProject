@@ -292,7 +292,7 @@ public class ContractController extends HttpServlet {
         existingContract.setStatus(new ContractStatus(2));
         existingContract.setHasTimesheet(true);
 
-        contractService.startContract(existingContract);
+
 
         TimeSheet timeSheet = new TimeSheet();
         // todo: apply frequency logic here maybe?
@@ -309,10 +309,13 @@ public class ContractController extends HttpServlet {
                 timeSheet.setTimesheetEndDate(combo.get(1));
                 timeSheet.setTimesheetStatus("IN_PROGRESS");
                 timeSheet.setContractId(Integer.parseInt(id));
+                timeSheet.setHoursDue(contractService.calculateHoursDue(5,0,existingContract.getHoursPerWeek(),existingContract.getWorkingDaysPerWeek()));
 
                 timesheetService.createTimesheet(timeSheet);
             }
         }
+        existingContract.setHoursDue(timesheetService.calculateTotalHoursDue(Integer.parseInt(id)));
+        contractService.startContract(existingContract);
         response.sendRedirect("start-contract");
     }
 
