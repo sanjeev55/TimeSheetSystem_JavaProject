@@ -9,27 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbb3e9dd-227d-4824-87d6-daedc720daa9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/model/TimeSheetEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Timesheet/SignTimeSheetView.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Timesheet/SignedByEmployeeView.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/controller/TimesheetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/controller/TimesheetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/model/TimeSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/model/TimeSheet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/DBConnectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/DBConnectionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/DateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/DateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/TimesheetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/TimesheetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/impl/TimesheetServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/impl/TimesheetServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Contract/ContractCreate.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Contract/ContractCreate.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Contract/ContractEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Contract/ContractEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Contract/ContractList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Contract/ContractList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Contract/ContractStart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Contract/ContractStart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Contract/ContractTerminate.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Contract/ContractTerminate.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Contract/ContractView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Contract/ContractView.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Dashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Timesheet/ArchiveTimeSheetView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Timesheet/ArchiveTimeSheetView.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Timesheet/TimeSheetPrint.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Timesheet/TimeSheetPrint.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Timesheet/TimesheetView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Timesheet/TimesheetView.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="bbb3e9dd-227d-4824-87d6-daedc720daa9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
