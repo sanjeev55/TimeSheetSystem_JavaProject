@@ -36,14 +36,13 @@ public interface ContractService {
      */
     double calculateHoursPerWeek();
 
-    double calculateHoursDue();
-
     /**
      * @param startDate The start date of the contract
      * @param endDate   The end date of the contract
      * @return Total vacation hours during the contract
      */
     double calculateVacationHours(Date startDate, Date endDate);
+    double calculateHoursDue(int wdip, int phip, double hpw, int wdpw);
 
     /**
      * @param id The contract id

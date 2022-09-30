@@ -98,10 +98,6 @@ public class ContractServiceImpl implements ContractService {
     }
 
     // todo: do this after Timesheet implementation
-    @Override
-    public double calculateHoursDue() {
-        return 0;
-    }
 
     @Override
     public double calculateVacationHours(java.util.Date startDate, java.util.Date endDate) {
@@ -115,6 +111,13 @@ public class ContractServiceImpl implements ContractService {
                 * (calculateHoursPerWeek() / calculateWorkingDaysPerWeek());
 
         return Math.abs(vacationHours);
+    }
+
+    @Override
+    public double calculateHoursDue(int wdip, int phip, double hpw, int wdpw ){
+        double hoursDue = ((wdip - phip) * hpw) / wdpw;
+        System.out.println("Hours due:"+hoursDue);
+        return hoursDue;
     }
 
     @Override
@@ -197,10 +200,11 @@ public class ContractServiceImpl implements ContractService {
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE javaee_team_nine.contract SET c_status = ?, has_timesheet = ? WHERE contract_id = ?;");
+                    "UPDATE javaee_team_nine.contract SET c_status = ?, has_timesheet = ?, hours_due = ? WHERE contract_id = ?;");
             preparedStatement.setInt(1, existingContract.getStatus().getId());
             preparedStatement.setBoolean(2, existingContract.isHasTimesheet());
-            preparedStatement.setInt(3, existingContract.getId());
+            preparedStatement.setDouble(3, existingContract.getHoursDue());
+            preparedStatement.setInt(4, existingContract.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {

@@ -16,4 +16,6 @@ public interface TimesheetService {
     boolean deleteTimesheetIfContractTerminated(int contract_id);
 
     List<TimeSheet> getTimesheetByContractId(int id);
+
+    double calculateTotalHoursDue(int id);
 }

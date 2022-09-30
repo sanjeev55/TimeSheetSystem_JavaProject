@@ -21,10 +21,11 @@ public class TimesheetServiceImpl implements TimesheetService {
         int contractId = timeSheet.getContractId();
         Date startDate = (Date) timeSheet.getTimesheetStartDate();
         Date endDate = (Date) timeSheet.getTimesheetEndDate();
+        int hoursDue = (int) timeSheet.getHoursDue();
 
         String query = "Insert into javaee_team_nine.timesheet(timesheet_start_date, timesheet_end_date, timesheet_status," +
-                "contract_id) " +
-                "values(?, ?, ?, ?)";
+                "contract_id, hours_due) " +
+                "values(?, ?, ?, ?, ?)";
 
 //        String query = "Insert into contract(c_status, name) values(?, ?)";
         try (Connection connection = dbService.initDB()) {
@@ -34,6 +35,7 @@ public class TimesheetServiceImpl implements TimesheetService {
             preparedStatement.setString(2, String.valueOf(endDate));
             preparedStatement.setString(3, timesheetStatus);
             preparedStatement.setInt(4, contractId);
+            preparedStatement.setInt(5, hoursDue);
 
             preparedStatement.executeUpdate();
 
@@ -149,8 +151,9 @@ public class TimesheetServiceImpl implements TimesheetService {
                 Date startDate = resultSet.getDate("timesheet_start_date");
                 Date endDate = resultSet.getDate("timesheet_end_date");
                 int cId = resultSet.getInt("contract_id");
+                Double hoursDue = resultSet.getDouble("hours_due");
 
-                TimeSheet timeSheet = new TimeSheet(id, status, startDate, endDate, cId);
+                TimeSheet timeSheet = new TimeSheet(id, status, startDate, endDate, cId, hoursDue);
 
                 timeSheetList.add(timeSheet);
             }
@@ -159,5 +162,15 @@ public class TimesheetServiceImpl implements TimesheetService {
             e.printStackTrace();
         }
         return timeSheetList;
+    }
+
+    @Override
+    public double calculateTotalHoursDue(int id) {
+        double totalHoursDue = 0;
+        List <TimeSheet> timeSheets = getTimesheetByContractId(id);
+        for (TimeSheet time: timeSheets){
+            totalHoursDue = totalHoursDue + time.getHoursDue();
+        }
+        return totalHoursDue;
     }
 }
