@@ -14,8 +14,8 @@ public class DBConnectionService {
     public DBConnectionService() {
         try {
             String url = "jdbc:mariadb://localhost:3306/javaee_team_nine";
-            String user = "root";
-            String password = "%password%";
+            String user = "APP";
+            String password = "APP";
 
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
@@ -155,7 +155,7 @@ public class DBConnectionService {
 
     public Connection initDB() throws SQLException {
         return DriverManager
-                .getConnection("jdbc:mariadb://localhost:3306/javaee_team_nine", "root", "%password%");
+                .getConnection("jdbc:mariadb://localhost:3306/javaee_team_nine", "APP", "APP");
     }
 
     public void registerUser(User user) {

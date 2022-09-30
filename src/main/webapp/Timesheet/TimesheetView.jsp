@@ -66,7 +66,7 @@
             <% } else { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
-            <li><a href="#" class="nav-link">Sign Timesheet</a></li>
+      <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
             <%if (u.isHasContract()){%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
@@ -98,6 +98,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Contract ID</th>
+                <th>signature</th>
             </tr>
             </thead>
             <tbody>
@@ -121,6 +122,11 @@
                 <td><%=timeSheet.getTimesheetEndDate()%>
                 </td>
                 <td><%=timeSheet.getContractId()%>
+                </td>
+                      <button class="btn" style="background-color: #4CAF50; color: white;">
+                            Signature
+                      </button>
+
                 </td>
                 <%--<td>
                     <a href="${pageContext.request.contextPath}/create?id=<%=t.getId()%>">
