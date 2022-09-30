@@ -25,10 +25,8 @@ public class ReminderDao {
     }
 
 
-    public List<User> getAllReminderUsers() {
-        List<User> dataList = new ArrayList<>();
-
-        String query = "SELECT u.* FROM \n" +
+    public List<User> getAllInProgressReminderUsers() {
+        String query = "SELECT u.*, t.timesheet_status FROM \n" +
                 "javaee_team_nine.users u \n" +
                 "inner join javaee_team_nine.contract c \n" +
                 "inner join javaee_team_nine.contract_status cs \n" +
@@ -42,6 +40,67 @@ public class ReminderDao {
                 "and t.timesheet_status = ts.timesheet_status\n" +
                 "and ts.timesheet_status = \"IN_PROGRESS\"\n" +
                 ";";
+        return getUserDetailsFromDB(query);
+
+    }
+
+    public List<User> getAllSignedByEmployeeReminderUsers() {
+        String query = "SELECT u.*, t.timesheet_status FROM \n" +
+                "javaee_team_nine.users u \n" +
+                "inner join javaee_team_nine.contract c \n" +
+                "inner join javaee_team_nine.contract_status cs \n" +
+                "inner join javaee_team_nine.timesheet t \n" +
+                "inner join javaee_team_nine.timesheet_frequency tf\n" +
+                "inner join javaee_team_nine.timesheet_status ts\n" +
+                "on u.has_contract = c.contract_id\n" +
+                "and c.c_status = cs.contract_status\n" +
+                "and c.contract_id = t.contract_id\n" +
+                "and c.frequency = tf.timesheet_frequency\n" +
+                "and t.timesheet_status = ts.timesheet_status\n" +
+                "and ts.timesheet_status = \"SIGNED_BY_EMPLOYEE\"\n" +
+                ";";
+        return getUserDetailsFromDB(query);
+
+    }
+
+    public List<User> getAllSignedBySupervisorReminderUsers() {
+        String query = "SELECT u.*, t.timesheet_status FROM \n" +
+                "javaee_team_nine.users u \n" +
+                "inner join javaee_team_nine.contract c \n" +
+                "inner join javaee_team_nine.contract_status cs \n" +
+                "inner join javaee_team_nine.timesheet t \n" +
+                "inner join javaee_team_nine.timesheet_frequency tf\n" +
+                "inner join javaee_team_nine.timesheet_status ts\n" +
+                "on u.has_contract = c.contract_id\n" +
+                "and c.c_status = cs.contract_status\n" +
+                "and c.contract_id = t.contract_id\n" +
+                "and c.frequency = tf.timesheet_frequency\n" +
+                "and t.timesheet_status = ts.timesheet_status\n" +
+                "and ts.timesheet_status = \"SIGNED_BY_SUPERVISOR\"\n" +
+                ";";
+        return getUserDetailsFromDB(query);
+
+    }
+
+    public List<User> getSupervisorAndAssistantUsers() {
+        String query = "SELECT u.* FROM \n" +
+                "javaee_team_nine.users u where\n" +
+                "upper(u.role) in (\"ASSISTANT\", \"SUPERVISOR\");";
+        return getUserDetailsFromDB(query);
+
+    }
+
+    public List<User> getSecretaryUsers() {
+        String query = "SELECT u.* FROM \n" +
+                "javaee_team_nine.users u where\n" +
+                "upper(u.role) = \"SECRETARY\";";
+        return getUserDetailsFromDB(query);
+
+    }
+
+    public List<User> getUserDetailsFromDB(String query) {
+
+        List<User> dataList = new ArrayList<>();
 
         try (Connection connection = dbService.initDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -68,7 +127,7 @@ public class ReminderDao {
             e.printStackTrace();
         }
         return dataList;
-    }
 
+    }
 
 }
