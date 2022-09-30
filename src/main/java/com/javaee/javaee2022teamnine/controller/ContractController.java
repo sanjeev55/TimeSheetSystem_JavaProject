@@ -340,12 +340,11 @@ public class ContractController extends HttpServlet {
         response.sendRedirect("terminate-contract");*/
     }
 
-    private void terminateContractUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    private void terminateContractUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException{
         String id = request.getParameter("contract_id");
         System.out.println("Contract Id========"+ id);
         Contract existingContract = contractService.getContractById(Integer.parseInt(id));
         User user = userService.getUserById(existingContract.getUserId());
-
 
         existingContract.setStatus(new ContractStatus(3));
         existingContract.setTerminationDate(dateService.dateToday());

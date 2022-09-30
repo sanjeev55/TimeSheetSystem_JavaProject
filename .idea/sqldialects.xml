@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/dao/ReminderDao.java" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/javaee/javaee2022teamnine/util/impl/ContractServiceImpl.java" dialect="MariaDB" />
   </component>
 </project>

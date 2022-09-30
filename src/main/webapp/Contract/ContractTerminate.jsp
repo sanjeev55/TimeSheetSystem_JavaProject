@@ -27,7 +27,8 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
-            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System Application </a>
+            <a href="<%=request.getContextPath()%>/Dashboard.jsp" class="navbar-brand"> Time Sheet System
+                Application </a>
         </div>
         <ul class="navbar-nav mr-auto">
             <%
@@ -41,7 +42,7 @@
             <li><a href="<%=request.getContextPath()%>/start-contract" class="nav-link">Start Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/terminate-contract" class="nav-link">Terminate
                 Contract</a></li>
-            <%if (u.isHasContract()){%>
+            <%if (u.isHasContract()) {%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
             <%}%>
@@ -53,7 +54,7 @@
             <li><a href="<%=request.getContextPath()%>/print-timesheet" class="nav-link">Print Timesheet</a>
             <li><a href="<%=request.getContextPath()%>/archive-timesheet" class="nav-link">Archive Timesheet</a>
             </li>
-            <%if (u.isHasContract()){%>
+            <%if (u.isHasContract()) {%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
             <%}%>
@@ -61,7 +62,7 @@
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="<%=request.getContextPath()%>/sign-timesheet" class="nav-link">Sign Timesheet</a></li>
-            <%if (u.isHasContract()){%>
+            <%if (u.isHasContract()) {%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
             <%}%>
@@ -70,7 +71,7 @@
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
             <li><a href="#" class="nav-link">Report Work</a></li>
             <li><a href="#" class="nav-link">Sign Timesheet</a></li>
-            <%if (u.isHasContract()){%>
+            <%if (u.isHasContract()) {%>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
             <%}%>
@@ -104,11 +105,12 @@
             </thead>
             <%
                 for (Contract contract : contracts) {
+                    int id = contract.getId();
             %>
             <tbody>
             <tr>
                 <td>
-                    <%=contract.getId()%>
+                    <%=id%>
                 </td>
                 <td><%=contract.getName()%>
                 </td>
@@ -124,12 +126,14 @@
                 <td><%=contract.getEndDate()%>
                 </td>
                 <td>
+
                     <!-- Button trigger modal -->
                     <%--<a href="${pageContext.request.contextPath}/terminate-contract?contract_id=<%=contract.getId()%>">
                         <button class="btn" style="background-color: #f44336; color: white;">
                             Terminate Contract
                         </button>
                     </a>--%>
+
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                         Terminate Contract
                     </button>
@@ -141,18 +145,21 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    The user (<%=contract.getId()%>) may still have Time Sheets that
+                                    The user <label>
+                                    <input type="number" name="contract-id" value="<%=id%>"/>
+                                </label> may still have Time Sheets that
                                     are in progress.
                                     <br/>
                                     Confirm termination of contract?
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="${pageContext.request.contextPath}/terminate?contract_id=<%=contract.getId()%>">
+                                    <a href="${pageContext.request.contextPath}/terminate?contract_id=<%=id%>">
                                         <button class="btn btn-success" onClick="window.location.reload();"
                                                 type="submit">
                                             Confirm
@@ -173,6 +180,7 @@
                 </td>
             </tr>
             </tbody>
+
             <%
                 }
             } else {
@@ -185,9 +193,14 @@
                 }
             %>
         </table>
-
     </div>
 </div>
 
 </body>
+<%--<script>
+    $('#terminate-confirm-modal').on('show.bs.modal', function (e) {
+        let contractId = $(e.relatedTarget).data('contract-id');
+        $(e.currentTarget).find('input[name="contractId"]').val(contractId);
+    });
+</script>--%>
 </html>

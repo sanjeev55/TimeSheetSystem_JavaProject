@@ -141,6 +141,7 @@ public class ContractServiceImpl implements ContractService {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
+                int contract_id = rs.getInt("contract_id");
                 String name = rs.getString("name");
 //                ContractStatus status = (ContractStatus) rs.getObject(new ContractStatus().getId());
                 Date startDate = rs.getDate("start_date");
@@ -152,7 +153,7 @@ public class ContractServiceImpl implements ContractService {
                 String frequency = rs.getString("frequency");
                 int userId = rs.getInt("userId");
 
-                contract = new Contract(id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear, frequency, userId);
+                contract = new Contract(contract_id, name, startDate, endDate, hoursPerWeek, vacationHours, workingDaysPerWeek, vacationDaysPerYear, frequency, userId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
