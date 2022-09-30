@@ -65,19 +65,19 @@
         <tr>
             <td>Full Name</td>
             <td><label>
-                <input name="fullname" type="text"/>
+                <input name="fullname" type="text" required>
             </label></td>
         </tr>
         <tr>
             <td>Email</td>
             <td><label>
-                <input type="text" name="email"/>
+                <input type="text" name="email" required>
             </label></td>
         </tr>
         <tr>
             <td>DOB</td>
             <td><label>
-                <input type="date" name="dob"/>
+                <input type="date" name="dob" required>
             </label></td>
         </tr>
         <tr>
@@ -121,17 +121,17 @@
         <tr>
             <td>Password</td>
             <td><label>
-                <input type="password" name="password"/>
+                <input type="password" name="password" required>
             </label></td>
         </tr>
         <tr>
             <td>Confirm Password</td>
             <td><label>
-                <input type="password" name="conpassword"/>
+                <input type="password" name="conpassword" required>
             </label></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="tos" id="tos" value="true">
+            <td><input type="checkbox" name="tos" id="tos" value="true" required>
                 <label for="tos">
                     <b>I agree to the TOS of the Time Sheet System!</b>
                 </label>
