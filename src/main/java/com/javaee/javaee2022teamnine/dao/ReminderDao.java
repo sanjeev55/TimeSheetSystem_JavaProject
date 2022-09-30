@@ -26,58 +26,66 @@ public class ReminderDao {
 
 
     public List<User> getAllInProgressReminderUsers() {
-        String query = "SELECT u.*, t.timesheet_status FROM \n" +
-                "javaee_team_nine.users u \n" +
-                "inner join javaee_team_nine.contract c \n" +
-                "inner join javaee_team_nine.contract_status cs \n" +
-                "inner join javaee_team_nine.timesheet t \n" +
-                "inner join javaee_team_nine.timesheet_frequency tf\n" +
-                "inner join javaee_team_nine.timesheet_status ts\n" +
+        String query = "SELECT u.* FROM \n" +
+                "users u \n" +
+                "inner join contract c \n" +
+                "inner join contract_status cs \n" +
+                "inner join timesheet t \n" +
+                "inner join timesheet_frequency tf\n" +
+                "inner join timesheet_status ts\n" +
                 "on u.has_contract = c.contract_id\n" +
-                "and c.c_status = cs.contract_status\n" +
+                "and c.c_status = cs.contract_status_id\n" +
                 "and c.contract_id = t.contract_id\n" +
                 "and c.frequency = tf.timesheet_frequency\n" +
                 "and t.timesheet_status = ts.timesheet_status\n" +
                 "and ts.timesheet_status = \"IN_PROGRESS\"\n" +
+                "and upper(cs.contract_status) = \"STARTED\"\n" +
+                "and CURDATE() between t.timesheet_start_date  and t.timesheet_end_date\n" +
                 ";";
         return getUserDetailsFromDB(query);
 
     }
 
     public List<User> getAllSignedByEmployeeReminderUsers() {
-        String query = "SELECT u.*, t.timesheet_status FROM \n" +
-                "javaee_team_nine.users u \n" +
-                "inner join javaee_team_nine.contract c \n" +
-                "inner join javaee_team_nine.contract_status cs \n" +
-                "inner join javaee_team_nine.timesheet t \n" +
-                "inner join javaee_team_nine.timesheet_frequency tf\n" +
-                "inner join javaee_team_nine.timesheet_status ts\n" +
+        String query = "SELECT u.* FROM \n" +
+                "users u \n" +
+                "inner join contract c \n" +
+                "inner join contract_status cs \n" +
+                "inner join timesheet t \n" +
+                "inner join timesheet_frequency tf\n" +
+                "inner join timesheet_status ts\n" +
                 "on u.has_contract = c.contract_id\n" +
-                "and c.c_status = cs.contract_status\n" +
+                "and c.c_status = cs.contract_status_id\n" +
                 "and c.contract_id = t.contract_id\n" +
                 "and c.frequency = tf.timesheet_frequency\n" +
                 "and t.timesheet_status = ts.timesheet_status\n" +
                 "and ts.timesheet_status = \"SIGNED_BY_EMPLOYEE\"\n" +
+                "and upper(cs.contract_status) = \"STARTED\"\n" +
+                "and CURDATE() between t.timesheet_start_date  and t.timesheet_end_date\n" +
                 ";";
+
         return getUserDetailsFromDB(query);
 
     }
 
     public List<User> getAllSignedBySupervisorReminderUsers() {
-        String query = "SELECT u.*, t.timesheet_status FROM \n" +
-                "javaee_team_nine.users u \n" +
-                "inner join javaee_team_nine.contract c \n" +
-                "inner join javaee_team_nine.contract_status cs \n" +
-                "inner join javaee_team_nine.timesheet t \n" +
-                "inner join javaee_team_nine.timesheet_frequency tf\n" +
-                "inner join javaee_team_nine.timesheet_status ts\n" +
+        String query = "SELECT u.* FROM \n" +
+                "users u \n" +
+                "inner join contract c \n" +
+                "inner join contract_status cs \n" +
+                "inner join timesheet t \n" +
+                "inner join timesheet_frequency tf\n" +
+                "inner join timesheet_status ts\n" +
                 "on u.has_contract = c.contract_id\n" +
-                "and c.c_status = cs.contract_status\n" +
+                "and c.c_status = cs.contract_status_id\n" +
                 "and c.contract_id = t.contract_id\n" +
                 "and c.frequency = tf.timesheet_frequency\n" +
                 "and t.timesheet_status = ts.timesheet_status\n" +
                 "and ts.timesheet_status = \"SIGNED_BY_SUPERVISOR\"\n" +
+                "and upper(cs.contract_status) = \"STARTED\"\n" +
+                "and CURDATE() between t.timesheet_start_date  and t.timesheet_end_date\n" +
                 ";";
+
         return getUserDetailsFromDB(query);
 
     }
@@ -131,3 +139,5 @@ public class ReminderDao {
     }
 
 }
+
+

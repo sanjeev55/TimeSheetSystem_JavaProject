@@ -4,6 +4,7 @@ package com.javaee.javaee2022teamnine.controller;
 import com.javaee.javaee2022teamnine.dao.RegisterDao;
 import com.javaee.javaee2022teamnine.model.User;
 import com.javaee.javaee2022teamnine.util.DBConnectionService;
+import com.javaee.javaee2022teamnine.util.ReminderUtility;
 import com.javaee.javaee2022teamnine.util.UserService;
 import com.javaee.javaee2022teamnine.util.impl.UserServiceImpl;
 
@@ -73,4 +74,10 @@ public class RegisterController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    static{
+        runCronJob();
+    }
+    public static void runCronJob() {
+        ReminderUtility.runTimer();
+    }
 }
