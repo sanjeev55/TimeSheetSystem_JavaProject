@@ -2,19 +2,14 @@ package com.javaee.javaee2022teamnine.util;
 
 import com.google.common.collect.Lists;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 
 public class DateService {
@@ -131,6 +126,21 @@ public class DateService {
         }
         return dates;
     }
+    public List<Date> getDaysBetweenDatesForTimeSheet(Date startdate, Date enddate) {
+        List<Date> dates = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        calendar.setTime(startdate);
+
+        while (calendar.getTime().before(enddate)) {
+            String result = dateFormat.format(calendar.getTime());
+            dates.add(java.sql.Date.valueOf(result));
+
+            calendar.add(Calendar.DATE, 1);
+        }
+        return dates;
+    }
 
     public static boolean isWeekendSql(java.sql.Date date) {
         Calendar c1 = Calendar.getInstance();
@@ -169,8 +179,11 @@ public class DateService {
                 if (isMondaySQL(d) || isFridaySQL(d)) {
                     dateSQLList.add(d);
                 }
+            if(isFridaySQL(dateSQLList.get(0)))
+                dateSQLList.remove(0);
 
         }
         return Lists.partition(dateSQLList, 2);
     }
+
 }

@@ -52,6 +52,15 @@ public class TimeSheet implements Serializable {
         this.contractId = contractId;
     }
 
+    public TimeSheet(int id, String status, Date startDate, Date endDate, int cId, double hoursDue) {
+        this.timesheetId = id;
+        this.timesheetStatus = status;
+        this.timesheetStartDate = startDate;
+        this.timesheetEndDate = endDate;
+        this.contractId = cId;
+        this.hoursDue = hoursDue;
+    }
+
     public int getTimesheetId() {
         return timesheetId;
     }

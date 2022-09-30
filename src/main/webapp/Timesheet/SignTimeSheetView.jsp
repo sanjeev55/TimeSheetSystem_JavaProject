@@ -2,20 +2,18 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.javaee.javaee2022teamnine.model.TimeSheet" %>
 <%@ page import="com.javaee.javaee2022teamnine.model.Contract" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.sql.Time" %>
+<%@ page import="com.javaee.javaee2022teamnine.model.TimeSheetEntry" %>
 <%--
   Created by IntelliJ IDEA.
   User: Sanjeev
   Date: 9/28/2022
-  Time: 6:26 PM
+  Time: 9:26 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Java EE TSS - Archive Timesheet</title>
+    <title>Java EE TSS - Sign TimeSheet</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -62,7 +60,7 @@
 
             <% } else if (u != null && u.getRole().equals("Supervisor")) { %>
             <li><a href="<%=request.getContextPath()%>/view-contract" class="nav-link">View Contract</a></li>
-            <li><a href="<%=request.getContextPath()%>/sign-timesheet-employee" class="nav-link">Sign Timesheet</a></li>
+            <li><a href="<%=request.getContextPath()%>/sign-time-employee" class="nav-link">Sign Timesheet</a></li>
             <li><a href="<%=request.getContextPath()%>/view-timesheet" class="nav-link">View Timesheet</a>
             </li>
 
@@ -84,62 +82,67 @@
 <div class="row">
 
     <div class="container">
-        <h3 class="text-center">Your Time Sheets</h3>
+        <h3 class="text-center">Your Timesheet for a Week</h3>
         <hr>
         <br>
         <%=u.getEmail()%>
         <table class="table table-bordered">
             <%
-                HashMap<TimeSheet, User> timeSheets = (HashMap<TimeSheet, User>) request.getAttribute("signedTimeSheets");
+                List<TimeSheetEntry> timeSheetEntryList = (List<TimeSheetEntry>) request.getAttribute("timeSheetEntryList");
 
             %>
             <thead>
             <tr>
+                <th>Timesheet Entry Id</th>
                 <th>Timesheet Id</th>
-                <th>User</th>
-                <th>Status</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Contract ID</th>
+                <th>Report Type</th>
+                <th>Description</th>
+                <th>Hours Due</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Date</th>
+                <th>Sign</th>
+
             </tr>
             </thead>
             <tbody>
             <%
-                for (Map.Entry<TimeSheet, User> timeSheet : timeSheets.entrySet()) {
+                for (TimeSheetEntry timeSheetEntry : timeSheetEntryList) {
             %>
             <tr>
                 <td>
-                    <%=timeSheet.getKey().getTimesheetId()%>
+                    <%=timeSheetEntry.getTimesheetEntryId()%>
                 </td>
                 <td>
-                    <%=timeSheet.getValue().getFullName()%>
+                    <%=timeSheetEntry.getTimesheetId()%>
+                </td>
+                <td><%=timeSheetEntry.getReportType()%>
+                </td>
+                <td><%=timeSheetEntry.getDescription()%>
+                </td>
+                <td><%=timeSheetEntry.getHoursDue()%>
+                </td>
+                <td><%=timeSheetEntry.getStartTime()%>
+                </td>
+                <td><%=timeSheetEntry.getEndTime()%>
+                </td>
+                <td><%=timeSheetEntry.getEntryDate()%>
                 </td>
                 <td>
-                    <center><span
-                            class="badge badge-info"><%=timeSheet.getKey().getTimesheetStatus()%></span>
-                    </center>
-                </td>
-                <td><%=timeSheet.getKey().getTimesheetStartDate()%>
-                </td>
-                <td><%=timeSheet.getKey().getTimesheetEndDate()%>
-                </td>
-                <td><%=timeSheet.getKey().getContractId()%>
-                </td>
-                <td>
-                    <%if (timeSheet.getKey().getTimesheetStatus().equals("ARCHIVED")){%>
-                    <a href="#">
-                        <button class="btn" style="background-color: #4CAF50; color: white;" disabled>
-                            Archived!!
+                    <%if (!timeSheetEntry.getSigned()) {%>
+                    <a href="${pageContext.request.contextPath}/sign-timesheet?timesheetEntryId=<%=timeSheetEntry.getTimesheetEntryId()%>">
+                        <button class="btn" style="background-color: #4CAF50; color: white;">
+                            Sign
                         </button>
                     </a>
                     <%} else {%>
-
-                    <a href="${pageContext.request.contextPath}/archive?id=<%=timeSheet.getKey().getTimesheetId()%>">
-                        <button class="btn" style="background-color: #4CAF50; color: white;">
-                            Archive
+                    <a href="#">
+                        <button class="btn" style="background-color: #4CAF50; color: white;" disabled>
+                            Signed!!
                         </button>
                     </a>
                     <%}%>
+
                 </td>
                 <%--<td>
                     <a href="${pageContext.request.contextPath}/create?id=<%=t.getId()%>">

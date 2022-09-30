@@ -118,6 +118,8 @@ public class DBConnectionService {
 
             statement.executeUpdate(createTimeSheetTable());
 
+            statement.executeUpdate(createTimeSheetEntryTable());
+
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -153,27 +155,40 @@ public class DBConnectionService {
                 " signed_by_supervisor DATE);";
     }
 
+    private  String createTimeSheetEntryTable(){
+        return "CREATE TABLE IF NOT EXISTS javaee_team_nine.timesheet_entry" +
+                "(timesheet_entry_id INTEGER not NULL AUTO_INCREMENT PRIMARY KEY," +
+                "timesheet_id INTEGER," +
+                "report_type VARCHAR(255)," +
+                "description VARCHAR(255)," +
+                "hours_due DOUBLE," +
+                "start_time TIME," +
+                "end_time TIME," +
+                "entry_date DATE," +
+                "is_signed BOOLEAN);";
+    }
+
     public Connection initDB() throws SQLException {
         return DriverManager
                 .getConnection("jdbc:mariadb://localhost:3306/javaee_team_nine", "APP", "APP");
     }
 
-    public void registerUser(User user) {
-        String insertQuery = "Insert into users(fullname, username, password, tos, role) values(?, ?, ?, ? ,?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(insertQuery);
-//            ps.setInt(1, user.getId());
-            ps.setString(1, user.getFullName());
-            ps.setString(2, user.getEmail());
-            ps.setString(3, user.getPassword());
-//            ps.setDate(5, user.getDob());
-            ps.setBoolean(4, user.isTos());
-            ps.setString(5, user.getRole());
-
-            ps.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public void registerUser(User user) {
+//        String insertQuery = "Insert into users(fullname, username, password, tos, role) values(?, ?, ?, ? ,?)";
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(insertQuery);
+////            ps.setInt(1, user.getId());
+//            ps.setString(1, user.getFullName());
+//            ps.setString(2, user.getEmail());
+//            ps.setString(3, user.getPassword());
+////            ps.setDate(5, user.getDob());
+//            ps.setBoolean(4, user.isTos());
+//            ps.setString(5, user.getRole());
+//
+//            ps.execute();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 }
